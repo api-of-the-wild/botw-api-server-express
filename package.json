@@ -1,0 +1,12 @@
+{
+  "name": "api-of-the-wild",
+  "version": "1.0.0",
+  "description": "The RESTful BotW Data API",
+  "main": "index.js",
+  "repository": "git@gitlab.com:kwhitejr/api-of-the-wild.git",
+  "author": "White, Kevin <kwhitejr@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "sam local start-api"
+  }
+}
