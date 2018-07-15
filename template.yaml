@@ -16,8 +16,8 @@ Resources:
   HelloWorldFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
-      CodeUri: lambdas/hello_world/
-      Handler: app.lambda_handler
+      CodeUri: src/lambdas/hello_world/
+      Handler: index.lambda_handler
       Runtime: nodejs8.10
       Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
         Variables:
@@ -31,8 +31,8 @@ Resources:
   Pokemon:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
-      CodeUri: lambdas/pokemon/
-      Handler: app.lambda_handler
+      CodeUri: src/lambdas/pokemon/
+      Handler: index.lambda_handler
       Runtime: nodejs8.10
       Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
         Variables:
