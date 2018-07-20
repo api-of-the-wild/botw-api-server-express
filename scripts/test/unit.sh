@@ -9,4 +9,5 @@ REPORTS_DIR="${ROOT_DIR}/reports/unit"
 
 yarn mocha \
   --recursive "${TEST_DIR}/**/*.js" \
-  --reporter-options reportDir="${REPORTS_DIR}/unit" 
+  --reporter=mochawesome \
+  --reporter-options reportDir="${REPORTS_DIR}"

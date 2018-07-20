@@ -2,14 +2,14 @@ module.exports = {
   env: {
     es6: true,
     node: true,
-    mocha: true
+    mocha: true,
   },
   extends: ["eslint:recommended", "plugin:prettier/recommended"],
   globals: {
-    bench: true
+    bench: true,
   },
   plugins: ["json"],
   rules: {
-    eqeqeq: ["error", "always", { null: "ignore" }]
-  }
+    eqeqeq: ["error", "always", { null: "ignore" }],
+  },
 };
