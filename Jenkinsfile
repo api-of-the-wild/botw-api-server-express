@@ -3,10 +3,10 @@ pipeline {
   stages {
     stage("Unit") {
       steps {
+        checkout scm
         echo "We're doing it!"
-        // checkout scm
-        // sh "yarn install"
-        // sh "yarn test:unit"
+        sh "npm install"
+        sh "npm run test:unit"
       }
     }
   }
