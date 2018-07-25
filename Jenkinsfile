@@ -4,8 +4,9 @@ pipeline {
     stage("Unit") {
       steps {
         checkout scm
-        echo "We're doing it!"
-        sh "npm install"
+        def nodeHome = tool name: 'node-8.10.0', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
+        env.PATH = "${nodeHome}/bin:${env.PATH}"
+        sh 'npm install'
         sh "npm run test:unit"
       }
     }
