@@ -1,5 +1,10 @@
+#!groovy
+
 pipeline {
   agent any
+
+  tools {nodejs 'node-8.10.0'}
+
   stages {
     stage('Unit') {
       steps {
