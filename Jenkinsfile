@@ -8,11 +8,11 @@ pipeline {
   stages {
     stage('Unit') {
       steps {
-        echo 'We\'re doing it!'
         checkout scm
         sh 'node -v'
-        sh 'yarn install'
-        sh 'yarn test:unit'
+        sh 'npm -v'
+        sh 'npm install'
+        sh 'npm run test:unit'
       }
     }
   }
