@@ -24,6 +24,7 @@ const lambda_handler = async (event, context, callback) => {
       }),
     };
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.log(err);
     callback(err, null);
   }

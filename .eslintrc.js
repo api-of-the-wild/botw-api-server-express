@@ -12,4 +12,5 @@ module.exports = {
   rules: {
     eqeqeq: ["error", "always", { null: "ignore" }],
   },
+  parser: "babel-eslint",
 };

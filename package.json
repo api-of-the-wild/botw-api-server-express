@@ -8,12 +8,14 @@
   "license": "MIT",
   "scripts": {
     "start": "sam local start-api",
+    "test:lint": "scripts/test/lint.sh",
     "test:unit": "scripts/test/unit.sh",
     "test:coverage": "scripts/test/coverage.sh",
     "view:unit": "open reports/unit/mochawesome.html",
     "view:coverage": "open reports/coverage/lcov-report/index.html"
   },
   "devDependencies": {
+    "babel-eslint": "^8.2.6",
     "chai": "^4.1.2",
     "eslint": "^5.1.0",
     "eslint-config-prettier": "^2.9.0",
