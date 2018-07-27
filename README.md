@@ -3,6 +3,12 @@ The RESTful BotW API.
 
 ## TODOs ##
 
+### Test Suites ###
+- [x] Lint Test
+- [x] Unit Test
+- [ ] Integration Test
+- [ ] Dependency Check
+
 ### Pipeline ###
 - [ ] Can use Node and Yarn in pipeline
 - [ ] PR trigger
