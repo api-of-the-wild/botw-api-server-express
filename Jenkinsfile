@@ -16,5 +16,10 @@ pipeline {
         sh 'yarn run test:unit'
       }
     }
+    stage('Lint') {
+      steps {
+        sh 'yarn test:lint'
+      }
+    }
   }
 }
