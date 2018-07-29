@@ -1,18 +1,19 @@
 #!groovy
 
 pipeline {
-  agent any
-
-  tools {nodejs 'node-8.10.0'}
+  agent {
+    docker { image 'keymux/docker-ubuntu-nvm-yarn:0.2.0' }
+  }
+  // tools { nodejs 'node-8.10.0' }
 
   stages {
     stage('Unit') {
       steps {
-        checkout scm
         sh 'node -v'
         sh 'npm -v'
-        sh 'npm install'
-        sh 'npm run test:unit'
+        sh 'yarn -v'
+        sh 'yarn install'
+        sh 'yarn run test:unit'
       }
     }
   }
