@@ -4,19 +4,20 @@
  */
 const pino = require("pino");
 
-export const createLogger = loggerDelegate => {
-  const logger = pino();
-  // {}, // pino options - https://github.com/pinojs/pino/blob/master/docs/API.md#constructor
-  // {
-  //   [Symbol.for("needsMetadata")]: true,
-  //   write: chunk => {
-  //     loggerDelegate.log(chunk);
-  //   },
-  // }
-  /**
-   * add metric level to logger - https://github.com/pinojs/pino/blob/master/docs/API.md#addLevel
-   * More information on levels: https://github.com/pinojs/pino/blob/master/docs/API.md#level
-   */
+const createLogger = (
+  loggerDelegate,
+  options = {},
+  postProcessingFunction = str => str.trim()
+) => {
+  const logger = pino(options, {
+    [Symbol.for("needsMetadata")]: true,
+    write: unformattedChunk => {
+      // See Strip New Line above ^
+      const chunk = postProcessingFunction(unformattedChunk);
+
+      loggerDelegate.log(chunk);
+    },
+  });
   const LOG_METRIC_LEVEL = 35;
   const LOG_METRIC_NAME = "metric";
   logger.addLevel(LOG_METRIC_NAME, LOG_METRIC_LEVEL);
