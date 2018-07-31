@@ -1,7 +1,7 @@
 #!groovy
 
 pipeline {
-  tool {
+  tools {
     docker 'docker'
   }
   agent {
