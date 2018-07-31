@@ -1,9 +1,6 @@
 #!groovy
 
 pipeline {
-  tools {
-    docker 'docker'
-  }
   agent {
     docker {
       image 'keymux/docker-ubuntu-nvm-yarn:0.2.0'
