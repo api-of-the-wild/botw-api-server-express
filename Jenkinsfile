@@ -3,7 +3,7 @@
 pipeline {
   agent {
     docker {
-      image 'keymux/docker-ubuntu-nvm-yarn:0.2.0'
+      image 'node:7-alpine'
     }
   }
 
