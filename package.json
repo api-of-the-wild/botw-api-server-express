@@ -25,6 +25,12 @@
     "mochawesome": "^3.0.2",
     "nyc": "^12.0.2",
     "prettier": "^1.13.7",
+    "sinon": "^6.1.4",
     "uuid": "^3.3.2"
+  },
+  "dependencies": {
+    "pino": "^4.17.6",
+    "request": "^2.87.0",
+    "request-promise": "^4.2.2"
   }
 }

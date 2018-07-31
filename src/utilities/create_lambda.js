@@ -1,5 +1,5 @@
 const rp = require("request-promise");
-const { createLogger } = require("logger");
+const { createLogger } = require("./logger");
 
 const success = callback => result => {
   callback(null, result);
@@ -25,7 +25,7 @@ const _enhancedLambdaCreator = contextEnhancer => handler => (
 const _defaultContextEnhancer = awsContext => ({
   awsContext,
   env: process.env,
-  logger: createLogger(),
+  logger: createLogger(console),
   request: rp,
 });
 
