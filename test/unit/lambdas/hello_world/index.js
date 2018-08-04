@@ -1,13 +1,13 @@
 "use strict";
 
-const app = require("../../../../src/lambdas/hello_world/index");
+const { hello } = require("../../../../src/lambdas/hello_world/index");
 const { expect } = require("chai");
 var event, context;
 
 describe("hello_world.js", function() {
   describe("lambda_handler()", () => {
     it("verifies successful response", async () => {
-      await app.lambda_handler(event, context, (err, result) => {
+      await hello(event, context, (err, result) => {
         expect(result).to.be.an("object");
         expect(result.statusCode).to.equal(200);
         expect(result.body).to.be.an("string");

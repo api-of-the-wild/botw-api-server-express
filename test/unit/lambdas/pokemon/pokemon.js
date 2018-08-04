@@ -2,12 +2,12 @@
 
 const {
   _getPokemonId,
-  lambda_handler,
-} = require("../../../../src/lambdas/pokemon/index");
+  handler,
+} = require("../../../../src/lambdas/pokemon/pokemon");
 const { expect } = require("chai");
 const uuid = require("uuid");
 
-describe("pokemon/index.js", function() {
+describe("pokemon/pokemon.js", function() {
   const EVENT_VALID = {
     queryStringParameters: {
       id: uuid(),
@@ -27,7 +27,7 @@ describe("pokemon/index.js", function() {
     });
   });
 
-  describe("lambda_handler()", () => {
+  describe("handler()", () => {
     const EVENT_VALID = {
       queryStringParameters: {
         id: "1",
@@ -35,7 +35,7 @@ describe("pokemon/index.js", function() {
     };
 
     it("returns pokemon response block from valid event", async () => {
-      await lambda_handler(EVENT_VALID, context, (err, result) => {
+      await handler(EVENT_VALID, context, (err, result) => {
         expect(result).to.be.an("object");
         expect(result.statusCode).to.equal(200);
         expect(result.body).to.be.an("string");
