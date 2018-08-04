@@ -15,7 +15,7 @@ describe("pokemon/index.js", function() {
   };
   const EVENT_INVALID = {};
 
-  describe("_getPokemonId", () => {
+  describe("_getPokemonId()", () => {
     it("returns id from valid event", () => {
       const id = _getPokemonId(EVENT_VALID);
       expect(id).to.deep.equal(EVENT_VALID.queryStringParameters.id);
@@ -27,7 +27,7 @@ describe("pokemon/index.js", function() {
     });
   });
 
-  describe("lambda_handler", () => {
+  describe("lambda_handler()", () => {
     const EVENT_VALID = {
       queryStringParameters: {
         id: "1",

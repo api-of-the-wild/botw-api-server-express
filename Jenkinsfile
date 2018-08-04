@@ -16,14 +16,16 @@ pipeline {
         sh 'yarn install'
       }
     }
-    stage('Unit') {
-      steps {
-        sh 'yarn run test:unit'
-      }
-    }
+    
     stage('Lint') {
       steps {
         sh 'yarn test:lint'
+      }
+    }
+
+    stage('Unit') {
+      steps {
+        sh 'yarn run test:unit'
       }
     }
   }
