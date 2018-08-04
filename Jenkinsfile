@@ -2,17 +2,30 @@
 
 pipeline {
   agent any
-
-  tools {nodejs 'node-8.10.0'}
+  
+  tools {
+    nodejs 'node-8.10.0'
+  }
 
   stages {
+    stage('Build') {
+      steps {
+        sh 'node -v'
+        sh 'npm -v'
+        sh 'yarn -v'
+        sh 'yarn install'
+      }
+    }
+    
+    stage('Lint') {
+      steps {
+        sh 'yarn test:lint'
+      }
+    }
+
     stage('Unit') {
       steps {
-        echo 'We\'re doing it!'
-        checkout scm
-        sh 'node -v'
-        sh 'yarn install'
-        sh 'yarn test:unit'
+        sh 'yarn run test:unit'
       }
     }
   }
