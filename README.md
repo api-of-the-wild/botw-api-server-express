@@ -1,4 +1,4 @@
-# API of the Wild #
+# API of the Wild - Server #
 The RESTful BotW API.
 
 ## TODOs ##
@@ -10,10 +10,11 @@ The RESTful BotW API.
 - [ ] Dependency Check
 
 ### Pipeline ###
-- [ ] Can use Node and Yarn in pipeline
-- [ ] PR trigger
+- [x] Can use Node and Yarn in pipeline
+- [x] PR trigger
 - [ ] Merge trigger
-- [ ] Unit Test stage
+- [x] Lint Test stage
+- [x] Unit Test stage
 - [ ] Integration Test stage
 - [ ] Migrate to docker-based stages
 
@@ -22,3 +23,10 @@ The RESTful BotW API.
 - [ ] CloudFront
 - [ ] SAM Template
 - [ ] Aurora / DynamoDB
+
+### Code
+- [ ] Lambda Factory
+- [ ] Tracer
+- [ ] Logger
+
+this is a trivial change
