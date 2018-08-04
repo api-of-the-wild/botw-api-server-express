@@ -1,10 +1,10 @@
 #!groovy
 
 pipeline {
-  agent {
-    docker {
-      image 'node:7-alpine'
-    }
+  agent any
+  
+  tools {
+    node 'node-8.10.0' 
   }
 
   stages {
