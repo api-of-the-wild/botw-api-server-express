@@ -1,15 +1,15 @@
-const axios = require("axios");
+const rp = require("request-promise");
 const url = "http://checkip.amazonaws.com/";
 let response;
 
-exports.lambda_handler = async (event, context, callback) => {
+const hello = async (event, context, callback) => {
   try {
-    const ret = await axios(url);
+    const ret = await rp(url);
     response = {
       statusCode: 200,
       body: JSON.stringify({
         message: "hello world",
-        location: ret.data.trim(),
+        location: ret,
       }),
     };
   } catch (err) {
@@ -19,4 +19,8 @@ exports.lambda_handler = async (event, context, callback) => {
   }
 
   callback(null, response);
+};
+
+module.exports = {
+  hello,
 };

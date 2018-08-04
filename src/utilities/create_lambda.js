@@ -13,9 +13,11 @@ const _enhancedLambdaCreator = contextEnhancer => handler => (
   const enhancedContext = contextEnhancer(context);
   const { logger } = enhancedContext;
 
-  return new Promise.resolve()
+  return Promise.resolve()
     .then(() => handler(enhancedContext)(event))
-    .then(success(callback))
+    .then(result => {
+      success(callback)(result);
+    })
     .catch(err => {
       logger.error(err);
       callback(err);
