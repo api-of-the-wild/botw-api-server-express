@@ -8,12 +8,16 @@ pipeline {
   }
 
   stages {
-    stage('Unit') {
+    stage('Build') {
       steps {
         sh 'node -v'
         sh 'npm -v'
         sh 'yarn -v'
         sh 'yarn install'
+      }
+    }
+    stage('Unit') {
+      steps {
         sh 'yarn run test:unit'
       }
     }
