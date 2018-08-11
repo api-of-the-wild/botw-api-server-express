@@ -25,8 +25,6 @@ The RESTful BotW API.
 - [ ] Aurora / DynamoDB
 
 ### Code
-- [ ] Lambda Factory
+- [X] Lambda Factory
 - [ ] Tracer
-- [ ] Logger
-
-this is a trivial change
+- [X] Logger
