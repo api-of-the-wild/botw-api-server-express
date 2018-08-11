@@ -2,15 +2,19 @@ const url = "https://pokeapi.co/api/v2/pokemon";
 let response;
 
 const _getPokemonId = event => {
-  const id =
-    event && event.queryStringParameters && event.queryStringParameters.id
-      ? event.queryStringParameters.id
-      : "";
-  return id;
+  return event && event.queryStringParameters && event.queryStringParameters.id;
 };
 
 const handler = ({ logger, request }) => async event => {
   const id = _getPokemonId(event);
+  if (id === undefined || id === null) {
+    response = {
+      statusCode: 400,
+      body: "Bad Request",
+    };
+
+    return Promise.resolve(response);
+  }
 
   logger.info(`This is a sample log. Going to fetch pokemon with id ${id}`);
 
@@ -28,11 +32,11 @@ const handler = ({ logger, request }) => async event => {
 
     response = {
       statusCode: 200,
-      body: JSON.stringify({
+      body: {
         name: result.name,
         weight: result.weight,
         id: result.id,
-      }),
+      },
     };
   } catch (err) {
     // eslint-disable-next-line no-console

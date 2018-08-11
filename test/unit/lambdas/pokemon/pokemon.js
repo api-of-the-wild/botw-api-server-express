@@ -1,4 +1,4 @@
-"use strict";
+const { spy, stub } = require("sinon");
 
 const {
   _getPokemonId,
@@ -8,44 +8,79 @@ const { expect } = require("chai");
 const uuid = require("uuid");
 
 describe("pokemon/pokemon.js", function() {
-  const EVENT_VALID = {
-    queryStringParameters: {
-      id: uuid(),
-    },
-  };
-  const EVENT_INVALID = {};
-
   describe("_getPokemonId()", () => {
+    const EVENT_VALID = {
+      queryStringParameters: {
+        id: uuid(),
+      },
+    };
+    const EVENT_INVALID = {};
+
     it("returns id from valid event", () => {
       const id = _getPokemonId(EVENT_VALID);
       expect(id).to.deep.equal(EVENT_VALID.queryStringParameters.id);
     });
 
-    it("returns empty string from invalid event", () => {
+    it("returns undefined from invalid event", () => {
       const id = _getPokemonId(EVENT_INVALID);
-      expect(id).to.deep.equal("");
+      expect(id).to.deep.equal(undefined);
     });
   });
 
   describe("handler()", () => {
-    const EVENT_VALID = {
-      queryStringParameters: {
-        id: "1",
-      },
-    };
+    const randomInt = Math.floor(Math.random() * (200 - 1 + 1)) + 1;
 
-    it("returns pokemon response block from valid event", async () => {
-      await handler(EVENT_VALID, context, (err, result) => {
-        expect(result).to.be.an("object");
-        expect(result.statusCode).to.equal(200);
-        expect(result.body).to.be.an("string");
+    let MOCK_EVENT;
+    let logger;
+    let requestSpy;
 
-        let body = JSON.parse(result.body);
+    beforeEach(() => {
+      MOCK_EVENT = {
+        queryStringParameters: {
+          id: randomInt,
+        },
+      };
+      logger = {
+        trace: spy(),
+        debug: spy(),
+        info: spy(),
+        metric: spy(),
+        warn: spy(),
+        error: spy(),
+        fatal: spy(),
+      };
+      requestSpy = stub().returns({
+        name: uuid(),
+        weight: uuid(),
+        id: MOCK_EVENT.queryStringParameters.id,
+      });
+    });
 
-        expect(body).to.be.an("object");
-        expect(body.name).to.be.a("string");
-        expect(body.weight).to.be.a("number");
-        expect(body.id).to.be.a("number");
+    it("returns pokemon response block from valid event", () => {
+      const lambda = handler({ logger, request: requestSpy });
+
+      return lambda(MOCK_EVENT).then(response => {
+        expect(requestSpy.args).to.deep.equal([
+          [
+            {
+              uri: `https://pokeapi.co/api/v2/pokemon/${
+                MOCK_EVENT.queryStringParameters.id
+              }`,
+              headers: {
+                "User-Agent": "Request-Promise",
+              },
+              json: true,
+            },
+          ],
+        ]);
+        expect(response.statusCode).to.deep.equal(200);
+        expect(response.body.id).to.deep.equal(
+          MOCK_EVENT.queryStringParameters.id
+        );
+        expect(response.body.name).to.exist;
+        expect(response.body.weight).to.exist;
+
+        // logger.info test
       });
     });
   });

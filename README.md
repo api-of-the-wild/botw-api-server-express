@@ -7,7 +7,7 @@ The RESTful BotW API.
 - [x] Lint Test
 - [x] Unit Test
 - [ ] Integration Test
-- [ ] Dependency Check
+- [x] Dependency Check
 
 ### Pipeline ###
 - [x] Can use Node and Yarn in pipeline
@@ -25,6 +25,6 @@ The RESTful BotW API.
 - [ ] Aurora / DynamoDB
 
 ### Code
-- [X] Lambda Factory
+- [x] Lambda Factory
 - [ ] Tracer
-- [X] Logger
+- [x] Logger
