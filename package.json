@@ -12,12 +12,14 @@
     "test:lint": "scripts/test/lint.sh",
     "test:unit": "scripts/test/unit.sh",
     "test:coverage": "scripts/test/coverage.sh",
+    "test:depcheck": "scripts/test/depcheck.sh",
     "view:unit": "open reports/unit/mochawesome.html",
     "view:coverage": "open reports/coverage/lcov-report/index.html"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.6",
     "chai": "^4.1.2",
+    "depcheck": "^0.6.9",
     "eslint": "^5.1.0",
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-json": "^1.2.0",
