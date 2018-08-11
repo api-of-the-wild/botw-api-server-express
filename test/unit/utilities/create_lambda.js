@@ -5,7 +5,6 @@ const rp = require("request-promise");
 const {
   _defaultContextEnhancer,
   _enhancedLambdaCreator,
-  createLambda,
 } = require("../../../src/utilities/create_lambda");
 
 const last = list => list[list.length - 1];
@@ -47,7 +46,7 @@ describe("create_lambda.js", () => {
       contextEnhancerStub = stub().returns({ logger });
     });
 
-    it.only("should call the handler with the proper arguments, and call the callback with the promise result", () => {
+    it("should call the handler with the proper arguments, and call the callback with the promise result", () => {
       const callbackSpy = spy();
       const contextEnhancerStub = stub().returns({ logger });
       const MOCK_RESPONSE = { statusCode: 200 };
@@ -66,7 +65,6 @@ describe("create_lambda.js", () => {
     });
 
     it("should catch unexpected error", () => {
-      // const enhancedContext = stub().rejects("Unexpected resolution");
       const handler = stub().throws("Unexpected resolution");
       const lambda = _enhancedLambdaCreator(contextEnhancerStub)(handler);
 
