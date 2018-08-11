@@ -1,4 +1,5 @@
 const { expect } = require("chai");
+const { spy, stub } = require("sinon");
 const rp = require("request-promise");
 
 const {
@@ -6,6 +7,8 @@ const {
   _enhancedLambdaCreator,
   createLambda,
 } = require("../../../src/utilities/create_lambda");
+
+const last = list => list[list.length - 1];
 
 describe("create_lambda.js", () => {
   describe("_defaultContextEnhancer()", () => {
@@ -20,6 +23,59 @@ describe("create_lambda.js", () => {
 
       // Here we just try to be reasonably sure this is correct:
       expect(testContext.logger.info).to.be.a("function");
+    });
+  });
+
+  describe("_enhancedLambdaCreator()", () => {
+    const MOCK_CONTEXT = Symbol();
+    const MOCK_EVENT = Symbol();
+
+    let callbackSpy;
+    let contextEnhancerStub;
+    let logger;
+    beforeEach(() => {
+      callbackSpy = spy();
+      logger = {
+        trace: spy(),
+        debug: spy(),
+        info: spy(),
+        metric: spy(),
+        warn: spy(),
+        error: spy(),
+        fatal: spy(),
+      };
+      contextEnhancerStub = stub().returns({ logger });
+    });
+
+    it.only("should call the handler with the proper arguments, and call the callback with the promise result", () => {
+      const callbackSpy = spy();
+      const contextEnhancerStub = stub().returns({ logger });
+      const MOCK_RESPONSE = { statusCode: 200 };
+      const curriedHandler = stub().returns(MOCK_RESPONSE);
+      const handler = stub().returns(curriedHandler);
+      const lambda = _enhancedLambdaCreator(() => ({ logger }))(handler);
+
+      return lambda(MOCK_EVENT, MOCK_CONTEXT, callbackSpy).then(() => {
+        expect(handler.args).to.deep.equal([[{ logger }]]);
+        expect(curriedHandler.args).to.deep.equal([[MOCK_EVENT]]);
+        expect(callbackSpy.args).to.deep.equal([[null, MOCK_RESPONSE]]);
+        expect(logger.info.args).to.deep.equal([
+          ['Received response {"statusCode":200}'],
+        ]);
+      });
+    });
+
+    it("should catch unexpected error", () => {
+      // const enhancedContext = stub().rejects("Unexpected resolution");
+      const handler = stub().throws("Unexpected resolution");
+      const lambda = _enhancedLambdaCreator(contextEnhancerStub)(handler);
+
+      return lambda(MOCK_EVENT, MOCK_CONTEXT, callbackSpy).then(result => {
+        expect(logger.error.args).to.deep.equal([
+          ['{"name":"Unexpected resolution"}'],
+        ]);
+        expect(result).to.equal(undefined);
+      });
     });
   });
 });

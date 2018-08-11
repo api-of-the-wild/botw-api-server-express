@@ -1,9 +1,7 @@
 const rp = require("request-promise");
 const { createLogger } = require("./logger");
 
-const success = callback => result => {
-  callback(null, result);
-};
+const consoleLogger = createLogger(console);
 
 const _enhancedLambdaCreator = contextEnhancer => handler => (
   event,
@@ -14,12 +12,15 @@ const _enhancedLambdaCreator = contextEnhancer => handler => (
   const { logger } = enhancedContext;
 
   return Promise.resolve()
-    .then(() => handler(enhancedContext)(event))
+    .then(() => {
+      return handler(enhancedContext)(event);
+    })
     .then(result => {
-      success(callback)(result);
+      logger.info(`Received response ${JSON.stringify(result)}`);
+      callback(null, result);
     })
     .catch(err => {
-      logger.error(err);
+      logger.error(`${JSON.stringify(err)}`);
       callback(err);
     });
 };
@@ -27,7 +28,7 @@ const _enhancedLambdaCreator = contextEnhancer => handler => (
 const _defaultContextEnhancer = awsContext => ({
   awsContext,
   env: process.env,
-  logger: createLogger(console),
+  logger: consoleLogger,
   request: rp,
 });
 
