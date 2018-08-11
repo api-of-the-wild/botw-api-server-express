@@ -7,8 +7,6 @@ const {
   _enhancedLambdaCreator,
 } = require("../../../src/utilities/create_lambda");
 
-const last = list => list[list.length - 1];
-
 describe("create_lambda.js", () => {
   describe("_defaultContextEnhancer()", () => {
     it("should bundle up all useful utilities", () => {
@@ -48,7 +46,6 @@ describe("create_lambda.js", () => {
 
     it("should call the handler with the proper arguments, and call the callback with the promise result", () => {
       const callbackSpy = spy();
-      const contextEnhancerStub = stub().returns({ logger });
       const MOCK_RESPONSE = { statusCode: 200 };
       const curriedHandler = stub().returns(MOCK_RESPONSE);
       const handler = stub().returns(curriedHandler);

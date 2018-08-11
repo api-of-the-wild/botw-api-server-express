@@ -9,7 +9,7 @@ const _getPokemonId = event => {
   return id;
 };
 
-const handler = ({ logger, env, request }) => async event => {
+const handler = ({ logger, request }) => async event => {
   const id = _getPokemonId(event);
 
   logger.info(`This is a sample log. Going to fetch pokemon with id ${id}`);

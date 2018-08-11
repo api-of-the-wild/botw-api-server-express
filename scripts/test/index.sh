@@ -12,6 +12,6 @@ ROOT_DIR="$(realpath "${SCRIPTS_DIR}/..")"
 
 set -x
 
-yarn test:lint
-yarn test:unit
-yarn test:coverage
+yarn test:lint && \
+  yarn test:unit && \
+  yarn test:coverage
