@@ -8,6 +8,7 @@ The RESTful BotW API.
 - [x] Unit Test
 - [ ] Integration Test
 - [x] Dependency Check
+- [ ] Changelog Check
 
 ### Pipeline ###
 - [x] Can use Node and Yarn in pipeline
