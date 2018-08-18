@@ -12,11 +12,9 @@ const handler = ({ logger, request }) => async event => {
       statusCode: 400,
       body: "Bad Request",
     };
-
+    logger.warn(`Got bad id: ${id}`);
     return Promise.resolve(response);
   }
-
-  logger.info(`This is a sample log. Going to fetch pokemon with id ${id}`);
 
   const rpOptions = {
     uri: `${url}/${id}`,
@@ -40,12 +38,12 @@ const handler = ({ logger, request }) => async event => {
     };
   } catch (err) {
     // eslint-disable-next-line no-console
-    console.log(err);
+    logger.error(err);
     response = {
       statusCode: 500,
-      body: err,
+      body: err.name,
     };
-    return Promise.reject(response);
+    return Promise.resolve(response);
   }
 
   return Promise.resolve(response);
