@@ -25,13 +25,14 @@ const retryService = (uri, rpOptions = {}) => {
           resolveWithFullResponse: true,
         })
         .then(resolution => {
+          // TODO - inject logger
+          // eslint-disable-next-line no-console
           console.log(
             `Endpoint ${uri} responded with ${resolution.statusCode}`
           );
           resolve(resolution);
         })
         .catch(rejection => {
-          console.log("ERRING!");
           new Date().getTime() < timeoutTime
             ? retry()
             : Promise.reject(rejection);
