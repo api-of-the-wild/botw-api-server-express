@@ -1,23 +1,26 @@
-const url = "https://pokeapi.co/api/v2/pokemon";
-let response;
-
 const _getPokemonId = event => {
   return event && event.queryStringParameters && event.queryStringParameters.id;
 };
 
-const handler = ({ logger, request }) => async event => {
+const handler = ({ logger, env, request }) => async event => {
+  let response;
   const id = _getPokemonId(event);
   if (id === undefined || id === null) {
     response = {
       statusCode: 400,
-      body: "Bad Request",
+      body: JSON.stringify({ message: "Bad Request" }),
     };
     logger.warn(`Got bad id: ${id}`);
     return Promise.resolve(response);
   }
 
+  const POKEAPI_BASE_URI = env.POKEAPI_BASE_URI || "https://pokeapi.co";
+  const POKEAPI_POKEMON_V2 = "api/v2/pokemon";
+  const uri = `${POKEAPI_BASE_URI}/${POKEAPI_POKEMON_V2}/${id}`;
+  logger.info(`uri: ${uri}`);
+
   const rpOptions = {
-    uri: `${url}/${id}`,
+    uri,
     headers: {
       "User-Agent": "Request-Promise",
     },
@@ -30,22 +33,25 @@ const handler = ({ logger, request }) => async event => {
 
     response = {
       statusCode: 200,
-      body: {
+      body: JSON.stringify({
         name: result.name,
         weight: result.weight,
         id: result.id,
-      },
+      }),
+      // headers: {
+      //   "Content-Type": "application/json",
+      // },
     };
   } catch (err) {
     // eslint-disable-next-line no-console
     logger.error(err);
     response = {
       statusCode: 500,
-      body: err.name,
+      body: JSON.stringify(err.name),
     };
     return Promise.resolve(response);
   }
-
+  console.log("about to resolve response", response);
   return Promise.resolve(response);
 };
 
