@@ -38,12 +38,8 @@ const handler = ({ logger, env, request }) => async event => {
         weight: result.weight,
         id: result.id,
       }),
-      // headers: {
-      //   "Content-Type": "application/json",
-      // },
     };
   } catch (err) {
-    // eslint-disable-next-line no-console
     logger.error(err);
     response = {
       statusCode: 500,
@@ -51,7 +47,6 @@ const handler = ({ logger, env, request }) => async event => {
     };
     return Promise.resolve(response);
   }
-  console.log("about to resolve response", response);
   return Promise.resolve(response);
 };
 

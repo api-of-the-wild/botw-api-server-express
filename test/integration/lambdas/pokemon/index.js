@@ -33,10 +33,10 @@ describe(`Integration tests (ENV: ${env.INTEGRATION_STAGE})`, () => {
         return retryService(lambdaBaseUri + "/pokemon?id=6", {
           timeoutMs: TIMEOUT_MS,
         });
-      })
-      .catch(rej => {
-        console.log("retry rejection", rej);
       });
+    // .catch(rej => {
+    //   console.log("retry rejection", rej);
+    // });
   });
 
   describe("GET /pokemon", () => {
@@ -45,8 +45,11 @@ describe(`Integration tests (ENV: ${env.INTEGRATION_STAGE})`, () => {
       const uri = lambdaBaseUri + "/pokemon?id=6";
       const expected = RESPONSE_200.response.jsonBody;
       return rp({ uri }).then(response => {
-        console.log("RESPONSE", response);
-        expect(response).to.deep.equal(expected);
+        console.log("RESPONSE", JSON.parse(response));
+        expect(JSON.parse(response).name).to.deep.equal(expected.name);
+        expect(JSON.parse(response).weight).to.deep.equal(expected.weight);
+        expect(JSON.parse(response).id).to.deep.equal(expected.id);
+        // expect response to not have property `moves`
       });
     });
   });
