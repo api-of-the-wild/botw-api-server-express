@@ -11,10 +11,14 @@
     "test": "scripts/test/index.sh",
     "test:lint": "scripts/test/lint.sh",
     "test:unit": "scripts/test/unit.sh",
+    "test:alpha": "scripts/test/alpha.sh",
     "test:coverage": "scripts/test/coverage.sh",
     "test:depcheck": "node scripts/test/depcheck.js",
     "view:unit": "open reports/unit/mochawesome.html",
-    "view:coverage": "open reports/coverage/lcov-report/index.html"
+    "view:coverage": "open reports/coverage/lcov-report/index.html",
+    "show:python": "ps -ef | grep python",
+    "docker:up": "scripts/docker/dockerUp.sh",
+    "docker:down": "scripts/docker/dockerDown.sh"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.6",

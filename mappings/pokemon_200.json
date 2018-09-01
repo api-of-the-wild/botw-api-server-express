@@ -1,0 +1,21 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPathPattern": "/api/v2/pokemon/6"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "id": 6,
+      "name": "charizard",
+      "weight": 905,
+      "moves": [
+        { "move": "sexy move" },
+        { "move": "sexier move" }
+      ]
+    }
+  }
+}
