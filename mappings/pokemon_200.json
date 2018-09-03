@@ -12,10 +12,7 @@
       "id": 6,
       "name": "charizard",
       "weight": 905,
-      "moves": [
-        { "move": "sexy move" },
-        { "move": "sexier move" }
-      ]
+      "moves": [{ "move": "sexy move" }, { "move": "sexier move" }]
     }
   }
 }

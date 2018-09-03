@@ -2,6 +2,7 @@ const rp = require("request-promise");
 
 const DEFAULT_DELAY_TIME_MS = 500;
 const DEFAULT_TIMEOUT_MS = 1900;
+const DEFAULT_STATUS_CODES = [200, 201, 202, 203, 204, 205, 206, 207, 208, 226];
 
 const retryService = (uri, rpOptions = {}) => {
   const options = {};
@@ -10,7 +11,7 @@ const retryService = (uri, rpOptions = {}) => {
   options.request = rpOptions.request || rp;
   options.serviceName = rpOptions.serviceName || "";
   options.timeoutMs = rpOptions.timeoutMs || DEFAULT_TIMEOUT_MS;
-  // options.statusCodes = rpOptions.statusCodes || _defaultStatusCodes;
+  options.statusCodes = rpOptions.statusCodes || DEFAULT_STATUS_CODES;
 
   const timeoutTime = new Date().getTime() + options.timeoutMs;
 

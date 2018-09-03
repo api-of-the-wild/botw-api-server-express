@@ -18,7 +18,7 @@ export ROOT_DIR
 export COMPOSE_PROJECT_NAME
 
 # Start SAM Local on same docker network
-sam local start-api --docker-network api-of-the-wild_cloud &
+sam local start-api --docker-network api_of_the_wild_cloud &
 PID=$!
 
 mocha \

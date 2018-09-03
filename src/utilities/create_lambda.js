@@ -16,7 +16,7 @@ const _enhancedLambdaCreator = contextEnhancer => handler => (
       return handler(enhancedContext)(event);
     })
     .then(result => {
-      logger.info(`Received response ${result}`);
+      logger.info("Received response " + JSON.stringify(result));
       callback(null, result);
     })
     .catch(err => {

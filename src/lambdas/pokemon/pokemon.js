@@ -24,26 +24,25 @@ const handler = ({ logger, env, request }) => async event => {
     headers: {
       "User-Agent": "Request-Promise",
     },
-    json: true, // Automatically parses the JSON string in the response
+    json: true,
+    resolveWithFullResponse: true,
   };
 
   try {
     const result = await request(rpOptions);
-    logger.info(`Got ${result.name}, id ${result.id}`);
-
     response = {
-      statusCode: 200,
+      statusCode: result.statusCode,
       body: JSON.stringify({
-        name: result.name,
-        weight: result.weight,
-        id: result.id,
+        name: result.body.name,
+        weight: result.body.weight,
+        id: result.body.id,
       }),
     };
   } catch (err) {
     logger.error(err);
     response = {
-      statusCode: 500,
-      body: JSON.stringify(err.name),
+      statusCode: err.statusCode || 500,
+      body: JSON.stringify(err.message),
     };
     return Promise.resolve(response);
   }
