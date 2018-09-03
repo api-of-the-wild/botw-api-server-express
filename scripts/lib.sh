@@ -6,13 +6,6 @@ ROOT_DIR="$(realpath "${SCRIPTS_DIR}/..")"
 # ENV_DIR="${ROOT_DIR}/.env.d"
 # CACHE_DIR="${ROOT_DIR}/.cache"
 
-# mkdir -p "${CACHE_DIR}"
-
-# WIREMOCK_TGZ_URI="https://nc.0ti.me/index.php/s/n7RN8j8ZRmZjZWJ/download"
-# WIREMOCK_TGZ_FILE="${CACHE_DIR}/wiremock.tgz"
-
-# MARIADB_ENV="${ENV_DIR}/mariadb.env"
-
 # Checks `which $1` and if a file does not exist at that path, exits with -1
 #
 # @param binary name    $1  The binary to check
@@ -46,4 +39,45 @@ fileExistsOrExit() {
   fi
 
   return 0
+}
+
+# @param containerId   $1   The container id to use when talking to docker daemon
+# @param portNumber    $2   The port number bound inside the container
+#
+# Returns (via stdout) the local port bound to the provided remote port on the
+#  provided docker container
+getDockerPortMapping() {
+  docker port $1 | grep -E "^$2" | awk -F: '{print $2}'
+}
+
+dockerComposeUp() {
+  # docker-compose up: Builds, (re)creates, starts, and attaches to containers for a service.
+  #   --detach - Detached mode: Run containers in the background, print new container names.
+  #   --force-recreate - Recreate containers even if their configuration and image haven't changed.
+  docker-compose up --detach --force-recreate
+
+  export WIREMOCK_PORT="$(getWireMockPort)"
+}
+
+dockerComposeDown() {
+  # docker-compose rm: Removes stopped service containers.
+  #   -f, --force - Don't ask to confirm removal.
+  #   -s, --stop - Stop the containers, if required, before removing.
+  #   -v - Remove any anonymous volumes attached to containers.
+  docker-compose rm --force --stop -v
+}
+
+dockerComposeRestart() {
+  dockerComposeDown
+  dockerComposeUp
+}
+
+# `docker-compose ps wiremock`: List containers with name wiremock, .e.g
+#       wiremock        docker-entrypoint.sh mysqld      Up (healthy)  0.0.0.0:8000->80/tcp
+# `grep -o -E '[0-9]+->8080/tcp'`:
+#     -o --only-matching - Show only the part of a matching line that matches PATTERN.
+#     -E --extended-regexp - Interpret PATTERN as an extended regular expression (see below).
+# `sed 's/->.*//'`: Stream EDitor, replace string ->.* with blank
+getWireMockPort() {
+  docker-compose ps wiremock | grep -o -E '[0-9]+->8080/tcp' | sed 's/->.*//'
 }

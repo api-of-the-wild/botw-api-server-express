@@ -1,0 +1,13 @@
+version: "3"
+services:
+  wiremock:
+    image: rodolpheche/wiremock:2.14.0-alpine
+    # docker with prepend network name with COMPOSE_PROJECT_NAME
+    networks:
+      - cloud
+    ports:
+      - 0:8080
+    volumes:
+      - ${PWD}/mappings:/home/wiremock/mappings:ro
+networks:
+  cloud:

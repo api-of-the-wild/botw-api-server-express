@@ -6,7 +6,7 @@ The RESTful BotW API.
 ### Test Suites ###
 - [x] Lint Test
 - [x] Unit Test
-- [ ] Integration Test
+- [x] Integration Test
 - [x] Dependency Check
 - [ ] Changelog Check
 

@@ -66,9 +66,7 @@ describe("create_lambda.js", () => {
       const lambda = _enhancedLambdaCreator(contextEnhancerStub)(handler);
 
       return lambda(MOCK_EVENT, MOCK_CONTEXT, callbackSpy).then(result => {
-        expect(logger.error.args).to.deep.equal([
-          ['{"name":"Unexpected resolution"}'],
-        ]);
+        expect(logger.error.args).to.deep.equal([["Unexpected resolution"]]);
         expect(result).to.equal(undefined);
       });
     });
