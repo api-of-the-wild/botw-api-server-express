@@ -1,18 +1,16 @@
 #!groovy
 
 pipeline {
-  agent any
-  
-  tools {
-    nodejs 'node-8.10.0'
+  agent {
+    docker { image "kwhitejr/docker-ubuntu-node8.10:latest"}
   }
 
   stages {
-    stage('Build') {
+    stage('Prepare') {
       steps {
         sh 'node -v'
         sh 'npm -v'
-        sh 'yarn -v'
+        sh 'yarn --version'
         sh 'yarn install'
       }
     }
