@@ -1,0 +1,36 @@
+﻿id,name,region_fk
+1,Akkala Highlands,1
+2,Akkala Sea,1
+3,Deep Akkala,1
+4,Tarrey Town,1
+5,Hyrule Field,2
+6,Hyrule Castle,2
+7,Dueling Peaks,3
+8,Kakariko Village,3
+9,Eldin,4
+10,Death Mountain,4
+11,Eldin Mountains,4
+12,Goron City,4
+13,Faron,5
+14,Lurelin Village,5
+15,Necluda Sea,5
+16,Gerudo Highlands,6
+17,Gerudo Desert,7
+18,Gerudo Town,7
+19,Woodland,8
+20,Great Hyrule Forest,8
+21,Great Plateau,9
+22,Mount Lanayru,10
+23,Hateno Village,10
+24,Necluda Sea,10
+25,Hebra Mountains,11
+26,Tabantha Tundra,11
+27,Faron Grasslands,12
+28,Faron Sea,12
+29,Lanayru Great Spring,13
+30,Lanayru Sea,13
+31,Nlanayru Wetlands,13
+32,Zora's Domain,13
+33,Hyrule Ridge,14
+34,Tabantha Frontier,15
+35,Rito Village,15
