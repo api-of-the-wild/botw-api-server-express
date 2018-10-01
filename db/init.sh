@@ -28,8 +28,8 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" "$POSTGRES_DB" <<-EOSQL
         location_type_fk INT references location_types(id)
     );
 
-    COPY location_types FROM '/docker-entrypoint-initdb.d/data/locationType.csv' DELIMITER ',' CSV HEADER;
-    COPY regions FROM '/docker-entrypoint-initdb.d/data/region.csv' DELIMITER ',' CSV HEADER;
-    COPY subregions FROM '/docker-entrypoint-initdb.d/data/subregion.csv' DELIMITER ',' CSV HEADER;
-    COPY locations FROM '/docker-entrypoint-initdb.d/data/location.csv' DELIMITER ',' CSV HEADER;
+    COPY location_types FROM '/docker-entrypoint-initdb.d/data/geography/locationType.csv' DELIMITER ',' CSV HEADER;
+    COPY regions FROM '/docker-entrypoint-initdb.d/data/geography/region.csv' DELIMITER ',' CSV HEADER;
+    COPY subregions FROM '/docker-entrypoint-initdb.d/data/geography/subregion.csv' DELIMITER ',' CSV HEADER;
+    COPY locations FROM '/docker-entrypoint-initdb.d/data/geography/location.csv' DELIMITER ',' CSV HEADER;
 EOSQL
