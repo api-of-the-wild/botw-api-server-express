@@ -1,6 +1,6 @@
 const router = require("express").Router();
 
-const { asyncMiddleware } = require("../../utilities/middleware");
+const { asyncMiddleware } = require("./utilities/middleware");
 const { countRegions } = require("./db_queries");
 
 const routes = app => {

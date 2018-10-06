@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "description": "The RESTful BotW Data API",
   "main": "index.js",
-  "repository": "git@gitlab.com:kwhitejr/api-of-the-wild.git",
+  "repository": "git@github.com:api-of-the-wild/botw-api-server-express.git",
   "author": "White, Kevin <kwhitejr@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "sam local start-api",
+    "start": "nodemon index.js",
     "test": "scripts/test/index.sh",
     "test:lint": "scripts/test/lint.sh",
     "test:unit": "scripts/test/unit.sh",
@@ -18,8 +18,7 @@
     "view:coverage": "open reports/coverage/lcov-report/index.html",
     "show:python": "ps -ef | grep python",
     "docker:up": "scripts/docker/dockerUp.sh",
-    "docker:down": "scripts/docker/dockerDown.sh",
-    "server:start": "nodemon src/lambdas/geography/index.js"
+    "docker:down": "scripts/docker/dockerDown.sh"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.6",
@@ -37,7 +36,6 @@
     "uuid": "^3.3.2"
   },
   "dependencies": {
-    "aws-serverless-express": "^3.3.5",
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
     "massive": "^5.4.0",
