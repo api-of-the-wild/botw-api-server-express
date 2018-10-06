@@ -1,0 +1,693 @@
+﻿id,name,region_fk,subregion_fk,location_type_fk
+1,Akkala Bridge Ruins,1,1,
+2,Akkala Citadel Ruins,1,1,
+3,Akkala Falls,1,1,
+4,Akkala Parade Ground Ruins,1,1,
+5,Akkala Span,1,1,
+6,Akkala Tower,1,1,4
+7,Dah Hesho Shrine,1,1,1
+8,East Akkala Plains,1,1,
+9,East Sokkala Bridge,1,1,
+10,Great Fairy Fountain,1,1,5
+11,Kaepora Pass,1,1,
+12,Kanalet Ridge,1,1,
+13,Ke'nai Shakah Shrine,1,1,1
+14,Lake Akkala,1,1,
+15,Shadow Hamlet Ruins,1,1,
+16,Shadow Pass,1,1,
+17,Sokkala Bridge,1,1,
+18,South Akkala Plains,1,1,
+19,South Akkala Stable,1,1,2
+20,South Lake Akkala,1,1,
+21,Spring of Power,1,1,6
+22,Ternio Trail,1,1,
+23,Torin Wetland,1,1,
+24,Ukuku Plains,1,1,
+25,Ulri Mountain,1,1,
+26,Ulria Grotto,1,1,
+27,West Sokkala Bridge,1,1,
+28,Ze Kasho Shrine,1,1,1
+29,East Akkala Beach,1,2,
+30,Lomei Labyrinth Island,1,2,
+31,Malin Bay,1,2,
+32,North Akkala Beach,1,2,
+33,Rist Peninsula,1,2,
+34,Ritaag Zumo Shrine,1,2,1
+35,Tu Ka'loh Shrine,1,2,1
+36,Akkala Ancient Tech Lab,1,3,
+37,Akkala Wilds,1,3,
+38,Bloodleaf Lake,1,3,
+39,East Akkala Stable,1,3,2
+40,Katosa Aug Shrine,1,3,1
+41,North Akkala Foothill,1,3,
+42,North Akkala Valley,1,3,
+43,Ordorac Quarry,1,3,
+44,Rok Woods,1,3,
+45,Skull Lake,1,3,
+46,Tempest Gulch,1,3,
+47,Tumlea Heights,1,3,
+48,Tutsuwa Nima Shrine,1,3,1
+49,Zuna Kai Shrine,1,3,1
+50,Inn,1,4,3
+51,Ore and More,1,4,3
+52,Rhondson Armor Boutique,1,4,3
+53,Slippery Falcon,1,4,3
+54,Ancient Tree Stump,2,5,
+55,Applean Forest,2,5,
+56,Aquame Bridge,2,5,
+57,Aquame Lake,2,5,
+58,Boneyard Bridge,2,5,
+59,Bottomless Swamp,2,5,
+60,Carok Bridge,2,5,
+61,Castle Town Prison,2,5,
+62,Castle Town Watchtower,2,5,
+63,Central Square,2,5,
+64,Central Tower,2,5,4
+65,Coliseum Ruins,2,5,
+66,Crenel Hills,2,5,
+67,Dah Kaso Shrine,2,5,1
+68,Digdogg Suspension Bridge,2,5,
+69,East Castle Town,2,5,
+70,East Post Ruins,2,5,
+71,Exchange Ruins,2,5,
+72,Forest of Time,2,5,
+73,Gatepost Town Ruins,2,5,
+74,Giant's Forest,2,5,
+75,Gleeok Bridge,2,5,
+76,Helmhead Bridge,2,5,
+77,Hyrule Castle Moat,2,5,
+78,Hyrule Castle Town Ruins,2,5,
+79,Hyrule Cathedral,2,5,
+80,Hyrule Forest Park,2,5,
+81,Hyrule Garrison Ruins,2,5,
+82,Kaam Ya'tak Shrine,2,5,1
+83,Katah Chuki Shrine,2,5,1
+84,Kolomo Garrison Ruins,2,5,
+85,Lake Kolomo,2,5,
+86,Mabe Prairie,2,5,
+87,Mabe Village Ruins,2,5,
+88,Manhala Bridge,2,5,
+89,Moat Bridge,2,5,
+90,Mount Daphnes,2,5,
+91,Mount Gustaf,2,5,
+92,Namika Ozz Shrine,2,5,1
+93,Noya Neha Shrine,2,5,1
+94,Orsedd Bridge,2,5,
+95,Outskirt Stable,2,5,2
+96,Passeri Greenbelt,2,5,
+97,Quarry Ruins,2,5,
+98,Ranch Ruins,2,5,
+99,Regencia River,2,5,
+100,Riverside Stable,2,5,2
+101,Romani Plains,2,5,
+102,Rota Ooh Shrine,2,5,1
+103,Sacred Ground Ruins,2,5,
+104,Sage Temple Ruins,2,5,
+105,Wahgo Katta Shrine,2,5,1
+106,Water Reservoir,2,5,
+107,West Castle Town,2,5,
+108,Whistling Hill,2,5,
+109,Windvane Meadow,2,5,
+110,Dining Hall,2,6,
+111,Docks,2,6,
+112,East Passage,2,6,
+113,First Gatehouse,2,6,
+114,Guards' Chamber,2,6,
+115,King's Study,2,6,
+116,Library,2,6,
+117,Lockup,2,6,
+118,Observation Room,2,6,
+119,Princess Zelda's Room,2,6,
+120,Princess Zelda's Study,2,6,
+121,Sanctum,2,6,
+122,Hyrule Castle Underground,2,6,
+123,Laboratory,2,6,
+124,Saas Ko'sah Shrine,2,6,1
+125,Second Gatehouse,2,6,
+126,West Passage,2,6,
+127,Ash Swamp,3,7,
+128,Batrea Lake,3,7,
+129,Big Twin Bridge,3,7,
+130,Blatchery Plain,3,7,
+131,Bonooru's Stand,3,7,
+132,Bosh Kala Shrine,3,7,1
+133,Bubinga Forest,3,7,
+134,Dueling Peaks Stable,3,7,2
+135,Dueling Peaks Tower,3,7,4
+136,Eagus Bridge,3,7,
+137,Floret Sandbar,3,7,
+138,Great Fairy Fountain,3,7,5
+139,Ha Dahamar Shrine,3,7,1
+140,Hickaly Woods,3,7,
+141,Hila Rao Shrine,3,7,1
+142,Hills of Baumer,3,7,
+143,Horwell Bridge,3,7,
+144,Hylia River,3,7,
+145,Kakariko Bridge,3,7,
+146,Lake Siela,3,7,
+147,Lakna Rokee Shrine,3,7,1
+148,Lantern Lake,3,7,
+149,Little Twin Bridge,3,7,
+150,Mable Ridge,3,7,
+151,Mount Rozudo,3,7,
+152,Nabi Lake,3,7,
+153,Oakle's Navel,3,7,
+154,Outpost Ruins,3,7,
+155,Owlan Bridge,3,7,
+156,Pillars of Levia,3,7,
+157,Proxim Bridge,3,7,
+158,Ree Dahee Shrine,3,7,1
+159,Sahasra Slope,3,7,
+160,Scout's Hill,3,7,
+161,Shee Vaneer Shrine,3,7,1
+162,Shee Venath Shrine,3,7,1
+163,South Nabi Lake,3,7,
+164,Squabble River,3,7,
+165,Ta'loh Naeg Shrine,3,7,1
+166,Toto Sah Shrine,3,7,1
+167,Enchanted,3,8,
+168,Fang and Bone,3,8,
+169,High Spirits Produce,3,8,
+170,Shuteye Inn,3,8,
+171,The Curious Quiver,3,8,
+172,Abandoned North Mine,4,9,
+173,Broca Island,4,9,
+174,Cephla Lake,4,9,
+175,Darunia Lake,4,9,
+176,Eldin Tower,4,9,4
+177,Foothill Stable,4,9,2
+178,Gero Pond,4,9,
+179,Golow River,4,9,
+180,Gorae Torr Shrine,4,9,1
+181,Gorko Tunnel,4,9,
+182,Goronbi Lake,4,9,
+183,Goronbi River,4,9,
+184,Gortram Cliff,4,9,
+185,Gut Check Rock,4,9,
+186,Isle of Rabac,4,9,
+187,Kayra Mah Shrine,4,9,1
+188,Lake Ferona,4,9,
+189,Lake Intenoch,4,9,
+190,Maw of Death Mountain,4,9,
+191,Medingo Pool,4,9,
+192,Mo'a Keet Shrine,4,9,1
+193,Qua Raym Shrine,4,9,1
+194,Sah Dahaj Shrine,4,9,1
+195,Shora Hah Shrine,4,9,1
+196,Southern Mine,4,9,
+197,Tah Muhl Shrine,4,9,1
+198,Trilby Valley,4,9,
+199,Bridge of Eldin,4,10,
+200,Daqa Koh Shrine,4,10,1
+201,Darb Pond,4,10,
+202,Death Caldera,4,10,
+203,Gorko Lake,4,10,
+204,Goro Cove,4,10,
+205,Goron Hot Springs,4,10,
+206,Lake Darman,4,10,
+207,Eldin Great Skeleton,4,11,
+208,Eldin's Flank,4,11,
+209,Goron Gusto Shop,4,12,
+210,Protein Palace,4,12,
+211,Ripped and Shredded,4,12,
+212,Rollin' Inn,4,12,
+213,Shae Mo'sah Shrine,4,12,1
+214,Stolock Bridge,4,12,
+215,Angel Peak,5,13,
+216,Aris Beach,5,13,
+217,Atun Valley,5,13,
+218,Breman Peak,5,13,
+219,Bronas Forest,5,13,
+220,Calora Lake,5,13,
+221,Cape Cales,5,13,
+222,Corta Lake,5,13,
+223,Courage Steppe,5,13,
+224,Dunsel Plateau,5,13,
+225,Ebara Forest,5,13,
+226,Faron Tower,5,13,4
+227,Floria Bridge,5,13,
+228,Floria Falls,5,13,
+229,Gama Cove,5,13,
+230,Hanu Pond,5,13,
+231,Jia Highlands,5,13,
+232,Kah Yah Shrine,5,13,1
+233,Kamah Plateau,5,13,
+234,Keelay Plain,5,13,
+235,Keya Pond,5,13,
+236,Koto Pond,5,13,
+237,Lake Floria,5,13,
+238,Lakeside Stable,5,13,2
+239,Meda Mountain,5,13,
+240,Mount Dunsel,5,13,
+241,Mount Floria,5,13,
+242,Mount Taran,5,13,
+243,Muwo Jeem Shrine,5,13,1
+244,Palmorae Beach,5,13,
+245,Palmorae Ruins,5,13,
+246,Qukah Nata Shrine,5,13,1
+247,Rabella Wetlands,5,13,
+248,Rassla Lake,5,13,
+249,Riola Spring,5,13,
+250,Rodai Lake,5,13,
+251,Sarjon Bridge,5,13,
+252,Sarjon Woods,5,13,
+253,Shai Utoh Shrine,5,13,1
+254,Shoda Sah Shrine,5,13,1
+255,Stinger Cliffs,5,13,
+256,Taran Pass,5,13,
+257,Tawa Jinn Shrine,5,13,1
+258,Temto Hill,5,13,
+259,Tobio's Hollow,5,13,
+260,Tuft Mountain,5,13,
+261,Ubota Point,5,13,
+262,Uten Marsh,5,13,
+263,Yah Rin Shrine,5,13,1
+264,Yambi Lake,5,13,
+265,General Store,5,14,
+266,Inn,5,14,
+267,Aris Beach,5,15,
+268,Cape Cresia,5,15,
+269,Clarnet Coast,5,15,
+270,Eventide Island,5,15,
+271,Gogobi Shores,5,15,
+272,Koholit Rock,5,15,
+273,Korgu Chideh Shrine,5,15,1
+274,Korne Beach,5,15,
+275,Martha's Landing,5,15,
+276,Rimba Beach,5,15,
+277,Soka Point,5,15,
+278,Toronbo Beach,5,15,
+279,Birida Lookout,6,16,
+280,Cliffs of Ruvara,6,16,
+281,Gerudo Summit,6,16,
+282,Gerudo Tower,6,16,4
+283,Hemaar's Descent,6,16,
+284,Joloo Nah Shrine,6,16,1
+285,Keeha Yoog Shrine,6,16,1
+286,Kema Kosassa Shrine,6,16,1
+287,Kuh Takkar Shrine,6,16,1
+288,Laparoh Mesa,6,16,
+289,Meadela's Mantle,6,16,
+290,Mount Agaat,6,16,
+291,Mystathi's Shelf,6,16,
+292,Nephra Hill,6,16,
+293,Risoka Snowfield,6,16,
+294,Rutimala Hill,6,16,
+295,Sapphia's Table,6,16,
+296,Sasa Kai Shrine,6,16,1
+297,Sho Dantu Shrine,6,16,1
+298,Statue of the Eighth Heroine,6,16,
+299,Taafei Hill,6,16,
+300,Vatorsa Snowfield,6,16,
+301,Zirco Mesa,6,16,
+302,Arbiter's Grounds,7,17,
+303,Champion's Gate,7,17,
+304,Dako Tah Shrine,7,17,1
+305,Daqo Chisay Shrine,7,17,1
+306,Daval Peak,7,17,
+307,Dila Maag Shrine,7,17,1
+308,Dragon's Exile,7,17,
+309,East Barrens,7,17,
+310,East Gerudo Mesa,7,17,
+311,East Gerudo Ruins,7,17,
+312,Gerudo Canyon,7,17,
+313,Gerudo Canyon Pass,7,17,
+314,Gerudo Canyon Stable,7,17,2
+315,Gerudo Desert Gateway,7,17,
+316,Gerudo Great Skeleton,7,17,
+317,Great Cliffs,7,17,
+318,Great Fairy Fountain,7,17,5
+319,Hawa Koth Shrine,7,17,1
+320,Jee Noh Shrine,7,17,1
+321,Kara Kara Bazaar,7,17,
+322,Karusa Valley,7,17,
+323,Kay Noh Shrine,7,17,1
+324,Kema Zoos Shrine,7,17,1
+325,Korsh O'hu Shrine,7,17,1
+326,Koukot Plateau,7,17,
+327,Misae Suma Shrine,7,17,1
+328,Mount Granajh,7,17,
+329,Mount Nabooru,7,17,
+330,Northern Icehouse,7,17,
+331,Palu Wasteland,7,17,
+332,Raqa Zunzo Shrine,7,17,1
+333,Sand-Seal Rally,7,17,
+334,South Lomei Labyrinth,7,17,
+335,Southern Oasis,7,17,
+336,Spectacle Rock,7,17,
+337,Stalry Plateau,7,17,
+338,Suma Sahma Shrine,7,17,1
+339,Taafei Hill,7,17,
+340,Tho Kayu Shrine,7,17,1
+341,Toruma Dunes,7,17,
+342,Wasteland Tower,7,17,4
+343,West Barrens,7,17,
+344,West Gerudo Ruins,7,17,
+345,Yarna Valley,7,17,
+346,Yiga Clan Hideout,7,17,
+347,Arrow Specialty Shop,7,18,
+348,Fashion Passion,7,18,
+349,Hotel Oasis,7,18,
+350,Sand-Seal Rental Shop,7,18,
+351,Starlight Memories,7,18,
+352,The Noble Canteen,7,18,
+353,Aldor Foothills,8,19,
+354,Deplian Badlands,8,19,
+355,Drenan Highlands,8,19,
+356,East Deplian Badlands,8,19,
+357,Elma Knolls,8,19,
+358,Forgotten Temple,8,19,
+359,Ketoh Wawai Shrine,8,19,1
+360,Maritta Exchange Ruins,8,19,
+361,Military Training Camp,8,19,
+362,Minshi Woods,8,19,
+363,Mirro Shaz Shrine,8,19,1
+364,Mount Drena,8,19,
+365,Monya Toma Shrine,8,19,1
+366,Pico Pond,8,19,
+367,Rauru Hillside,8,19,
+368,Rauru Settlement Ruins,8,19,
+369,Rona Kachta Shrine,8,19,1
+370,Rowan Plain,8,19,
+371,Salari Hill,8,19,
+372,Salari Plain,8,19,
+373,Serenne Stable,8,19,2
+374,Thyphlo Ruins,8,19,
+375,Trilby Plain,8,19,
+376,West Deplian Badlands,8,19,
+377,Woodland Stable,8,19,2
+378,Woodland Tower,8,19,4
+379,Daag Chokah Shrine,8,20,1
+380,Keo Ruug Shrine,8,20,1
+381,Korok Forest,8,20,
+382,General Shoppe,8,20,
+383,Great Deku Tree's Navel,8,20,
+384,Spore Store,8,20,
+385,Kuhn Sidajj Shrine,8,20,1
+386,Lake Mekar,8,20,
+387,Lake Saria,8,20,
+388,Lost Woods,8,20,
+389,Maag Halan Shrine,8,20,1
+390,Mekar Island,8,20,
+391,Mido Swamp,8,20,
+392,Eastern Abbey,9,21,
+393,Forest of Spirits,9,21,
+394,Great Plateau Tower,9,21,4
+395,Hopper Pond,9,21,
+396,Ja Baij Shrine,9,21,1
+397,Keh Namut Shrine,9,21,1
+398,Mount Hylia,9,21,
+399,Oman Au Shrine,9,21,1
+400,Owa Daim Shrine,9,21,1
+401,River of the Dead,9,21,
+402,Shrine of Resurrection,9,21,1
+403,Temple of Time,9,21,
+404,Camphor Pond,10,22,
+405,Cliffs of Quince,10,22,
+406,Dow Na'eh Shrine,10,22,1
+407,Ebon Mountain/Lovers Pond,10,22,
+408,Fir River,10,22,
+409,Firly Plateau,10,22,
+410,Firly Pond,10,22,
+411,Fort Hateno,10,22,
+412,Ginner Woods,10,22,
+413,Hateno Ancient Tech Lab,10,22,
+414,Hateno Tower,10,22,4
+415,Jitan Sa'mi Shrine,10,22,1
+416,Kam Urog Shrine,10,22,1
+417,Lake Jarrah,10,22,
+418,Lake Sumac,10,22,
+419,Lanayru Bluff,10,22,
+420,Lanayru Heights,10,22,
+421,Lanayru Promenade,10,22,
+422,Lanayru Range,10,22,
+423,Lanayru Road - East Gate,10,22,
+424,Lanayru Road - West Gate,10,22,
+425,Madorna Mountain,10,22,
+426,Marblod Plain,10,22,
+427,Mezza Lo Shrine,10,22,1
+428,Midla Woods,10,22,
+429,Myahm Agana Shrine,10,22,1
+430,Naydra Snowfield,10,22,
+431,Nirvata Lake,10,22,
+432,Nirvata Plateau,10,22,
+433,Ovli Plain,10,22,
+434,Peak of Awakening,10,22,
+435,Phalian Highlands,10,22,
+436,Pierre Plateau,10,22,
+437,Purifier Lake,10,22,
+438,Quatta's Shelf,10,22,
+439,Rabia Plain,10,22,
+440,Retsam Forest,10,22,
+441,Robred Dropoff,10,22,
+442,Solewood Range,10,22,
+443,Spring of Wisdom,10,22,6
+444,Tahno O'ah Shrine,10,22,1
+445,Trotter's Downfall,10,22,
+446,Walnot Mountain,10,22,
+447,Zelkoa Pond,10,22,
+448,East Wind,10,23,
+449,Kochi Dye Shop,10,23,
+450,Link's House,10,23,
+451,The Great Ton Pu Inn,10,23,
+452,Ventest Clothing Boutique,10,23,
+453,Chaas Qeta Shrine,10,24,1
+454,Deepback Bay,10,24,
+455,Hateno Bay,10,24,
+456,Hateno Beach,10,24,
+457,Kitano Bay,10,24,
+458,Loshlo Harbor,10,24,
+459,Mapla Point,10,24,
+460,Tenoko Island,10,24,
+461,Biron Snowshelf,11,25,
+462,Coldsnap Hollow,11,25,
+463,Corvash Peak,11,25,
+464,Goflam's Secret Hot Spring,11,25,
+465,Goma Asaagh Shrine,11,25,1
+466,Hebra East Summit,11,25,
+467,Hebra Great Skeleton,11,25,
+468,Hebra North Crest,11,25,
+469,Hebra North Summit,11,25,
+470,Hebra Peak,11,25,
+471,Hebra South Summit,11,25,
+472,Hebra Tundra,11,25,
+473,Hebra West Summit,11,25,
+474,Hia Miu Shrine,11,25,1
+475,Icefall Foothills,11,25,
+476,Lake Kilsie,11,25,
+477,Maka Rah Shrine,11,25,1
+478,Mozo Shenno Shrine,11,25,1
+479,Pikida Stonegrove,11,25,
+480,Rok Uwog Shrine,11,25,1
+481,Rospro Pass,11,25,
+482,Selmie's Spot,11,25,
+483,Shada Naw Shrine,11,25,1
+484,Sherfin's Secret Hot Spring,11,25,
+485,Sturnida Basin,11,25,
+486,Sturnida Secret Hot Spring,11,25,
+487,Talonto Peak,11,25,
+488,To Quomo Shrine,11,25,1
+489,Dunba Taag Shrine,11,26,1
+490,Gee Ha'rah Shrine,11,26,1
+491,Hebra Falls,11,26,
+492,Hebra Headspring,11,26,
+493,Hebra Tower,11,26,4
+494,Kopeeki Drifts,11,26,
+495,Lanno Kooh Shrine,11,26,1
+496,N. Tabantha Snowfield,11,26,
+497,North Lomei Labyrinth,11,26,
+498,Pondo's Lodge,11,26,
+499,Qaza Tokki Shrine,11,26,1
+500,Rin Oyaa Shrine,11,26,1
+501,S. Tabantha Snowfield,11,26,
+502,Sha Gehma Shrine,11,26,1
+503,Snowfield Stable,11,26,2
+504,Tabantha Hills,11,26,
+505,Tabantha Village Ruins,11,26,
+506,Tama Pond,11,26,
+507,Barula Plain,12,27,
+508,Bridge of Hylia,12,27,
+509,Cora Lake,12,27,
+510,Damel Forest,12,27,
+511,Deya Lake,12,27,
+512,Deya Village Ruins,12,27,
+513,Dracozu Lake,12,27,
+514,Dracozu River,12,27,
+515,Faron Woods,12,27,
+516,Farosh Hills,12,27,
+517,Finra Woods,12,27,
+518,Fural Plain,12,27,
+519,Grinnden Plain,12,27,
+520,Guchini Plain,12,27,
+521,Guchini Plain Barrows,12,27,
+522,Haran Lake,12,27,
+523,Harfin Valley,12,27,
+524,Harker Lake,12,27,
+525,Herin Lake,12,27,
+526,Highland Stable,12,27,2
+527,Horse God Bridge,12,27,
+528,Hylia Island,12,27,
+529,Ishto Soh Shrine,12,27,1
+530,Ka'o Makagh Shrine,12,27,1
+531,Lake Hylia,12,27,
+532,Lake of the Horse God,12,27,
+533,Lake Tower,12,27,4
+534,Malanya Spring,12,27,
+535,Menoat River,12,27,
+536,Mount Faloraa,12,27,
+537,Mounted Archery Camp,12,27,
+538,Nautelle Wetlands,12,27,
+539,Oseira Plains,12,27,
+540,Pagos Woods,12,27,
+541,Pappetto Grove,12,27,
+542,Parache Plains,12,27,
+543,Popla Foothills,12,27,
+544,Pumaag Nitae Shrine,12,27,1
+545,Shae Katha Shrine,12,27,1
+546,Shoqa Tatone Shrine,12,27,1
+547,Spring of Courage,12,27,6
+548,Taobab Grassland,12,27,
+549,Ya Naga Shrine,12,27,1
+550,Zokassa Ridge,12,27,
+551,Zonai Ruins,12,27,
+552,Darybon Plains,12,28,
+553,Ibara Butte,12,28,
+554,Komo Shoreline,12,28,
+555,Laverra Beach,12,28,
+556,Nette Plateau,12,28,
+557,Puffer Beach,12,28,
+558,Bank of Wishes,13,29,
+559,Brynna Plain,13,29,
+560,East Reservoir Lake,13,29,
+561,Great Zora Bridge,13,29,
+562,Horon Lagoon,13,29,
+563,Inogo Bridge,13,29,
+564,Ja'Abu Ridge,13,29,
+565,Lulu Lake,13,29,
+566,Luto's Crossing,13,29,
+567,Oren Bridge,13,29,
+568,Ploymus Mountain,13,29,
+569,Ralis Pond,13,29,
+570,Rucco Maag Shrine,13,29,1
+571,Rutala Dam,13,29,
+572,Ruto Mountain,13,29,
+573,Samasa Plain,13,29,
+574,Shatterback Point,13,29,
+575,Tabahl Woods,13,29,
+576,Tal Tal Peak,13,29,
+577,Veiled Falls,13,29,
+578,Zodobon Highlands,13,29,
+579,Zora River,13,29,
+580,Afromsia Coast,13,30,
+581,Ankel Island,13,30,
+582,Davdi Island,13,30,
+583,Kah Mael Shrine,13,30,1
+584,Knuckel Island,13,30,
+585,Lanayru Bay,13,30,
+586,Lodrum Headland,13,30,
+587,Shai Yota Shrine,13,30,1
+588,Spool Bight,13,30,
+589,Talus Plateau,13,30,
+590,Tarm Point,13,30,
+591,Tingel Island,13,30,
+592,Wintre Island,13,30,
+593,Bannan Island,13,31,
+594,Boné Pond,13,31,
+595,Crenel Peak,13,31,
+596,Dagah Keek Shrine,13,31,1
+597,Daka Tuss Shrine,13,31,1
+598,Goponga Island,13,31,
+599,Goponga Village Ruins,13,31,
+600,Kaya Wan Shrine,13,31,1
+601,Kincean Island,13,31,
+602,Lanayru Tower,13,31,4
+603,Linebeck Island,13,31,
+604,Mercay Island,13,31,
+605,Mikau Lake,13,31,
+606,Millennio Sandbar,13,31,
+607,Molida Island,13,31,
+608,Moor Garrison Ruins,13,31,
+609,Rebonae Bridge,13,31,
+610,Rikoka Hills,13,31,
+611,Rutala River,13,31,
+612,Ruto Lake,13,31,
+613,Ruto Precipice,13,31,
+614,Sheh Rata Shrine,13,31,1
+615,Shrine Island,13,31,1
+616,Soh Kofi Shrine,13,31,1
+617,Telta Lake,13,31,
+618,Thims Bridge,13,31,
+619,Toto Lake,13,31,
+620,Upland Zorana,13,31,
+621,Wes Island,13,31,
+622,Wetland Stable,13,31,2
+623,Zauz Island,13,31,
+624,Zelo Pond,13,31,
+625,Coral Reef,13,32,
+626,Ne'ez Yohma Shrine,13,32,1
+627,Seabed Inn,13,32,
+628,Breach of Demise,14,33,
+629,Dalite Forest,14,33,
+630,Footrace Check-In,14,33,
+631,Illumeni Plateau,14,33,
+632,Irch Plain,14,33,
+633,Jeddo Bridge,14,33,
+634,Lake Illumeni,14,33,
+635,Lindor's Brow,14,33,
+636,Ludfo's Bog,14,33,
+637,Maag No'rah Shrine,14,33,1
+638,Mijah Rokee Shrine,14,33,1
+639,Mogg Latan Shrine,14,33,1
+640,Mount Rhoam,14,33,
+641,Nima Plain,14,33,
+642,North Hyrule Plain,14,33,
+643,Ridgeland Tower,14,33,4
+644,Royal Ancient Lab Ruins,14,33,
+645,Rutile Lake,14,33,
+646,Safula Hill,14,33,
+647,Sanidin Park Ruins,14,33,
+648,Satori Mountain,14,33,
+649,Seres Scablands,14,33,
+650,Shae Loya Shrine,14,33,1
+651,Sheem Dagoze Shrine,14,33,1
+652,Tabantha Bridge Stable,14,33,2
+653,Tabantha Great Bridge,14,33,
+654,Tamio River,14,33,
+655,Tanagar Canyon,14,33,
+656,Tanagar Canyon Course,14,33,
+657,Thundra Plateau,14,33,
+658,Toh Yahsa Shrine,14,33,1
+659,Upland Lindor,14,33,
+660,Washa's Bluff,14,33,
+661,West Hyrule Plains,14,33,
+662,Zalta Wa Shrine,14,33,1
+663,Ancient Columns,15,34,
+664,Bareeda Naag Shrine,15,34,1
+665,Cuho Mountain,15,34,
+666,Dragon Bone Mire,15,34,
+667,Dronoc's Pass,15,34,
+668,Flight Range,15,34,
+669,Gisa Crater,15,34,
+670,Great Fairy Fountain,15,34,5
+671,Hebra Plunge,15,34,
+672,Hebra Trailhead Lodge,15,34,
+673,Kah Okeo Shrine,15,34,1
+674,Kolami Bridge,15,34,
+675,Lake Totori,15,34,
+676,Nero Hill,15,34,
+677,Passer Hill,15,34,
+678,Piper Ridge,15,34,
+679,Rayne Highlands,15,34,
+680,Rito Stable,15,34,2
+681,Rospro Pass,15,34,
+682,Sha Warvo Shrine,15,34,1
+683,Strock Lake,15,34,
+684,Tabantha Tower,15,34,4
+685,Tena Ko'sah Shrine,15,34,1
+686,Voo Lota Shrine,15,34,1
+687,Warbler's Nest,15,34,
+688,Akh Va'quot Shrine,15,35,1
+689,Brazen Beak,15,35,
+690,Revali's Landing,15,35,
+691,Slippery Falcon,15,35,
+692,Swallow's Roost,15,35,

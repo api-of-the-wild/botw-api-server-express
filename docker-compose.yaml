@@ -1,13 +1,32 @@
 version: "3"
 services:
-  wiremock:
-    image: rodolpheche/wiremock:2.14.0-alpine
-    # docker with prepend network name with COMPOSE_PROJECT_NAME
+  # wiremock:
+  #   image: rodolpheche/wiremock:2.14.0-alpine
+  #   # docker will prepend network name with COMPOSE_PROJECT_NAME
+  #   networks:
+  #     - cloud
+  #   ports:
+  #     - 0:8080
+  #   volumes:
+  #     - ${PWD}/mappings:/home/wiremock/mappings:ro
+  db:
+    image: postgres:10.5
+    restart: always
     networks:
       - cloud
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: botw
     ports:
-      - 0:8080
+      - 5432:5432
     volumes:
-      - ${PWD}/mappings:/home/wiremock/mappings:ro
+    - ./db:/docker-entrypoint-initdb.d
+    # healthcheck:
+    #   test: ["CMD-SHELL", "pg_isready -U admin -d api-of-the-wild"]
+    #   interval: 10s
+    #   timeout: 5s
+    #   retries: 5
+    
 networks:
   cloud:

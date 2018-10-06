@@ -18,7 +18,8 @@
     "view:coverage": "open reports/coverage/lcov-report/index.html",
     "show:python": "ps -ef | grep python",
     "docker:up": "scripts/docker/dockerUp.sh",
-    "docker:down": "scripts/docker/dockerDown.sh"
+    "docker:down": "scripts/docker/dockerDown.sh",
+    "server:start": "nodemon src/lambdas/geography/index.js"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.6",
@@ -36,6 +37,10 @@
     "uuid": "^3.3.2"
   },
   "dependencies": {
+    "aws-serverless-express": "^3.3.5",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "massive": "^5.4.0",
     "pino": "^4.17.6",
     "request": "^2.87.0",
     "request-promise": "^4.2.2"
