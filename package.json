@@ -37,6 +37,7 @@
     "uuid": "^3.3.2"
   },
   "dependencies": {
+    "aws-serverless-express": "^3.3.5",
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
     "massive": "^5.4.0",

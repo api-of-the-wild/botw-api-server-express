@@ -1,5 +1,6 @@
 const router = require("express").Router();
 
+const { asyncMiddleware } = require("../../utilities/middleware");
 const { countRegions } = require("./db_queries");
 
 const routes = app => {
@@ -9,15 +10,13 @@ const routes = app => {
     response.json({ message: "Hello Geography" });
   });
 
-  router.get("/regions/count", async (request, response, next) => {
-    try {
+  router.get(
+    "/regions/count",
+    asyncMiddleware(async (request, response, next) => {
       const total = await countRegions(db);
       response.send(`There are ${total} regions.`);
-    } catch (err) {
-      console.error(err);
-      next();
-    }
-  });
+    })
+  );
 
   return router;
 };

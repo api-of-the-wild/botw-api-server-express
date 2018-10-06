@@ -1,6 +1,6 @@
 module.exports = {
   postgres: {
-    host: "127.0.0.1",
+    host: "host.docker.internal",
     port: 5432,
     database: "botw",
     user: "admin",
