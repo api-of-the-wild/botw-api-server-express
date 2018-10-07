@@ -3,7 +3,7 @@ const bodyParser = require("body-parser");
 
 const app = express();
 const massiveInstance = require("./db_connect");
-const routes = require("./routes");
+const routes = require("./routes/geography");
 
 const PORT = 3001;
 const server = () =>
