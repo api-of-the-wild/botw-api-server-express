@@ -10,8 +10,6 @@ ROOT_DIR="$(realpath "${SCRIPTS_DIR}/..")"
 dockerComposeUp
 DC_CODE=$?
 
-echo "wiremock port: $(getWireMockPort)"
-
 if [ ${DC_CODE} -ne 0 ]; then
   # Introspection
   docker-compose logs

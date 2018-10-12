@@ -55,8 +55,6 @@ dockerComposeUp() {
   #   --detach - Detached mode: Run containers in the background, print new container names.
   #   --force-recreate - Recreate containers even if their configuration and image haven't changed.
   docker-compose up --detach --force-recreate
-
-  export WIREMOCK_PORT="$(getWireMockPort)"
 }
 
 dockerComposeDown() {
@@ -80,4 +78,8 @@ dockerComposeRestart() {
 # `sed 's/->.*//'`: Stream EDitor, replace string ->.* with blank
 getWireMockPort() {
   docker-compose ps wiremock | grep -o -E '[0-9]+->8080/tcp' | sed 's/->.*//'
+}
+
+dockerPostgresConnect() {
+  docker exec -it api_of_the_wild_db_1 psql -U admin botw
 }
