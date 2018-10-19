@@ -1,11 +1,14 @@
 const massive = require("massive");
 const config = require("./config").postgres;
+
+const STAGE = process.env.STAGE || "dev";
+
 const connectionObj = {
-  host: config.host,
-  port: config.port,
-  database: config.database,
-  user: config.user,
-  password: config.password,
+  host: config[STAGE].host,
+  port: config[STAGE].port,
+  database: config[STAGE].database,
+  user: config[STAGE].user,
+  password: config[STAGE].password,
 };
 
 module.exports = massive(connectionObj);

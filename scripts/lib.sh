@@ -83,3 +83,7 @@ getWireMockPort() {
 dockerPostgresConnect() {
   docker exec -it api_of_the_wild_db_1 psql -U admin botw
 }
+
+dockerBuildApp() {
+  docker build -f src/Dockerfile -t kwhitejr/botw-server-express .
+}
