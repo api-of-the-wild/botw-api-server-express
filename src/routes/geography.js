@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars*/
+
 const router = require("express").Router();
 
 const { asyncMiddleware } = require("../utilities/middleware");
@@ -14,7 +16,6 @@ const routes = app => {
     "/locations/:id",
     asyncMiddleware(async (request, response, next) => {
       const id = request.params.id;
-      console.log(id);
       const location = await getLocation(db, id);
       response.json(location);
     })
@@ -24,7 +25,6 @@ const routes = app => {
     "/subregions/:id",
     asyncMiddleware(async (request, response, next) => {
       const id = request.params.id;
-      console.log(id);
       const location = await getSubregion(db, id);
       response.json(location);
     })
@@ -34,7 +34,6 @@ const routes = app => {
     "/regions/:id",
     asyncMiddleware(async (request, response, next) => {
       const id = request.params.id;
-      console.log(id);
       const location = await getRegion(db, id);
       response.json(location);
     })

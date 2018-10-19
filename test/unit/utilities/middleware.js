@@ -1,10 +1,12 @@
+/* eslint-disable no-unused-vars */
+
 const chai = require("chai");
 const { spy } = require("sinon");
 const { expect } = chai;
 
 const { asyncMiddleware } = require("../../../src/utilities/middleware");
 
-describe.only("asyncMiddleware", () => {
+describe("asyncMiddleware", () => {
   let error;
   let next;
 

@@ -4,6 +4,7 @@ set -e
 psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" "$POSTGRES_DB" <<-EOSQL
     GRANT ALL PRIVILEGES ON DATABASE $POSTGRES_DB TO $POSTGRES_USER;
 
+    -- Init geography domain
     DROP MATERIALIZED VIEW IF EXISTS location_views;
     DROP TABLE IF EXISTS locations;
     DROP TABLE IF EXISTS location_types;
@@ -43,7 +44,6 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" "$POSTGRES_DB" <<-EOSQL
     COPY subregions FROM '/docker-entrypoint-initdb.d/data/geography/subregion.csv' DELIMITER ',' CSV HEADER;
     COPY locations FROM '/docker-entrypoint-initdb.d/data/geography/location.csv' DELIMITER ',' CSV HEADER;
 
-    -- Data structured for consumer
     CREATE MATERIALIZED VIEW location_views
     AS
     SELECT
