@@ -51,7 +51,7 @@ const getRegion = (db, id) => {
         decompose: {
           pk: "region_id",
           columns: {
-            region_id: "region_id",
+            region_id: "id",
             region: "name",
           },
           subregions: {
