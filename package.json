@@ -9,6 +9,7 @@
   "scripts": {
     "start": "STAGE=dev nodemon src/index.js",
     "start:test": "STAGE=test nodemon src/index.js",
+    "count_failures": "bin/count_failures.sh",
     "test": "scripts/test/index.sh",
     "test:lint": "scripts/test/lint.sh",
     "test:unit": "scripts/test/unit.sh",
