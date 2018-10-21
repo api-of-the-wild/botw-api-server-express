@@ -13,29 +13,32 @@ const routes = app => {
   const db = app.get("db");
 
   router.get(
-    "/locations/:id",
+    "/locations/v1/:id",
     asyncMiddleware(async (request, response, next) => {
       const id = request.params.id;
       const location = await getLocation(db, id);
-      response.json(location);
+      response.body = location;
+      next();
     })
   );
 
   router.get(
-    "/subregions/:id",
+    "/subregions/v1/:id",
     asyncMiddleware(async (request, response, next) => {
       const id = request.params.id;
-      const location = await getSubregion(db, id);
-      response.json(location);
+      const subregion = await getSubregion(db, id);
+      response.body = subregion;
+      next();
     })
   );
 
   router.get(
-    "/regions/:id",
+    "/regions/v1/:id",
     asyncMiddleware(async (request, response, next) => {
       const id = request.params.id;
-      const location = await getRegion(db, id);
-      response.json(location);
+      const region = await getRegion(db, id);
+      response.body = region;
+      next();
     })
   );
 
