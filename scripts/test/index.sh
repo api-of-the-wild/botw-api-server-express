@@ -15,5 +15,4 @@ set -x
 yarn count_failures \
   "yarn test:lint" \
   "yarn test:depcheck" \
-  "yarn test:unit" \
-  "yarn test:coverage"
+  "yarn test:unit"

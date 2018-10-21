@@ -5,7 +5,7 @@ CURRENT_DIR="${CURRENT_DIR:?}"
 SCRIPTS_DIR="$(realpath "${CURRENT_DIR}/..")"
 ROOT_DIR="$(realpath "${SCRIPTS_DIR}/..")"
 BIN_DIR="${ROOT_DIR}/node_modules/.bin"
-LINT_DIFF_FILE="${ROOT_DIR}/reports/lint_errors.diff"
+LINT_DIFF_FILE="${ROOT_DIR}/lint_errors.diff"
 
 # whichOrExit "${BIN_DIR}/eslint" "${red}You need to run ${bold}yarn install${normal}${red} to be able to proceed\n${normal}" >&2
 
