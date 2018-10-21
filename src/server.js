@@ -1,13 +1,21 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const morgan = require("morgan");
 
 const app = express();
 const massiveInstance = require("./db_connect");
 const routes = require("./routes/geography");
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 const server = () =>
   massiveInstance.then(db => {
+    // Setup logger
+    app.use(
+      morgan(
+        ':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] :response-time ms'
+      )
+    );
+
     // Add db into our app object
     app.set("db", db);
 

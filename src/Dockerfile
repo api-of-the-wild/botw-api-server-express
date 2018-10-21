@@ -9,6 +9,8 @@ RUN yarn install
 
 COPY . .
 
+RUN chmod +x ./scripts/wait-for-it.sh
+
 EXPOSE 3001
 
-CMD ["yarn", "start"]
+CMD ["yarn", "start:test"]

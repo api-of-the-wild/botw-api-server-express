@@ -6,6 +6,7 @@ SCRIPTS_DIR="$(realpath "${CURRENT_DIR}/..")"
 ROOT_DIR="$(realpath "${SCRIPTS_DIR}/..")"
 
 . "${SCRIPTS_DIR}/lib.sh"
+. "${SCRIPTS_DIR}/docker/docker.lib.sh"
 
 dockerComposeUp
 DC_CODE=$?

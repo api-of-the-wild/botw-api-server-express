@@ -19,7 +19,9 @@
     "view:coverage": "open reports/coverage/lcov-report/index.html",
     "show:python": "ps -ef | grep python",
     "docker:up": "scripts/docker/dockerUp.sh",
-    "docker:down": "scripts/docker/dockerDown.sh"
+    "docker:down": "scripts/docker/dockerDown.sh",
+    "docker:restart": "scripts/docker/dockerRestart.sh",
+    "docker:build": "scripts/docker/dockerBuildApp.sh"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.6",
@@ -41,6 +43,7 @@
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
     "massive": "^5.4.0",
+    "morgan": "^1.9.1",
     "pino": "^4.17.6",
     "request": "^2.87.0",
     "request-promise": "^4.2.2"

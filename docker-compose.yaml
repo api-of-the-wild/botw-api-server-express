@@ -10,7 +10,8 @@ services:
       - cloud
     depends_on:
       - db
-    command: ["/bin/bash", "./scripts/wait-for-it.sh", "db:5432", "--", "yarn", "start:test"]
+    command: ./scripts/wait-for-it.sh db:5432 -- yarn start:test
+    # command: ["/bin/bash", "ls"]
 
   db:
     image: postgres:10.5
