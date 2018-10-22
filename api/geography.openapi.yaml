@@ -29,6 +29,50 @@ paths:
                 $ref: "#/components/schemas/Region"
         "404":
           description: Not Found
+  /geography/subregions/v1/{id}:
+    get:
+      summary: Get data for a single subregion.
+      description: Gets a single subregion by its id.
+      tags:
+        - Subregion
+      parameters:
+        - in: path
+          description: Unique identifier for the resource.
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json; charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/Subregion"
+        "404":
+          description: Not Found
+  /geography/locations/v1/{id}:
+    get:
+      summary: Get data for a single location.
+      description: Gets a single location by its id.
+      tags:
+        - Location
+      parameters:
+        - in: path
+          description: Unique identifier for the resource.
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json; charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/Location"
+        "404":
+          description: Not Found
 
 components:
   schemas:
