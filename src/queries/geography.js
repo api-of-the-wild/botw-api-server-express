@@ -9,6 +9,8 @@ const getLocation = (db, id) => {
             location_id: "id",
             location: "name",
             location_type: "location_type",
+            region: "region",
+            subregion: "subregion",
           },
         },
       }
