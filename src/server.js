@@ -5,7 +5,7 @@ const morgan = require("morgan");
 const app = express();
 const massiveInstance = require("./db_connect");
 const routes = require("./routes/geography");
-const { metadataMiddleware } = require("./utilities/middleware");
+const { enrichResponseMiddleware } = require("./utilities/middleware");
 
 const PORT = process.env.PORT || 3001;
 const server = () =>
@@ -25,12 +25,7 @@ const server = () =>
     // Init routes
     app.use("/geography", routes(app));
 
-    app.get("/", (req, res, next) => {
-      res.body = { message: "hello world" };
-      next();
-    });
-
-    app.use(metadataMiddleware);
+    app.use(enrichResponseMiddleware);
 
     app.listen(PORT, () => {
       // eslint-disable-next-line no-console

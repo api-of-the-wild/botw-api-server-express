@@ -8,6 +8,12 @@
   "include": [
     "src/**/*.js"
   ],
+  "exclude": [
+    "src/queries/**/*.js",
+    "src/routes/**/*.js",
+    "src/utilities/make_promises_safe.js",
+    "src/server.js"
+  ],
   "reporter": [
     "lcov",
     "text-summary"

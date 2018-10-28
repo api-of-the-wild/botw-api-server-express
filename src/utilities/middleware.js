@@ -2,7 +2,7 @@ const asyncMiddleware = fn => (req, res, next) => {
   Promise.resolve(fn(req, res, next)).catch(next);
 };
 
-const metadataMiddleware = (req, res, next) => {
+const enrichResponseMiddleware = (req, res, next) => {
   const path = req.originalUrl;
   const pathParams = path.split("/");
   const self = `${req.hostname}${req.originalUrl}`;
@@ -16,5 +16,5 @@ const metadataMiddleware = (req, res, next) => {
 
 module.exports = {
   asyncMiddleware,
-  metadataMiddleware,
+  enrichResponseMiddleware,
 };

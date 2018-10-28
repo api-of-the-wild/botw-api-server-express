@@ -1,10 +1,12 @@
 /* eslint-disable no-unused-vars */
 
-const chai = require("chai");
+const { expect } = require("chai");
 const { spy } = require("sinon");
-const { expect } = chai;
 
-const { asyncMiddleware } = require("../../../src/utilities/middleware");
+const {
+  asyncMiddleware,
+  enrichResponseMiddleware,
+} = require("../../../src/utilities/middleware");
 
 describe("asyncMiddleware", () => {
   let error;
@@ -78,5 +80,39 @@ describe("asyncMiddleware", () => {
     triggerFailure(error);
     await catchingThenable;
     expect(next.calledWith(error)).to.be.true;
+  });
+});
+
+describe("enrichResponseMiddleware", () => {
+  const MOCK_REQUEST = {
+    originalUrl: "/geography/regions/v1/1",
+    hostname: "https://apiofthewild",
+  };
+
+  const MOCK_RESPONSE_BODY = {
+    id: 1,
+    region: "Akkala",
+    subregions: [],
+  };
+
+  let response, nextSpy;
+  beforeEach(() => {
+    response = { send: spy(), body: MOCK_RESPONSE_BODY };
+    nextSpy = spy();
+  });
+
+  it("should add self, resource, and version properties to the response body", () => {
+    const expectedBody = {
+      id: 1,
+      region: "Akkala",
+      subregions: [],
+      self: "https://apiofthewild/geography/regions/v1/1",
+      version: "v1",
+      resource: "geography/regions",
+    };
+    enrichResponseMiddleware(MOCK_REQUEST, response, nextSpy);
+
+    expect(response.send.calledWith(expectedBody)).to.be.true;
+    expect(nextSpy.calledOnce).to.be.true;
   });
 });

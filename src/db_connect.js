@@ -1,5 +1,5 @@
 const massive = require("massive");
-const config = require("./config").postgres;
+const config = require("../config.env").postgres;
 
 const STAGE = process.env.STAGE || "dev";
 
