@@ -18,13 +18,22 @@ getDockerPortMapping() {
 }
 
 dockerComposeUp() {
-  # wrap this in an if statement -- rebuild flag
-  docker-compose build --no-cache
+  # TODO: wrap this in an if statement -- rebuild flag
+  # docker-compose build --no-cache
   
   # docker-compose up: Builds, (re)creates, starts, and attaches to containers for a service.
   #   --detach - Detached mode: Run containers in the background, print new container names.
   #   --force-recreate - Recreate containers even if their configuration and image haven't changed.
   docker-compose up --detach --force-recreate
+  DC_CODE=$?
+
+  if [ ${DC_CODE} -ne 0 ]; then
+    # Introspection
+    docker-compose logs
+    docker-compose ps
+
+    exit ${DC_CODE}
+  fi
 }
 
 dockerComposeDown() {
@@ -49,6 +58,21 @@ dockerPostgresOpen() {
   docker exec -it api_of_the_wild_db_1 psql -U admin botw
 }
 
+# TODO: refactor these two build functions
 dockerBuildApp() {
   docker build -f src/Dockerfile -t kwhitejr/botw-server-express .
+}
+
+dockerBuildTestRunner() {
+  docker build -f test/Dockerfile -t kwhitejr/botw-test-runner .
+}
+
+dockerExecuteTestRunner() {
+  IMAGE_NAME="kwhitejr/botw-test-runner"
+
+  echo "Build new ${IMAGE_NAME} image..."
+  dockerBuildTestRunner
+
+  echo "Run ${IMAGE_NAME} executable test container..."
+  docker run -it --rm --network container:api_of_the_wild_app_1 kwhitejr/botw-test-runner
 }

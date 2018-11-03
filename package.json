@@ -13,7 +13,7 @@
     "test": "scripts/test/index.sh",
     "test:lint": "scripts/test/lint.sh",
     "test:unit": "scripts/test/unit.sh",
-    "test:alpha": "scripts/test/alpha.sh",
+    "test:integration": "scripts/test/integration.sh",
     "test:depcheck": "node scripts/test/depcheck.js",
     "view:coverage": "open reports/coverage/lcov-report/index.html",
     "view:unit": "open reports/coverage/mochawesome.html",
@@ -21,7 +21,9 @@
     "docker:up": "scripts/docker/dockerUp.sh",
     "docker:down": "scripts/docker/dockerDown.sh",
     "docker:restart": "scripts/docker/dockerRestart.sh",
-    "docker:build": "scripts/docker/dockerBuildApp.sh"
+    "docker:test": "scripts/docker/dockerRunTest.sh",
+    "docker:buildapp": "scripts/docker/dockerBuildApp.sh",
+    "docker:buildtestrunner": "scripts/docker/dockerBuildTestRunner.sh"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.6",
