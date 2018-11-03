@@ -13,31 +13,39 @@ const routes = app => {
   const db = app.get("db");
 
   router.get(
+    "/test/v0",
+    asyncMiddleware(async (req, res, next) => {
+      res.body = { message: "Welcome to the RESTful BotW API!" };
+      next();
+    })
+  );
+
+  router.get(
     "/locations/v1/:id",
-    asyncMiddleware(async (request, response, next) => {
-      const id = request.params.id;
+    asyncMiddleware(async (req, res, next) => {
+      const id = req.params.id;
       const location = await getLocation(db, id);
-      response.body = location;
+      res.body = location;
       next();
     })
   );
 
   router.get(
     "/subregions/v1/:id",
-    asyncMiddleware(async (request, response, next) => {
-      const id = request.params.id;
+    asyncMiddleware(async (req, res, next) => {
+      const id = req.params.id;
       const subregion = await getSubregion(db, id);
-      response.body = subregion;
+      res.body = subregion;
       next();
     })
   );
 
   router.get(
     "/regions/v1/:id",
-    asyncMiddleware(async (request, response, next) => {
-      const id = request.params.id;
+    asyncMiddleware(async (req, res, next) => {
+      const id = req.params.id;
       const region = await getRegion(db, id);
-      response.body = region;
+      res.body = region;
       next();
     })
   );
