@@ -35,11 +35,12 @@ module.exports = {
   },
   app: {
     local: {
-      host: "https://localhost:3001",
-    },
-    docker: {
       host: "http://localhost:3001",
     },
-    prod: {},
+    // docker
+    ALPHA: {
+      host: "http://localhost:3001",
+    },
+    BETA: {},
   },
 };

@@ -2,15 +2,14 @@ const { expect } = require("chai");
 const rp = require("request-promise");
 
 const config = require("../../config.env");
+const { createLogger } = require("../../src/utilities/logger");
+
+const logger = createLogger(console);
 
 const env = process.env;
-
 const INTEGRATION_STAGE = env.INTEGRATION_STAGE || "ALPHA";
-const SERVER_URI_BASE = env.SERVER_URI_BASE || config.app.docker.host;
-
-console.log("about to run integration tests");
-console.log(`INTEGRATION_STAGE: ${INTEGRATION_STAGE}`);
-console.log(`SERVER_URI_BASE: ${SERVER_URI_BASE}`);
+const SERVER_URI_BASE =
+  env.SERVER_URI_BASE || config.app[INTEGRATION_STAGE].host;
 
 describe("the application server", () => {
   describe("GET /", () => {
@@ -24,7 +23,7 @@ describe("the application server", () => {
           expect(json.version).to.exist;
         })
         .catch(err => {
-          console.error(`Unexpected error was caught: ${err}`);
+          logger.error(`Unexpected error was caught: ${err}`);
         });
     });
   });

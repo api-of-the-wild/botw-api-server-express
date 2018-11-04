@@ -8,7 +8,6 @@ TEST_DIR="${ROOT_DIR}/test/integration"
 SRC_DIR="${ROOT_DIR}/src"
 REPORTS_DIR="${ROOT_DIR}/reports"
 
-. "${SCRIPTS_DIR}/docker/docker.lib.sh"
 . "${SCRIPTS_DIR}/test/test.lib.sh"
 
 # See test.lib
