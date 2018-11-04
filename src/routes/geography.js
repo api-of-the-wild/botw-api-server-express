@@ -1,8 +1,11 @@
 /* eslint-disable no-unused-vars*/
-
 const router = require("express").Router();
 
-const { asyncMiddleware } = require("../utilities/middleware");
+const {
+  asyncMiddleware,
+  enrichResponseMiddleware,
+} = require("../utilities/middleware");
+
 const {
   getLocation,
   getSubregion,
@@ -50,6 +53,7 @@ const routes = app => {
     })
   );
 
+  router.use(enrichResponseMiddleware);
   return router;
 };
 

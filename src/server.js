@@ -5,7 +5,7 @@ const morgan = require("morgan");
 const app = express();
 const massiveInstance = require("./db_connect");
 const routes = require("./routes/geography");
-const { enrichResponseMiddleware } = require("./utilities/middleware");
+const { validatePathMiddleware } = require("./utilities/middleware");
 
 const PORT = process.env.PORT || 3001;
 const server = () =>
@@ -22,10 +22,9 @@ const server = () =>
 
     app.use(bodyParser.json());
 
+    app.all("*", validatePathMiddleware);
     // Init routes
     app.use("/geography", routes(app));
-
-    app.use(enrichResponseMiddleware);
 
     app.listen(PORT, () => {
       // eslint-disable-next-line no-console
