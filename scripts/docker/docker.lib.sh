@@ -54,6 +54,12 @@ dockerComposeLog() {
   docker-compose logs > ${FILE}
 }
 
+dockerContainerLog() {
+  CONTAINER=$1
+  FILE=$2
+  docker logs ${CONTAINER} > ${FILE}
+}
+
 dockerPostgresOpen() {
   docker exec -it api_of_the_wild_db_1 psql -U admin botw
 }

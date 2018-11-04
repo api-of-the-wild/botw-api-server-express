@@ -14,15 +14,7 @@ REPORTS_DIR="${ROOT_DIR}/reports"
 dockerComposeUp
 
 dockerExecuteTestRunner
-# DOCKER_TEST_CODE=$?
 
-dockerComposeLog docker.integration_test.log
+# dockerContainerLog test_runner docker.integration_test.log
 
 dockerComposeDown
-
-# if [ ${DOCKER_TEST_CODE} -ne 0 ]; then
-#   # Restore to initial state
-#   dockerComposeDown
-
-#   exit ${DOCKER_TEST_CODE}
-# fi
