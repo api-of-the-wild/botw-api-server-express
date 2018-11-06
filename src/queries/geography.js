@@ -1,3 +1,6 @@
+// .find() returns an array
+// .findOne() returns an object or undefined
+
 const getLocation = (db, id) => {
   return db.location_views
     .findOne(
@@ -15,12 +18,18 @@ const getLocation = (db, id) => {
         },
       }
     )
-    .then(location => location);
+    .then(location => {
+      if (location === undefined) {
+        return null;
+      } else {
+        return location;
+      }
+    });
 };
 
 const getSubregion = (db, id) => {
   return db.location_views
-    .find(
+    .findOne(
       { subregion_id: id },
       {
         decompose: {
@@ -42,12 +51,18 @@ const getSubregion = (db, id) => {
         },
       }
     )
-    .then(region => region[0]);
+    .then(subregion => {
+      if (subregion === undefined) {
+        return null;
+      } else {
+        return subregion;
+      }
+    });
 };
 
 const getRegion = (db, id) => {
   return db.location_views
-    .find(
+    .findOne(
       { region_id: id },
       {
         decompose: {
@@ -76,7 +91,13 @@ const getRegion = (db, id) => {
         },
       }
     )
-    .then(region => region[0]);
+    .then(region => {
+      if (region === undefined) {
+        return null;
+      } else {
+        return region;
+      }
+    });
 };
 
 module.exports = {

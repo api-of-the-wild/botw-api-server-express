@@ -28,6 +28,12 @@ const routes = app => {
     asyncMiddleware(async (req, res, next) => {
       const id = req.params.id;
       const location = await getLocation(db, id);
+      if (location === null) {
+        res.status(404).send({
+          message: `Locations resource with id ${id} does not exist.`,
+        });
+        return;
+      }
       res.body = location;
       next();
     })
@@ -38,6 +44,12 @@ const routes = app => {
     asyncMiddleware(async (req, res, next) => {
       const id = req.params.id;
       const subregion = await getSubregion(db, id);
+      if (subregion === null) {
+        res.status(404).send({
+          message: `Subregions resource with id ${id} does not exist.`,
+        });
+        return;
+      }
       res.body = subregion;
       next();
     })
@@ -48,6 +60,12 @@ const routes = app => {
     asyncMiddleware(async (req, res, next) => {
       const id = req.params.id;
       const region = await getRegion(db, id);
+      if (region === null) {
+        res.status(404).send({
+          message: `Regions resource with id ${id} does not exist.`,
+        });
+        return;
+      }
       res.body = region;
       next();
     })
