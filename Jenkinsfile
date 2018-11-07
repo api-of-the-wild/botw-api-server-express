@@ -31,10 +31,11 @@ pipeline {
       }
     }
 
-    stage('Alpha tests') {
-      steps {
-        sh 'yarn docker:test'
-      }
-    }
+    // TODO: install docker-compose on Jenkins server
+    // stage('Alpha tests') {
+    //   steps {
+    //     sh 'yarn docker:test'
+    //   }
+    // }
   }
 }
