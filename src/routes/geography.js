@@ -16,14 +16,6 @@ const routes = app => {
   const db = app.get("db");
 
   router.get(
-    "/test/v0",
-    asyncMiddleware(async (req, res, next) => {
-      res.body = { message: "Welcome to the RESTful BotW API!" };
-      next();
-    })
-  );
-
-  router.get(
     "/locations/v1/:id",
     asyncMiddleware(async (req, res, next) => {
       const id = req.params.id;

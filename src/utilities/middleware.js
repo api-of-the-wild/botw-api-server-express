@@ -13,12 +13,14 @@ const validatePathMiddleware = (req, res, next) => {
   const isIdNumber = parseInt(id) || false;
 
   if (!isDomainValid || !isResourceValid || !isVersionValid || !isIdFalsy) {
-    res.status(400).send({ error: `Requested path ${req.path} is invalid.` });
+    res.status(400).send({ message: `Requested path ${req.path} is invalid.` });
     return;
   }
 
   if (!isIdNumber) {
-    res.status(400).send({ error: `Requested resource id ${id} is not valid` });
+    res
+      .status(400)
+      .send({ message: `Requested resource id ${id} is not valid type.` });
     return;
   }
   next();

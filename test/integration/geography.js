@@ -49,35 +49,6 @@ describe("the /geography domain", () => {
           logger.error(`Unexpected error was caught: ${err}`);
         });
     });
-
-    it.skip("should respond 40x when id does not exist", () => {
-      const testUri = `${SERVER_URI_BASE}/geography/regions/v1/bogus`;
-      const rpOptions = createRpOptions(testUri);
-      return rp(rpOptions)
-        .then(result => {
-          // Region properties
-          expect(result.id).to.be.a("number");
-          expect(result.name).to.be.a("string");
-          expect(result.subregions).to.be.a("array");
-          // Subregion properties
-          expect(result.subregions[0].id).to.be.a("number");
-          expect(result.subregions[0].name).to.be.a("string");
-          expect(result.subregions[0].locations).to.be.a("array");
-          // Location properties
-          expect(result.subregions[0].locations[0].id).to.be.a("number");
-          expect(result.subregions[0].locations[0].name).to.be.a("string");
-          expect(result.subregions[0].locations[0].location_type).to.satisfy(
-            value => value === null || typeof value === "string"
-          );
-          // Request metadata properties
-          expect(result.self).to.be.a("string");
-          expect(result.resource).to.be.a("string");
-          expect(result.version).to.be.a("string");
-        })
-        .catch(err => {
-          logger.error(`Unexpected error was caught: ${err}`);
-        });
-    });
   });
 
   describe("GET /subregions/v1/:id", () => {
@@ -95,35 +66,6 @@ describe("the /geography domain", () => {
           expect(result.locations[0].id).to.be.a("number");
           expect(result.locations[0].name).to.be.a("string");
           expect(result.locations[0].location_type).to.satisfy(
-            value => value === null || typeof value === "string"
-          );
-          // Request metadata properties
-          expect(result.self).to.be.a("string");
-          expect(result.resource).to.be.a("string");
-          expect(result.version).to.be.a("string");
-        })
-        .catch(err => {
-          logger.error(`Unexpected error was caught: ${err}`);
-        });
-    });
-
-    it.skip("should respond 40x when id does not exist", () => {
-      const testUri = `${SERVER_URI_BASE}/geography/regions/v1/bogus`;
-      const rpOptions = createRpOptions(testUri);
-      return rp(rpOptions)
-        .then(result => {
-          // Region properties
-          expect(result.id).to.be.a("number");
-          expect(result.name).to.be.a("string");
-          expect(result.subregions).to.be.a("array");
-          // Subregion properties
-          expect(result.subregions[0].id).to.be.a("number");
-          expect(result.subregions[0].name).to.be.a("string");
-          expect(result.subregions[0].locations).to.be.a("array");
-          // Location properties
-          expect(result.subregions[0].locations[0].id).to.be.a("number");
-          expect(result.subregions[0].locations[0].name).to.be.a("string");
-          expect(result.subregions[0].locations[0].location_type).to.satisfy(
             value => value === null || typeof value === "string"
           );
           // Request metadata properties
@@ -160,34 +102,55 @@ describe("the /geography domain", () => {
           logger.error(`Unexpected error was caught: ${err}`);
         });
     });
+  });
 
-    it.skip("should respond 40x when id does not exist", () => {
-      const testUri = `${SERVER_URI_BASE}/geography/regions/v1/bogus`;
-      const rpOptions = createRpOptions(testUri);
-      return rp(rpOptions)
-        .then(result => {
-          // Region properties
-          expect(result.id).to.be.a("number");
-          expect(result.name).to.be.a("string");
-          expect(result.subregions).to.be.a("array");
-          // Subregion properties
-          expect(result.subregions[0].id).to.be.a("number");
-          expect(result.subregions[0].name).to.be.a("string");
-          expect(result.subregions[0].locations).to.be.a("array");
-          // Location properties
-          expect(result.subregions[0].locations[0].id).to.be.a("number");
-          expect(result.subregions[0].locations[0].name).to.be.a("string");
-          expect(result.subregions[0].locations[0].location_type).to.satisfy(
-            value => value === null || typeof value === "string"
-          );
-          // Request metadata properties
-          expect(result.self).to.be.a("string");
-          expect(result.resource).to.be.a("string");
-          expect(result.version).to.be.a("string");
-        })
-        .catch(err => {
-          logger.error(`Unexpected error was caught: ${err}`);
-        });
+  describe("4xx cases", () => {
+    it("should respond 400 when path or id is bogus", () => {
+      const testCases = [
+        `${SERVER_URI_BASE}/bogus/regions/v1/3`,
+        `${SERVER_URI_BASE}/geography/bogus/v1/3`,
+        `${SERVER_URI_BASE}/geography/regions/bogus/3`,
+        `${SERVER_URI_BASE}/geography/regions/v1/bogus`,
+        `${SERVER_URI_BASE}/hocus/bogus`,
+      ];
+
+      const testRunner = testCase => {
+        const rpOptions = createRpOptions(testCase);
+
+        return rp(rpOptions)
+          .then(erroneousResult => {
+            logger.error(`Unexpected error was caught: ${erroneousResult}`);
+          })
+          .catch(result => {
+            expect(result.statusCode).to.be.equal(400);
+            expect(result.error.message).to.be.a("string");
+          });
+      };
+
+      testCases.forEach(testRunner);
+    });
+
+    it("should respond 404 when resource for id is not found", () => {
+      const testCases = [
+        `${SERVER_URI_BASE}/geography/regions/v1/30`,
+        `${SERVER_URI_BASE}/geography/subregions/v1/1000`,
+        `${SERVER_URI_BASE}/geography/locations/v1/3000`,
+      ];
+
+      const testRunner = testCase => {
+        const rpOptions = createRpOptions(testCase);
+
+        return rp(rpOptions)
+          .then(erroneousResult => {
+            logger.error(`Unexpected resolution: ${erroneousResult}`);
+          })
+          .catch(result => {
+            expect(result.statusCode).to.be.equal(404);
+            expect(result.error.message).to.be.a("string");
+          });
+      };
+
+      testCases.forEach(testRunner);
     });
   });
 });
