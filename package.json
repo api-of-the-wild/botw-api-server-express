@@ -35,13 +35,10 @@
     "eslint-plugin-prettier": "^2.6.2",
     "mocha": "^5.2.0",
     "mochawesome": "^3.0.2",
-    "nock": "^10.0.1",
     "nodemon": "^1.18.4",
     "nyc": "^12.0.2",
     "prettier": "^1.13.7",
-    "sinon": "^6.1.4",
-    "supertest": "^3.3.0",
-    "uuid": "^3.3.2"
+    "sinon": "^6.1.4"
   },
   "dependencies": {
     "body-parser": "^1.18.3",

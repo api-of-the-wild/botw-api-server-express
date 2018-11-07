@@ -2,6 +2,7 @@ const VALID_PATHS = { geography: ["regions", "subregions", "locations"] };
 const VALID_VERSIONS = ["v1"];
 
 const validatePathMiddleware = (req, res, next) => {
+  // eslint-disable-next-line no-unused-vars
   const [_, domain, resource, version, id] = req.path.split("/");
   const isDomainValid = Object.keys(VALID_PATHS).includes(domain) || false;
   const isResourceValid = VALID_PATHS[domain]

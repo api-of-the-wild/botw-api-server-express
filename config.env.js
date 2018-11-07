@@ -9,6 +9,7 @@ module.exports = {
         "eslint",
         "eslint-config-prettier",
         "eslint-plugin-prettier",
+        "eslint-config-plugin:prettier",
         "mocha",
         "mochawesome",
         "nyc",

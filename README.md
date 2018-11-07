@@ -69,7 +69,12 @@ Otherwise, run integration tests via Docker with `yarn docker:test`.
 - [ ] EC2
 - [ ] Aurora
 
+### Testing
+
+- [ ] Improve Depcheck test output
+
 ### Other
 
 - [ ] Abstract utilities to separate repo
 - [ ] Get logs from executable container
+- [ ] Update OpenAPI /geography spec with 400 and 404 responses
