@@ -19,7 +19,7 @@ getDockerPortMapping() {
 
 dockerComposeUp() {
   # TODO: wrap this in an if statement -- rebuild flag
-  # docker-compose build --no-cache
+  docker-compose build --no-cache
   
   # docker-compose up: Builds, (re)creates, starts, and attaches to containers for a service.
   #   --detach - Detached mode: Run containers in the background, print new container names.

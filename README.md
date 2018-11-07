@@ -39,6 +39,8 @@ yarn docker:down
 
 ## Tests
 
+### Basic Testing
+
 Testing suite includes
 
 - Linting: `yarn test:lint`
@@ -52,35 +54,22 @@ View testing reports
 - Unit: `yarn view:unit`
 - Coverage: `yarn view:coverage`
 
+### Integration Testing and Docker
+
+If you have dependencies installed and a local postgres database setup, run `yarn start && yarn test:integration`.
+
+Otherwise, run integration tests via Docker with `yarn docker:test`.
+
 ## TODOs
-
-### Test Suites
-
-- [x] Lint Test
-- [x] Unit Test
-- [x] Integration Test
-- [x] Dependency Check
-- [ ] Changelog Check
-
-### Pipeline
-
-- [x] Can use Node and Yarn in pipeline
-- [x] PR trigger
-- [ ] Merge trigger
-- [x] Lint Test stage
-- [x] Unit Test stage
-- [ ] Integration Test stage
-- [ ] Migrate to docker-based stages
 
 ### Infrastructure
 
 - [ ] IAM Roles
 - [ ] CloudFront
-- [ ] SAM Template
-- [ ] Aurora / DynamoDB
+- [ ] EC2
+- [ ] Aurora
 
-### Code
+### Other
 
-- [x] Lambda Factory
-- [ ] Tracer
-- [x] Logger
+- [ ] Abstract utilities to separate repo
+- [ ] Get logs from executable container
