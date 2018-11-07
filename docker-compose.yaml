@@ -1,14 +1,17 @@
 version: "3"
 services:
-  # wiremock:
-  #   image: rodolpheche/wiremock:2.14.0-alpine
-  #   # docker will prepend network name with COMPOSE_PROJECT_NAME
-  #   networks:
-  #     - cloud
-  #   ports:
-  #     - 0:8080
-  #   volumes:
-  #     - ${PWD}/mappings:/home/wiremock/mappings:ro
+  app:
+    build:
+      context: .
+      dockerfile: ./src/Dockerfile
+    ports:
+      - 3001:3001
+    networks:
+      - cloud
+    depends_on:
+      - db
+    command: ./scripts/wait-for-it.sh db:5432 -- yarn start:test
+
   db:
     image: postgres:10.5
     restart: always
@@ -21,12 +24,12 @@ services:
     ports:
       - 5432:5432
     volumes:
-    - ./db:/docker-entrypoint-initdb.d
-    # healthcheck:
-    #   test: ["CMD-SHELL", "pg_isready -U admin -d api-of-the-wild"]
-    #   interval: 10s
-    #   timeout: 5s
-    #   retries: 5
+      - ./db:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d botw"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     
 networks:
   cloud:

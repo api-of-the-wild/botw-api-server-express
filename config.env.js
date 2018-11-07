@@ -9,11 +9,39 @@ module.exports = {
         "eslint",
         "eslint-config-prettier",
         "eslint-plugin-prettier",
+        "eslint-config-plugin:prettier",
         "mocha",
         "mochawesome",
         "nyc",
         "prettier",
       ],
     },
+  },
+  postgres: {
+    dev: {
+      host: "localhost",
+      port: 5432,
+      database: "botw",
+      user: "admin",
+      password: "password",
+    },
+    test: {
+      host: "db",
+      port: 5432,
+      database: "botw",
+      user: "admin",
+      password: "password",
+    },
+    prod: {},
+  },
+  app: {
+    local: {
+      host: "http://localhost:3001",
+    },
+    // docker
+    ALPHA: {
+      host: "http://localhost:3001",
+    },
+    BETA: {},
   },
 };

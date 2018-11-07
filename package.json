@@ -3,23 +3,27 @@
   "version": "1.0.0",
   "description": "The RESTful BotW Data API",
   "main": "index.js",
-  "repository": "git@gitlab.com:kwhitejr/api-of-the-wild.git",
+  "repository": "git@github.com:api-of-the-wild/botw-api-server-express.git",
   "author": "White, Kevin <kwhitejr@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "sam local start-api",
+    "start": "STAGE=dev nodemon index.js",
+    "start:test": "STAGE=test nodemon index.js",
+    "count_failures": "bin/count_failures.sh",
     "test": "scripts/test/index.sh",
     "test:lint": "scripts/test/lint.sh",
     "test:unit": "scripts/test/unit.sh",
-    "test:alpha": "scripts/test/alpha.sh",
-    "test:coverage": "scripts/test/coverage.sh",
+    "test:integration": "scripts/test/integration.sh",
     "test:depcheck": "node scripts/test/depcheck.js",
-    "view:unit": "open reports/unit/mochawesome.html",
     "view:coverage": "open reports/coverage/lcov-report/index.html",
+    "view:unit": "open reports/coverage/mochawesome.html",
     "show:python": "ps -ef | grep python",
     "docker:up": "scripts/docker/dockerUp.sh",
     "docker:down": "scripts/docker/dockerDown.sh",
-    "server:start": "nodemon src/lambdas/geography/index.js"
+    "docker:restart": "scripts/docker/dockerRestart.sh",
+    "docker:test": "scripts/docker/dockerRunTest.sh",
+    "docker:buildapp": "scripts/docker/dockerBuildApp.sh",
+    "docker:buildtestrunner": "scripts/docker/dockerBuildTestRunner.sh"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.6",
@@ -31,16 +35,16 @@
     "eslint-plugin-prettier": "^2.6.2",
     "mocha": "^5.2.0",
     "mochawesome": "^3.0.2",
+    "nodemon": "^1.18.4",
     "nyc": "^12.0.2",
     "prettier": "^1.13.7",
-    "sinon": "^6.1.4",
-    "uuid": "^3.3.2"
+    "sinon": "^6.1.4"
   },
   "dependencies": {
-    "aws-serverless-express": "^3.3.5",
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
     "massive": "^5.4.0",
+    "morgan": "^1.9.1",
     "pino": "^4.17.6",
     "request": "^2.87.0",
     "request-promise": "^4.2.2"

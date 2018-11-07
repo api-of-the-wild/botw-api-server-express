@@ -1,0 +1,181 @@
+openapi: 3.0.1
+servers:
+  - url: "https://api-of-the-wild.com"
+    description: AotW's public envirmonment.
+info:
+  description: API of the Wild - Geography Services
+  title: Geography
+  version: "1.0"
+paths:
+  /geography/regions/v1/{id}:
+    get:
+      summary: Get data for a single region.
+      description: Gets a single region by its id.
+      tags:
+        - Region
+      parameters:
+        - in: path
+          description: Unique identifier for the resource.
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json; charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/Region"
+        "404":
+          description: Not Found
+  /geography/subregions/v1/{id}:
+    get:
+      summary: Get data for a single subregion.
+      description: Gets a single subregion by its id.
+      tags:
+        - Subregion
+      parameters:
+        - in: path
+          description: Unique identifier for the resource.
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json; charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/Subregion"
+        "404":
+          description: Not Found
+  /geography/locations/v1/{id}:
+    get:
+      summary: Get data for a single location.
+      description: Gets a single location by its id.
+      tags:
+        - Location
+      parameters:
+        - in: path
+          description: Unique identifier for the resource.
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json; charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/Location"
+        "404":
+          description: Not Found
+
+components:
+  schemas:
+    metadata:
+      description: Metadata for the response.
+      type: object
+      properties:
+        self:
+          description: The requested url.
+          type: string
+          format: url
+          example: https://api-of-the-wild/geography/regions/v1/1
+        resource:
+          description: The requested resource.
+          type: string
+          example: geography/regions
+        version:
+          description: The version of the requested resource.
+          type: string
+          example: v1
+    Region:
+      description: Complete response for a region resource.
+      allOf:
+        - $ref: "#/components/schemas/metadata"
+        - $ref: "#/components/schemas/region"
+    Subregion:
+      description: Complete response for a subregion resource.
+      allOf:
+        - $ref: "#/components/schemas/metadata"
+        - $ref: "#/components/schemas/subregion"
+        - type: object
+          properties:
+            region:
+              type: string
+              example: "Akkala"
+    Location:
+      description: Complete response for a location resource.
+      allOf:
+        - $ref: "#/components/schemas/metadata"
+        - $ref: "#/components/schemas/location"
+        - type: object
+          properties:
+            region:
+              type: string
+              example: "Akkala"
+            subregion:
+              type: string
+              example: "Deep Akkala"
+    region:
+      description: Region data.
+      type: object
+      properties:
+        id:
+          description: The region's unique identifier.
+          type: number
+          example: 2
+        name:
+          description: The name of the region.
+          type: string
+          example: Central Hyrule
+        subregions:
+          type: array
+          description: The region's subregions.
+          items:
+            $ref: "#/components/schemas/subregion"
+    subregion:
+      description: Subregion data.
+      type: object
+      properties:
+        id:
+          description: The subregion's unique identifier.
+          type: number
+          example: 3
+        name:
+          description: The name of the region.
+          type: string
+          example: Deep Akkala
+        locations:
+          type: array
+          description: The subregion's locations.
+          items:
+            $ref: "#/components/schemas/location"
+    location:
+      description: Location data.
+      type: object
+      properties:
+        id:
+          description: The locations's unique identifier.
+          type: number
+          example: 34
+        name:
+          description: The name of the location.
+          type: string
+          example: Ritaag Zumo Shrine
+        location_type:
+          type: string
+          nullable: true
+          description: The location's location type.
+          example: shrine
+          enum:
+            - shrine
+            - stable
+            - village
+            - tower
+            - fountain
+            - spring

@@ -2,29 +2,40 @@
 
 pipeline {
   agent {
-    docker { image "kwhitejr/docker-ubuntu-node8.10:latest"}
+    docker {
+      image 'node:8'
+      args '-p 3001:3001'
+    }
   }
-
   stages {
-    stage('Prepare') {
+    stage('Build') {
       steps {
+        sh 'npm install yarn'
+        sh 'yarn install'
         sh 'node -v'
         sh 'npm -v'
         sh 'yarn --version'
-        sh 'yarn install'
       }
     }
     
-    stage('Lint') {
+    stage('Internal tests') {
       steps {
-        sh 'yarn test:lint'
+        parallel(
+          lint: {
+            sh 'yarn test:lint'
+          },
+          unit: {
+            sh 'yarn test:unit'
+          }
+        )
       }
     }
 
-    stage('Unit') {
-      steps {
-        sh 'yarn run test:unit'
-      }
-    }
+    // TODO: install docker-compose on Jenkins server
+    // stage('Alpha tests') {
+    //   steps {
+    //     sh 'yarn docker:test'
+    //   }
+    // }
   }
 }

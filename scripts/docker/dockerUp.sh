@@ -6,16 +6,6 @@ SCRIPTS_DIR="$(realpath "${CURRENT_DIR}/..")"
 ROOT_DIR="$(realpath "${SCRIPTS_DIR}/..")"
 
 . "${SCRIPTS_DIR}/lib.sh"
+. "${SCRIPTS_DIR}/docker/docker.lib.sh"
 
 dockerComposeUp
-DC_CODE=$?
-
-echo "wiremock port: $(getWireMockPort)"
-
-if [ ${DC_CODE} -ne 0 ]; then
-  # Introspection
-  docker-compose logs
-  docker-compose ps
-
-  exit ${DC_CODE}
-fi

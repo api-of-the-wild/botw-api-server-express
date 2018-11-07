@@ -8,6 +8,4 @@ ROOT_DIR="$(realpath "${SCRIPTS_DIR}/..")"
 . "${SCRIPTS_DIR}/lib.sh"
 . "${SCRIPTS_DIR}/docker/docker.lib.sh"
 
-dockerComposeLog docker-compose.log
-
-dockerComposeDown
+dockerBuildTestRunner
