@@ -1,14 +1,15 @@
 /* eslint-disable no-unused-vars */
 
 const { expect } = require("chai");
-const { spy } = require("sinon");
+const { spy, stub } = require("sinon");
 
 const {
   asyncMiddleware,
   enrichResponseMiddleware,
+  validatePathMiddleware,
 } = require("../../../src/utilities/middleware");
 
-describe("asyncMiddleware", () => {
+describe("asyncMiddleware()", () => {
   let error;
   let next;
 
@@ -83,7 +84,7 @@ describe("asyncMiddleware", () => {
   });
 });
 
-describe("enrichResponseMiddleware", () => {
+describe("enrichResponseMiddleware()", () => {
   const MOCK_REQUEST = {
     originalUrl: "/geography/regions/v1/1",
     hostname: "https://apiofthewild",
@@ -114,5 +115,55 @@ describe("enrichResponseMiddleware", () => {
 
     expect(response.send.calledWith(expectedBody)).to.be.true;
     expect(nextSpy.calledOnce).to.be.true;
+  });
+});
+
+describe("validatePathMiddleware()", () => {
+  let req, res, next;
+
+  beforeEach(() => {
+    req = {};
+    res = {
+      status: spy(),
+    };
+    next = spy();
+  });
+
+  it("should call `next` if path is valid", () => {
+    const testCases = [
+      "/geography/regions/v1/1",
+      "/geography/subregions/v1/1",
+      "/geography/locations/v1/1",
+    ];
+
+    const testRunner = path => {
+      req.path = path;
+      validatePathMiddleware(req, res, next);
+      expect(next.called).to.be.true;
+    };
+
+    testCases.forEach(testRunner);
+  });
+
+  it("should send 400 if path params are not valid", () => {
+    const testCases = [
+      "/BOGUS/regions/v1/1",
+      "/geography/BOGUS/v1/1",
+      "/geography/locations/BOGUS/1",
+      "/geography/locations/v1/BOGUS",
+      "/geography/locations/v1",
+    ];
+
+    const testRunner = path => {
+      req.path = path;
+      res.status = stub().returns({
+        send: spy(),
+      });
+      validatePathMiddleware(req, res, next);
+      expect(res.status.calledWith(400)).to.be.true;
+      // expect(res.send.calledOnce).to.be.true;
+    };
+
+    testCases.forEach(testRunner);
   });
 });
