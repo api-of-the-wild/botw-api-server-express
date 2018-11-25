@@ -1,0 +1,8 @@
+﻿id,compendium_no,compendium_no_dlc_2,compendium_no_master_mode,compendium_no_master_mode_dlc_2,name,attack_power_min,attack_power_max,effects,description
+1,344,348,349,353,Arrow,0,0,None,A common arrow. Its shaft was carved from the wood of a sturdy tree.
+2,345,349,350,354,Fire Arrow,0,10,Elemental / Ignite: 40-60 ignite damage over time,"An arrow imbued with the power of fire. It breaks apart on impact, igniting objects in the immediate area. It's incredibly effective against cold things."
+3,346,350,351,355,Ice Arrow,0,10,Elemental / Cold: 40-60 damage if the ice locked target gets hit again.,"An arrow imbued with the power of ice. It breaks apart on impact, freezing objects in the immediate area. It's incredibly effective against hot things."
+4,347,351,352,356,Shock Arrow,0,20,Elemental / Electricity,"An arrow imbued with the power of electricity. It breaks apart on impact, channeling electricity into nearby objects. It's incredibly effective against metal or anything wet."
+5,348,352,353,357,Bomb Arrow,40,55,Special / Explode: can ignite targets.,"A powerful arrow designed to destroy monsters. The explosive powder packed into the tip ignites on impact, dealing massive damage to anything caught in the blast."
+6,349,353,354,358,Ancient Arrow,50,50,Special: one-shots Guardians if you shoot the eye.,An arrow created using ancient technology. To be struck with one is to be consigned to oblivion in an instant. It deals devastating damage—even against Guardians.
+7,,,,,Light Arrow,0,0,None,None
