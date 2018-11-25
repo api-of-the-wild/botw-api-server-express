@@ -1,4 +1,7 @@
-const VALID_PATHS = { geography: ["regions", "subregions", "locations"] };
+const VALID_PATHS = {
+  geography: ["regions", "subregions", "locations"],
+  compendium: ["arrows", "shields"],
+};
 const VALID_VERSIONS = ["v1"];
 
 const validatePathMiddleware = (req, res, next) => {

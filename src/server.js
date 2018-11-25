@@ -4,7 +4,8 @@ const morgan = require("morgan");
 
 const app = express();
 const massiveInstance = require("./db_connect");
-const routes = require("./routes/geography");
+const geographyRoutes = require("./routes/geography");
+const compendiumRoutes = require("./routes/compendium");
 const { validatePathMiddleware } = require("./utilities/middleware");
 
 const PORT = process.env.PORT || 3001;
@@ -24,7 +25,8 @@ const server = () =>
 
     app.all("*", validatePathMiddleware);
     // Init routes
-    app.use("/geography", routes(app));
+    app.use("/geography", geographyRoutes(app));
+    app.use("/compendium", compendiumRoutes(app));
 
     app.listen(PORT, () => {
       // eslint-disable-next-line no-console
