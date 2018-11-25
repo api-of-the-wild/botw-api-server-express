@@ -32,7 +32,13 @@ module.exports = {
       user: "admin",
       password: "password",
     },
-    prod: {},
+    prod: {
+      host: "ad1375259bnjkgw.cthhrssqz0g0.us-west-2.rds.amazonaws.com",
+      port: 5432,
+      user: "kwhitejr",
+      password: "password",
+      database: "botw",
+    },
   },
   app: {
     local: {

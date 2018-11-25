@@ -23,7 +23,10 @@
     "docker:restart": "scripts/docker/dockerRestart.sh",
     "docker:test": "scripts/docker/dockerRunTest.sh",
     "docker:buildapp": "scripts/docker/dockerBuildApp.sh",
-    "docker:buildtestrunner": "scripts/docker/dockerBuildTestRunner.sh"
+    "docker:buildtestrunner": "scripts/docker/dockerBuildTestRunner.sh",
+    "deploy:hard": "aws cloudformation create-stack --stack-name apiofthewild-application-stack --template-body file://$PWD/cloudformation/application.yaml --profile kwhitejr --region us-west-2",
+    "deploy:seed": "scripts/db/seed.sh",
+    "delete:hard": "aws cloudformation delete-stack --stack-name apiofthewild-application-stack --profile kwhitejr"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.6",
