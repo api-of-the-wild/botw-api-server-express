@@ -1,7 +1,18 @@
-const getArrow = (db, id) => {
+const _makeQueryField = (isIdDlc2, isIdMasterMode) =>
+  isIdDlc2 && isIdMasterMode
+    ? "compendium_id_master_mode_dlc_2"
+    : isIdDlc2
+      ? "compendium_id_dlc_2"
+      : isIdMasterMode
+        ? "compendium_id_master_mode"
+        : "compendium_id";
+
+const getArrow = (db, id, isIdDlc2, isIdMasterMode) => {
+  const idQueryField = _makeQueryField(isIdDlc2, isIdMasterMode);
+
   return db.arrows
     .findOne(
-      { compendium_id: id },
+      { [idQueryField]: id },
       {
         fields: [
           "compendium_id",
@@ -25,10 +36,12 @@ const getArrow = (db, id) => {
     });
 };
 
-const getShield = (db, id) => {
+const getShield = (db, id, isIdDlc2, isIdMasterMode) => {
+  const idQueryField = _makeQueryField(isIdDlc2, isIdMasterMode);
+
   return db.shields
     .findOne(
-      { compendium_id: id },
+      { [idQueryField]: id },
       {
         fields: [
           "compendium_id",

@@ -68,7 +68,9 @@ const routes = app => {
     "/arrows/v1/:id",
     asyncMiddleware(async (req, res, next) => {
       const id = req.params.id;
-      const arrow = await getArrow(db, id);
+      const isIdDlc2 = (req.query && req.query.dlc2) || false;
+      const isIdMasterMode = (req.query && req.query.mastermode) || false;
+      const arrow = await getArrow(db, id, isIdDlc2, isIdMasterMode);
       if (arrow === null) {
         res.status(404).send({
           message: `compendium/arrows/v1 resource with id ${id} does not exist.`,
@@ -84,7 +86,9 @@ const routes = app => {
     "/shields/v1/:id",
     asyncMiddleware(async (req, res, next) => {
       const id = req.params.id;
-      const shield = await getShield(db, id);
+      const isIdDlc2 = (req.query && req.query.dlc2) || false;
+      const isIdMasterMode = (req.query && req.query.mastermode) || false;
+      const shield = await getShield(db, id, isIdDlc2, isIdMasterMode);
       if (shield === null) {
         res.status(404).send({
           message: `compendium/shields/v1 resource with id ${id} does not exist.`,
