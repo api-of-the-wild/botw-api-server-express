@@ -13,6 +13,9 @@ const {
   getArrow,
   getShield,
   getWeaponsCollection,
+  getBowsCollection,
+  getArrowsCollection,
+  getShieldsCollection,
 } = require("../queries/compendium");
 
 const { validateQueryParams } = require("../utilities/queryParamsValidation");
@@ -36,75 +39,37 @@ const routes = app => {
   //   })
   // );
 
+  // GET by id
   router.get(
     "/weapons/v1/:id",
     validateIdMiddleware,
     validateQueryParams("mastermode"),
     validateQueryParams("dlc2"),
     getById(db, getWeapon, "weapons")
-    // enrichResponseMiddleware
-  );
-
-  router.get(
-    "/weapons/v1",
-    validateQueryParams("weapon_type"),
-    validateQueryParams("hands"),
-    getCollection(db, getWeaponsCollection)
-    // enrichResponseMiddleware
   );
 
   router.get(
     "/bows/v1/:id",
-    asyncMiddleware(async (req, res, next) => {
-      const id = req.params.id;
-      const isIdDlc2 = (req.query && req.query.dlc2) || false;
-      const isIdMasterMode = (req.query && req.query.mastermode) || false;
-      const bow = await getBow(db, id, isIdDlc2, isIdMasterMode);
-      if (bow === null) {
-        res.status(404).send({
-          message: `compendium/bows/v1 resource with id ${id} does not exist.`,
-        });
-        return;
-      }
-      res.body = bow;
-      next();
-    })
+    validateIdMiddleware,
+    validateQueryParams("mastermode"),
+    validateQueryParams("dlc2"),
+    getById(db, getBow, "bows")
   );
 
   router.get(
     "/arrows/v1/:id",
-    asyncMiddleware(async (req, res, next) => {
-      const id = req.params.id;
-      const isIdDlc2 = (req.query && req.query.dlc2) || false;
-      const isIdMasterMode = (req.query && req.query.mastermode) || false;
-      const arrow = await getArrow(db, id, isIdDlc2, isIdMasterMode);
-      if (arrow === null) {
-        res.status(404).send({
-          message: `compendium/arrows/v1 resource with id ${id} does not exist.`,
-        });
-        return;
-      }
-      res.body = arrow;
-      next();
-    })
+    validateIdMiddleware,
+    validateQueryParams("mastermode"),
+    validateQueryParams("dlc2"),
+    getById(db, getArrow, "arrows")
   );
 
   router.get(
     "/shields/v1/:id",
-    asyncMiddleware(async (req, res, next) => {
-      const id = req.params.id;
-      const isIdDlc2 = (req.query && req.query.dlc2) || false;
-      const isIdMasterMode = (req.query && req.query.mastermode) || false;
-      const shield = await getShield(db, id, isIdDlc2, isIdMasterMode);
-      if (shield === null) {
-        res.status(404).send({
-          message: `compendium/shields/v1 resource with id ${id} does not exist.`,
-        });
-        return;
-      }
-      res.body = shield;
-      next();
-    })
+    validateIdMiddleware,
+    validateQueryParams("mastermode"),
+    validateQueryParams("dlc2"),
+    getById(db, getShield, "shields")
   );
 
   // router.get(
@@ -122,6 +87,20 @@ const routes = app => {
   //     next();
   //   })
   // );
+
+  // GET collections
+  router.get(
+    "/weapons/v1",
+    validateQueryParams("weapon_type"),
+    validateQueryParams("hands"),
+    getCollection(db, getWeaponsCollection)
+  );
+
+  router.get("/bows/v1", getCollection(db, getBowsCollection));
+
+  router.get("/arrows/v1", getCollection(db, getArrowsCollection));
+
+  router.get("/shields/v1", getCollection(db, getShieldsCollection));
 
   router.use(enrichResponseMiddleware);
   return router;
