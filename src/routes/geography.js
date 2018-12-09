@@ -22,7 +22,7 @@ const routes = app => {
       const location = await getLocation(db, id);
       if (location === null) {
         res.status(404).send({
-          message: `Locations resource with id ${id} does not exist.`,
+          message: `geography/locations/v1 resource with id ${id} does not exist.`,
         });
         return;
       }
@@ -38,7 +38,7 @@ const routes = app => {
       const subregion = await getSubregion(db, id);
       if (subregion === null) {
         res.status(404).send({
-          message: `Subregions resource with id ${id} does not exist.`,
+          message: `geography/subregions/v1 resource with id ${id} does not exist.`,
         });
         return;
       }
@@ -54,7 +54,7 @@ const routes = app => {
       const region = await getRegion(db, id);
       if (region === null) {
         res.status(404).send({
-          message: `Regions resource with id ${id} does not exist.`,
+          message: `geography/regions/v1 resource with id ${id} does not exist.`,
         });
         return;
       }
