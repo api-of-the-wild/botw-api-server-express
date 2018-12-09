@@ -1,6 +1,6 @@
 const VALID_PATHS = {
   geography: ["regions", "subregions", "locations"],
-  compendium: ["arrows", "shields"],
+  compendium: ["weapons", "bows", "arrows", "shields"],
 };
 const VALID_VERSIONS = ["v1"];
 
@@ -12,12 +12,28 @@ const validatePathMiddleware = (req, res, next) => {
     ? VALID_PATHS[domain].includes(resource)
     : false;
   const isVersionValid = VALID_VERSIONS.includes(version) || false;
-  const isIdFalsy = !!id;
 
+  if (!isDomainValid || !isResourceValid || !isVersionValid) {
+    res.status(400).send({ message: `Requested path ${req.path} is invalid.` });
+    return;
+  }
+
+  // if (!isIdNumber) {
+  //   res
+  //     .status(400)
+  //     .send({ message: `Requested resource id ${id} is not valid type.` });
+  //   return;
+  // }
+  next();
+};
+
+const validateIdMiddleware = (req, res, next) => {
+  const id = (req.params && req.params.id) || false;
+  const isIdFalsy = !!id;
   const isIdNumber = parseInt(id) || false;
 
-  if (!isDomainValid || !isResourceValid || !isVersionValid || !isIdFalsy) {
-    res.status(400).send({ message: `Requested path ${req.path} is invalid.` });
+  if (!isIdFalsy) {
+    res.status(400).send({ message: `Requested id ${id} is invalid.` });
     return;
   }
 
@@ -36,18 +52,21 @@ const asyncMiddleware = fn => (req, res, next) => {
 
 const enrichResponseMiddleware = (req, res, next) => {
   const path = req.originalUrl;
-  const pathParams = path.split("/");
+  const [_, domain, resource, version, id] = path.split("/");
   const self = `${req.hostname}${req.originalUrl}`;
 
-  const resource = [pathParams[1], pathParams[2]].join("/");
-  const version = pathParams[3];
-  res.body = Object.assign(res.body, { self, resource, version });
+  const domainResource = [domain, resource].join("/");
+  res.body = Object.assign(res.body, {
+    self,
+    resource: domainResource,
+    version: version.substring(0, version.indexOf("?")),
+  });
   res.send(res.body);
-  next();
 };
 
 module.exports = {
   validatePathMiddleware,
+  validateIdMiddleware,
   asyncMiddleware,
   enrichResponseMiddleware,
 };
