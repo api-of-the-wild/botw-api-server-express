@@ -1,8 +1,9 @@
-const VALID_PATHS = {
-  geography: ["regions", "subregions", "locations"],
-  compendium: ["weapons", "bows", "arrows", "shields"],
-};
-const VALID_VERSIONS = ["v1"];
+const { VALID_PATHS, VALID_VERSIONS } = require("../../config.env").paths;
+const {
+  WEAPON_TYPE_ENUM,
+  WEAPON_HANDS_ENUM,
+  BOOLEAN_ENUM,
+} = require("../../config.env").enums;
 
 const validatePathMiddleware = (req, res, next) => {
   // eslint-disable-next-line no-unused-vars
@@ -40,6 +41,37 @@ const validateIdMiddleware = (req, res, next) => {
   next();
 };
 
+const VALID_QUERY_PARAMS = {
+  weapon_type: WEAPON_TYPE_ENUM,
+  hands: WEAPON_HANDS_ENUM,
+  mastermode: BOOLEAN_ENUM,
+  dlc2: BOOLEAN_ENUM,
+};
+
+// TODO: include check on the query param key (not jsut value)
+const validateQueryParamsMiddleware = queryParam => (req, res, next) => {
+  const queryParamsArray =
+    req.query && req.query[queryParam]
+      ? req.query[queryParam].split(",")
+      : null;
+
+  if (queryParamsArray === null) {
+    return next();
+  }
+
+  const queryParamValuesAreValid = queryParamsArray.every(val =>
+    VALID_QUERY_PARAMS[queryParam].includes(val)
+  );
+
+  if (!queryParamValuesAreValid) {
+    res.status(400).send({
+      message: `Query parameter ${queryParam} contains one or more invalid values: ${queryParamsArray}`,
+    });
+    return;
+  }
+  next();
+};
+
 const asyncMiddleware = fn => (req, res, next) => {
   Promise.resolve(fn(req, res, next)).catch(next);
 };
@@ -61,6 +93,7 @@ const enrichResponseMiddleware = (req, res, next) => {
 module.exports = {
   validatePathMiddleware,
   validateIdMiddleware,
+  validateQueryParamsMiddleware,
   asyncMiddleware,
   enrichResponseMiddleware,
 };

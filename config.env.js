@@ -44,4 +44,31 @@ module.exports = {
     },
     BETA: {},
   },
+  enums: {
+    WEAPON_TYPE_ENUM: [
+      "arm",
+      "axe",
+      "bat",
+      "boomerang",
+      "carver",
+      "club",
+      "crusher",
+      "hammer",
+      "leaf",
+      "polearm",
+      "rod",
+      "sickle",
+      "spear",
+      "sword",
+    ],
+    WEAPON_HANDS_ENUM: ["1", "2"],
+    BOOLEAN_ENUM: ["true", "false"],
+  },
+  paths: {
+    VALID_PATHS: {
+      geography: ["regions", "subregions", "locations"],
+      compendium: ["weapons", "bows", "arrows", "shields"],
+    },
+    VALID_VERSIONS: ["v1"],
+  },
 };

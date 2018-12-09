@@ -4,6 +4,7 @@ const router = require("express").Router();
 const {
   asyncMiddleware,
   validateIdMiddleware,
+  validateQueryParamsMiddleware,
   enrichResponseMiddleware,
 } = require("../utilities/middleware");
 
@@ -18,7 +19,7 @@ const {
   getShieldsCollection,
 } = require("../queries/compendium");
 
-const { validateQueryParams } = require("../utilities/queryParamsValidation");
+// const { validateQueryParamsMiddleware } = require("../utilities/queryParamsValidation");
 
 const routes = app => {
   const db = app.get("db");
@@ -43,32 +44,32 @@ const routes = app => {
   router.get(
     "/weapons/v1/:id",
     validateIdMiddleware,
-    validateQueryParams("mastermode"),
-    validateQueryParams("dlc2"),
+    validateQueryParamsMiddleware("mastermode"),
+    validateQueryParamsMiddleware("dlc2"),
     getById(db, getWeapon, "weapons")
   );
 
   router.get(
     "/bows/v1/:id",
     validateIdMiddleware,
-    validateQueryParams("mastermode"),
-    validateQueryParams("dlc2"),
+    validateQueryParamsMiddleware("mastermode"),
+    validateQueryParamsMiddleware("dlc2"),
     getById(db, getBow, "bows")
   );
 
   router.get(
     "/arrows/v1/:id",
     validateIdMiddleware,
-    validateQueryParams("mastermode"),
-    validateQueryParams("dlc2"),
+    validateQueryParamsMiddleware("mastermode"),
+    validateQueryParamsMiddleware("dlc2"),
     getById(db, getArrow, "arrows")
   );
 
   router.get(
     "/shields/v1/:id",
     validateIdMiddleware,
-    validateQueryParams("mastermode"),
-    validateQueryParams("dlc2"),
+    validateQueryParamsMiddleware("mastermode"),
+    validateQueryParamsMiddleware("dlc2"),
     getById(db, getShield, "shields")
   );
 
@@ -91,8 +92,8 @@ const routes = app => {
   // GET collections
   router.get(
     "/weapons/v1",
-    validateQueryParams("weapon_type"),
-    validateQueryParams("hands"),
+    validateQueryParamsMiddleware("weapon_type"),
+    validateQueryParamsMiddleware("hands"),
     getCollection(db, getWeaponsCollection)
   );
 
