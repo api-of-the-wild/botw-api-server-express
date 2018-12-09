@@ -3,6 +3,7 @@ const router = require("express").Router();
 
 const {
   asyncMiddleware,
+  validateIdMiddleware,
   enrichResponseMiddleware,
 } = require("../utilities/middleware");
 
@@ -37,49 +38,19 @@ const routes = app => {
 
   router.get(
     "/weapons/v1/:id",
-    asyncMiddleware(async (req, res, next) => {
-      // Path Params
-      const id = req.params.id;
-
-      //Querystring Params
-      const isIdDlc2 = (req.query && req.query.dlc2) || false;
-      const isIdMasterMode = (req.query && req.query.mastermode) || false;
-      const weaponTypes =
-        req.query && req.query.weapontypes
-          ? req.query.weapontypes.split(",")
-          : [];
-      console.log(weaponTypes);
-
-      // Db Query
-      const weapon = await getWeapon(db, id, isIdDlc2, isIdMasterMode);
-      if (weapon === null) {
-        res.status(404).send({
-          message: `compendium/weapons/v1 resource with id ${id} does not exist.`,
-        });
-        return;
-      }
-      res.body = weapon;
-      next();
-    })
+    validateIdMiddleware,
+    validateQueryParams("mastermode"),
+    validateQueryParams("dlc2"),
+    getById(db, getWeapon, "weapons")
+    // enrichResponseMiddleware
   );
 
   router.get(
     "/weapons/v1",
     validateQueryParams("weapon_type"),
     validateQueryParams("hands"),
-    asyncMiddleware(async (req, res, next) => {
-      // TODO: convert to reduce
-      const filters = {};
-      Object.keys(req.query).map(key => {
-        filters[key] = req.query[key].split(",");
-      });
-
-      // Db Query
-      const weapons = await getWeaponsCollection(db, filters);
-      res.body = { objects: weapons };
-      next();
-    }),
-    enrichResponseMiddleware
+    getCollection(db, getWeaponsCollection)
+    // enrichResponseMiddleware
   );
 
   router.get(
@@ -155,5 +126,40 @@ const routes = app => {
   router.use(enrichResponseMiddleware);
   return router;
 };
+
+const getCollection = (db, queryFn) =>
+  asyncMiddleware(async (req, res, next) => {
+    // TODO: convert to reduce
+    const filters = {};
+    Object.keys(req.query).map(key => {
+      filters[key] = req.query[key].split(",");
+    });
+
+    // Db Query
+    const dbResponse = await queryFn(db, filters);
+    res.body = { objects: dbResponse };
+    next();
+  });
+
+const getById = (db, queryFn, resource) =>
+  asyncMiddleware(async (req, res, next) => {
+    // Path Params
+    const id = req.params.id;
+
+    //Querystring Params
+    const isIdDlc2 = (req.query && req.query.dlc2) || false;
+    const isIdMasterMode = (req.query && req.query.mastermode) || false;
+
+    // Db Query
+    const dbResponse = await queryFn(db, id, isIdDlc2, isIdMasterMode);
+    if (dbResponse === null) {
+      res.status(404).send({
+        message: `compendium/${resource}/v1 resource with id ${id} does not exist.`,
+      });
+      return;
+    }
+    res.body = dbResponse;
+    next();
+  });
 
 module.exports = routes;

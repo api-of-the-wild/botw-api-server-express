@@ -18,12 +18,6 @@ const validatePathMiddleware = (req, res, next) => {
     return;
   }
 
-  // if (!isIdNumber) {
-  //   res
-  //     .status(400)
-  //     .send({ message: `Requested resource id ${id} is not valid type.` });
-  //   return;
-  // }
   next();
 };
 
@@ -59,7 +53,7 @@ const enrichResponseMiddleware = (req, res, next) => {
   res.body = Object.assign(res.body, {
     self,
     resource: domainResource,
-    version: version.substring(0, version.indexOf("?")),
+    version: version.substring(0, 2),
   });
   res.send(res.body);
 };

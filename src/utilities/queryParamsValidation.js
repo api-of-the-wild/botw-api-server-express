@@ -15,10 +15,13 @@ const WEAPON_TYPE_ENUM = [
   "sword",
 ];
 const WEAPON_HANDS_ENUM = ["1", "2"];
+const BOOLEAN_ENUM = ["true", "false"];
 
 const VALID_QUERY_PARAMS = {
   weapon_type: WEAPON_TYPE_ENUM,
   hands: WEAPON_HANDS_ENUM,
+  mastermode: BOOLEAN_ENUM,
+  dlc2: BOOLEAN_ENUM,
 };
 
 const validateQueryParams = queryParam => (req, res, next) => {
