@@ -3,6 +3,7 @@ const {
   WEAPON_TYPE_ENUM,
   WEAPON_HANDS_ENUM,
   BOOLEAN_ENUM,
+  LOCATION_TYPE_ENUM,
 } = require("../../config.env").enums;
 
 const validatePathMiddleware = (req, res, next) => {
@@ -46,6 +47,7 @@ const VALID_QUERY_PARAMS = {
   hands: WEAPON_HANDS_ENUM,
   mastermode: BOOLEAN_ENUM,
   dlc2: BOOLEAN_ENUM,
+  location_type: LOCATION_TYPE_ENUM,
 };
 
 // TODO: include check on the query param key (not jsut value)

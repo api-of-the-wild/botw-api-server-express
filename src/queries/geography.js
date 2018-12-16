@@ -27,6 +27,29 @@ const getLocation = (db, id) => {
     });
 };
 
+const getLocationsCollection = (db, filters) => {
+  return db.location_views
+    .find(filters, {
+      decompose: {
+        pk: "location_id",
+        columns: {
+          location_id: "id",
+          location: "name",
+          location_type: "location_type",
+          region: "region",
+          subregion: "subregion",
+        },
+      },
+    })
+    .then(locations => {
+      if (locations === undefined) {
+        return null;
+      } else {
+        return locations;
+      }
+    });
+};
+
 const getSubregion = (db, id) => {
   return db.location_views
     .findOne(
@@ -56,6 +79,36 @@ const getSubregion = (db, id) => {
         return null;
       } else {
         return subregion;
+      }
+    });
+};
+
+const getSubregionsCollection = (db, filters) => {
+  return db.location_views
+    .find(filters, {
+      decompose: {
+        pk: "subregion_id",
+        columns: {
+          subregion_id: "id",
+          subregion: "name",
+          region: "region",
+        },
+        locations: {
+          pk: "location_id",
+          columns: {
+            location_id: "id",
+            location: "name",
+            location_type: "location_type",
+          },
+          array: true,
+        },
+      },
+    })
+    .then(subregions => {
+      if (subregions === undefined) {
+        return null;
+      } else {
+        return subregions;
       }
     });
 };
@@ -100,8 +153,48 @@ const getRegion = (db, id) => {
     });
 };
 
+const getRegionsCollection = (db, filters) => {
+  return db.location_views
+    .find(filters, {
+      decompose: {
+        pk: "region_id",
+        columns: {
+          region_id: "id",
+          region: "name",
+        },
+        subregions: {
+          pk: "subregion_id",
+          columns: {
+            subregion_id: "id",
+            subregion: "name",
+          },
+          locations: {
+            pk: "location_id",
+            columns: {
+              location_id: "id",
+              location: "name",
+              location_type: "location_type",
+            },
+            array: true,
+          },
+          array: true,
+        },
+      },
+    })
+    .then(region => {
+      if (region === undefined) {
+        return null;
+      } else {
+        return region;
+      }
+    });
+};
+
 module.exports = {
   getLocation,
   getSubregion,
   getRegion,
+  getLocationsCollection,
+  getSubregionsCollection,
+  getRegionsCollection,
 };

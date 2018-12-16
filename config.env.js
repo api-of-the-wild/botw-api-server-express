@@ -63,6 +63,15 @@ module.exports = {
     ],
     WEAPON_HANDS_ENUM: ["1", "2"],
     BOOLEAN_ENUM: ["true", "false"],
+    LOCATION_TYPE_ENUM: [
+      "null",
+      "shrine",
+      "stable",
+      "village",
+      "tower",
+      "fountain",
+      "spring",
+    ],
   },
   paths: {
     VALID_PATHS: {
