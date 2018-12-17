@@ -4,7 +4,7 @@ const morgan = require("morgan");
 
 const app = express();
 const massiveInstance = require("./db_connect");
-const geographyRoutes = require("./routes/geography");
+const { routes: geographyRoutes } = require("./routes/geography");
 const compendiumRoutes = require("./routes/compendium");
 const { validatePathMiddleware } = require("./utilities/middleware");
 
