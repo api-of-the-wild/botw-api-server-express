@@ -29,6 +29,7 @@ const validateIdMiddleware = (req, res, next) => {
   const isIdNumber = parseInt(id) || false;
 
   if (!isIdFalsy) {
+    // TODO: should the res call be returned?
     res.status(400).send({ message: `Requested id ${id} is invalid.` });
     return;
   }
@@ -42,16 +43,16 @@ const validateIdMiddleware = (req, res, next) => {
   next();
 };
 
-const VALID_QUERY_PARAMS = {
-  weapon_type: WEAPON_TYPE_ENUM,
-  hands: WEAPON_HANDS_ENUM,
-  mastermode: BOOLEAN_ENUM,
-  dlc2: BOOLEAN_ENUM,
-  location_type: LOCATION_TYPE_ENUM,
-};
-
-// TODO: include check on the query param key (not jsut value)
+// TODO: include check on the query param key (not just value)
 const validateQueryParamsMiddleware = queryParam => (req, res, next) => {
+  const VALID_QUERY_PARAMS = {
+    weapon_type: WEAPON_TYPE_ENUM,
+    hands: WEAPON_HANDS_ENUM,
+    mastermode: BOOLEAN_ENUM,
+    dlc2: BOOLEAN_ENUM,
+    location_type: LOCATION_TYPE_ENUM,
+  };
+
   const queryParamsArray =
     req.query && req.query[queryParam]
       ? req.query[queryParam].split(",")
@@ -80,6 +81,7 @@ const asyncMiddleware = fn => (req, res, next) => {
 
 const enrichResponseMiddleware = (req, res, next) => {
   const path = req.originalUrl;
+  // eslint-disable-next-line no-unused-vars
   const [_, domain, resource, version, id] = path.split("/");
   const self = `${req.hostname}${req.originalUrl}`;
 
@@ -90,6 +92,7 @@ const enrichResponseMiddleware = (req, res, next) => {
     version: version.substring(0, 2),
   });
   res.send(res.body);
+  next();
 };
 
 module.exports = {

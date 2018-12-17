@@ -83,12 +83,10 @@ const getCollection = (db, queryFn) =>
       });
     });
 
-    console.log(filters);
-
     // Db Query
     const dbResponse = await queryFn(db, filters);
     res.body = { objects: dbResponse };
     next();
   });
 
-module.exports = routes;
+module.exports = { routes, getById, getCollection };
