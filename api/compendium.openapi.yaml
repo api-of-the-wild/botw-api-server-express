@@ -1,0 +1,917 @@
+openapi: 3.0.1
+servers:
+  - url: "https://api-of-the-wild.com"
+    description: AotW's public envirmonment.
+info:
+  description: API of the Wild - Compendium Services
+  title: Compendium
+  version: "1.0"
+paths:
+  /compendium/creatures/v1/{id}:
+    get:
+      summary: Get data for a single creature.
+      description: Gets a single creature by its id.
+      tags:
+        - Creature
+      parameters:
+        - in: path
+          description: Unique identifier for the resource.
+          name: id
+          required: true
+          schema:
+            type: string
+        - in: query
+          description: Filter by mastermode compendium.
+          name: mastermode
+          schema:
+            type: string
+            enum:
+              - true
+              - false
+        - in: query
+          description: Filter by DLC 2 compendium.
+          name: dlc2
+          schema:
+            type: string
+            enum:
+              - true
+              - false
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json; charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/Creature"
+        "404":
+          description: Not Found
+  /compendium/monsters/v1/{id}:
+    get:
+      summary: Get data for a single monster.
+      description: Gets a single monster by its id.
+      tags:
+        - Monster
+      parameters:
+        - in: path
+          description: Unique identifier for the resource.
+          name: id
+          required: true
+          schema:
+            type: string
+        - in: query
+          description: Filter by mastermode compendium.
+          name: mastermode
+          schema:
+            type: string
+            enum:
+              - true
+              - false
+        - in: query
+          description: Filter by DLC 2 compendium.
+          name: dlc2
+          schema:
+            type: string
+            enum:
+              - true
+              - false
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json; charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/Monster"
+        "404":
+          description: Not Found
+  /compendium/materials/v1/{id}:
+    get:
+      summary: Get data for a single material.
+      description: Gets a single material by its id.
+      tags:
+        - Material
+      parameters:
+        - in: path
+          description: Unique identifier for the resource.
+          name: id
+          required: true
+          schema:
+            type: string
+        - in: query
+          description: Filter by mastermode compendium.
+          name: mastermode
+          schema:
+            type: string
+            enum:
+              - true
+              - false
+        - in: query
+          description: Filter by DLC 2 compendium.
+          name: dlc2
+          schema:
+            type: string
+            enum:
+              - true
+              - false
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json; charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/Material"
+        "404":
+          description: Not Found
+  
+  # Weapons
+  /compendium/weapons/v1/{id}:
+    get:
+      summary: Get data for a single weapon.
+      description: Gets a single weapon by its id.
+      tags:
+        - Weapon
+      parameters:
+        - in: path
+          description: Unique identifier for the resource.
+          name: id
+          required: true
+          schema:
+            type: string
+        - in: query
+          description: Filter by mastermode compendium.
+          name: mastermode
+          schema:
+            type: string
+            enum:
+              - true
+              - false
+        - in: query
+          description: Filter by DLC 2 compendium.
+          name: dlc2
+          schema:
+            type: string
+            enum:
+              - true
+              - false
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json; charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/Weapon"
+        "404":
+          description: Not Found
+  /compendium/weapons/v1:
+    get:
+      summary: Get data for several weapons.
+      description: Get several weapons.
+      tags:
+        - Weapon
+      parameters:
+        - in: query
+          description: Filter by number of hands.
+          name: hands
+          schema:
+            type: number
+            enum:
+              - 1
+              - 2
+        - in: query
+          description: Filter by weapon type.
+          name: weapon_type
+          schema:
+            type: string
+            enum:
+              - arm
+              - axe
+              - bat
+              - boomerang
+              - carver
+              - club
+              - crusher
+              - hammer
+              - leaf
+              - polearm
+              - rod
+              - sickle
+              - spear
+              - sword
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json; charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/WeaponCollection"
+        "400":
+          description: Bad Request
+  
+  # Bows
+  /compendium/bows/v1/{id}:
+    get:
+      summary: Get data for a single bow.
+      description: Gets a single bow by its id.
+      tags:
+        - Bow
+      parameters:
+        - in: path
+          description: Unique identifier for the resource.
+          name: id
+          required: true
+          schema:
+            type: string
+        - in: query
+          description: Filter by mastermode compendium.
+          name: mastermode
+          schema:
+            type: string
+            enum:
+              - true
+              - false
+        - in: query
+          description: Filter by DLC 2 compendium.
+          name: dlc2
+          schema:
+            type: string
+            enum:
+              - true
+              - false
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json; charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/Bow"
+        "404":
+          description: Not Found
+  /compendium/bows/v1:
+    get:
+      summary: Get data for several bows.
+      description: Get several bows.
+      tags:
+        - Bow
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json; charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/BowCollection"
+        "400":
+          description: Bad Request
+
+  # Arrows
+  /compendium/arrows/v1/{id}:
+    get:
+      summary: Get data for a single arrow.
+      description: Gets a single arrow by its id.
+      tags:
+        - Arrow
+      parameters:
+        - in: path
+          description: Unique identifier for the resource.
+          name: id
+          required: true
+          schema:
+            type: string
+        - in: query
+          description: Filter by mastermode compendium.
+          name: mastermode
+          schema:
+            type: string
+            enum:
+              - true
+              - false
+        - in: query
+          description: Filter by DLC 2 compendium.
+          name: dlc2
+          schema:
+            type: string
+            enum:
+              - true
+              - false
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json; charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/Arrow"
+        "404":
+          description: Not Found
+  /compendium/arrows/v1:
+    get:
+      summary: Get data for several arrows.
+      description: Get several arrows.
+      tags:
+        - Arrow
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json; charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/ArrowCollection"
+        "400":
+          description: Bad Request
+
+  # Shields
+  /compendium/shields/v1/{id}:
+    get:
+      summary: Get data for a single shield.
+      description: Gets a single shield by its id.
+      tags:
+        - Shield
+      parameters:
+        - in: path
+          description: Unique identifier for the resource.
+          name: id
+          required: true
+          schema:
+            type: string
+        - in: query
+          description: Filter by mastermode compendium.
+          name: mastermode
+          schema:
+            type: string
+            enum:
+              - true
+              - false
+        - in: query
+          description: Filter by DLC 2 compendium.
+          name: dlc2
+          schema:
+            type: string
+            enum:
+              - true
+              - false
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json; charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/Shield"
+        "404":
+          description: Not Found
+  /compendium/shields/v1:
+    get:
+      summary: Get data for several shields.
+      description: Get several shields.
+      tags:
+        - Shield
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json; charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/ShieldCollection"
+        "400":
+          description: Bad Request
+
+  # Treasures
+  /compendium/treasures/v1/{id}:
+    get:
+      summary: Get data for a single treasure.
+      description: Gets a single treasure by its id.
+      tags:
+        - Treasure
+      parameters:
+        - in: path
+          description: Unique identifier for the resource.
+          name: id
+          required: true
+          schema:
+            type: string
+        - in: query
+          description: Filter by mastermode compendium.
+          name: mastermode
+          schema:
+            type: string
+            enum:
+              - true
+              - false
+        - in: query
+          description: Filter by DLC 2 compendium.
+          name: dlc2
+          schema:
+            type: string
+            enum:
+              - true
+              - false
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json; charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/Treasure"
+        "404":
+          description: Not Found
+  /compendium/treasures/v1:
+    get:
+      summary: Get data for several treasures.
+      description: Get several treasures.
+      tags:
+        - Treasure
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json; charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/TreasureCollection"
+        "400":
+          description: Bad Request
+
+components:
+  schemas:
+    metadata:
+      description: Metadata for the response.
+      type: object
+      properties:
+        self:
+          description: The requested url.
+          type: string
+          format: url
+          example: https://api-of-the-wild/compendium/weapons/v1/340
+        resource:
+          description: The requested resource.
+          type: string
+          example: compendium/weapons
+        version:
+          description: The version of the requested resource.
+          type: string
+          example: v1
+    CreatureCollection:
+      description: Collection of creature resources.
+      allOf:
+        - $ref: "#/components/schemas/metadata"
+        - type: object
+          properties:
+            objects:
+              type: array
+              description: An array of arrow resources.
+              items:
+                $ref: "#/components/schemas/creature"
+    Creature:
+      description: Complete response for a creature resource.
+      allOf:
+        - $ref: "#/components/schemas/metadata"
+        - $ref: "#/components/schemas/creature"
+    creature:
+      description: Creature data.
+      type: object
+      properties:
+        compendium_id:
+          description: The creature's unique identifier, normal compendium.
+          type: number
+          example: 344
+        compendium_id_dlc_2:
+          description: The creature's unique identifier, normal DLC 2 compendium.
+          type: number
+          example: 348
+        compendium_id_master_mode:
+          description: The creature's unique identifier, normal Master Mode compendium.
+          type: number
+          example: 349
+        compendium_id_master_mode_dlc_2:
+          description: The creature's unique identifier, normal Master Mode + DLC 2 compendium.
+          type: number
+          example: 353
+        name:
+          description: The name of the creature.
+          type: string
+          example: Arrow
+        attack_power_min:
+          description: Minimum attack power modifier.
+          type: number
+          example: 0
+        attack_power_max:
+          description: Maximum attack power modifier.
+          type: number
+          example: 0
+        effects:
+          description: The arrow's extra effects.
+          type: string
+          example: None
+        description:
+          description: The arrow's description.
+          type: string
+          example: A common arrow. Its shaft was carved from the wood of a sturdy tree.
+    MonsterCollection:
+      description: Collection of monster resources.
+      allOf:
+        - $ref: "#/components/schemas/metadata"
+        - type: object
+          properties:
+            objects:
+              type: array
+              description: An array of monster resources.
+              items:
+                $ref: "#/components/schemas/monster"
+    Monster:
+      description: Complete response for a monster resource.
+      allOf:
+        - $ref: "#/components/schemas/metadata"
+        - $ref: "#/components/schemas/monster"
+    monster:
+      description: Monster data.
+      type: object
+      properties:
+        compendium_id:
+          description: The monster's unique identifier, normal compendium.
+          type: number
+          example: 344
+        compendium_id_dlc_2:
+          description: The monster's unique identifier, normal DLC 2 compendium.
+          type: number
+          example: 348
+        compendium_id_master_mode:
+          description: The monster's unique identifier, normal Master Mode compendium.
+          type: number
+          example: 349
+        compendium_id_master_mode_dlc_2:
+          description: The monster's unique identifier, normal Master Mode + DLC 2 compendium.
+          type: number
+          example: 353
+        name:
+          description: The name of the monster.
+          type: string
+          example: Arrow
+        attack_power_min:
+          description: Minimum attack power modifier.
+          type: number
+          example: 0
+        attack_power_max:
+          description: Maximum attack power modifier.
+          type: number
+          example: 0
+        effects:
+          description: The arrow's extra effects.
+          type: string
+          example: None
+        description:
+          description: The monster's description.
+          type: string
+          example: A common arrow. Its shaft was carved from the wood of a sturdy tree.
+    MaterialCollection:
+      description: Collection of material resources.
+      allOf:
+        - $ref: "#/components/schemas/metadata"
+        - type: object
+          properties:
+            objects:
+              type: array
+              description: An array of arrow resources.
+              items:
+                $ref: "#/components/schemas/material"
+    Material:
+      description: Complete response for a material resource.
+      allOf:
+        - $ref: "#/components/schemas/metadata"
+        - $ref: "#/components/schemas/material"
+    material:
+      description: Material data.
+      type: object
+      properties:
+        compendium_id:
+          description: The material's unique identifier, normal compendium.
+          type: number
+          example: 344
+        compendium_id_dlc_2:
+          description: The material's unique identifier, normal DLC 2 compendium.
+          type: number
+          example: 348
+        compendium_id_master_mode:
+          description: The material's unique identifier, normal Master Mode compendium.
+          type: number
+          example: 349
+        compendium_id_master_mode_dlc_2:
+          description: The material's unique identifier, normal Master Mode + DLC 2 compendium.
+          type: number
+          example: 353
+        name:
+          description: The name of the material.
+          type: string
+          example: Arrow
+        attack_power_min:
+          description: Minimum attack power modifier.
+          type: number
+          example: 0
+        attack_power_max:
+          description: Maximum attack power modifier.
+          type: number
+          example: 0
+        effects:
+          description: The arrow's extra effects.
+          type: string
+          example: None
+        description:
+          description: The material's description.
+          type: string
+          example: A common arrow. Its shaft was carved from the wood of a sturdy tree.
+    WeaponCollection:
+      description: Collection of weapon resources.
+      allOf:
+        - $ref: "#/components/schemas/metadata"
+        - type: object
+          properties:
+            objects:
+              type: array
+              description: An array of weapon resources.
+              items:
+                $ref: "#/components/schemas/weapon"
+    Weapon:
+      description: Complete response for a weapon resource.
+      allOf:
+        - $ref: "#/components/schemas/metadata"
+        - $ref: "#/components/schemas/weapon"
+    weapon:
+      description: Weapon data.
+      type: object
+      properties:
+        compendium_id:
+          description: The weapon's unique identifier, normal compendium.
+          type: number
+          example: 230
+        compendium_id_dlc_2:
+          description: The weapon's unique identifier, normal DLC 2 compendium.
+          type: number
+          example: 233
+        compendium_id_master_mode:
+          description: The weapon's unique identifier, normal Master Mode compendium.
+          type: number
+          example: 235
+        compendium_id_master_mode_dlc_2:
+          description: The weapon's unique identifier, normal Master Mode + DLC 2 compendium.
+          type: number
+          example: 238
+        name:
+          description: The name of the weapon.
+          type: string
+          example: Lynel Sword
+        hands:
+          description: Number of hands required to hold the weapon.
+          type: number
+          example: 1
+          enum:
+            - 1
+            - 2
+        weapon_type:
+          description: The weapon type.
+          type: string
+          example: sword
+          enum:
+              - arm
+              - axe
+              - bat
+              - boomerang
+              - carver
+              - club
+              - crusher
+              - hammer
+              - leaf
+              - polearm
+              - rod
+              - sickle
+              - spear
+              - sword
+        attack_power:
+          description: The weapon's attack power.
+          type: number
+          example: 24
+        durability:
+          description: The weapon's durability.
+          type: number
+          example: 26
+        description:
+          description: The weapon's description.
+          type: string
+          example: This Lynel-made sword was designed with smashing in mind rather than slicing. It's on the heavy side compared to what Hylians are used to, but it's very strong.
+    BowCollection:
+      description: Collection of bow resources.
+      allOf:
+        - $ref: "#/components/schemas/metadata"
+        - type: object
+          properties:
+            objects:
+              type: array
+              description: An array of bow resources.
+              items:
+                $ref: "#/components/schemas/bow"
+    Bow:
+      description: Complete response for a bow resource.
+      allOf:
+        - $ref: "#/components/schemas/metadata"
+        - $ref: "#/components/schemas/bow"
+    bow:
+      description: Bow data.
+      type: object
+      properties:
+        compendium_id:
+          description: The bow's unique identifier, normal compendium.
+          type: number
+          example: 332
+        compendium_id_dlc_2:
+          description: The bow's unique identifier, normal DLC 2 compendium.
+          type: number
+          example: 336
+        compendium_id_master_mode:
+          description: The bow's unique identifier, normal Master Mode compendium.
+          type: number
+          example: 337
+        compendium_id_master_mode_dlc_2:
+          description: The bow's unique identifier, normal Master Mode + DLC 2 compendium.
+          type: number
+          example: 341
+        name:
+          description: The name of the bow.
+          type: string
+          example: Ancient Bow
+        attack_power:
+          description: The bow's attack power.
+          type: number
+          example: 44
+        durability:
+          description: The bow's durability.
+          type: number
+          example: 120
+        range:
+          description: The bow's range.
+          type: number
+          example: 50
+        fire_rate:
+          description: The bow's fire rate (arrows per shot).
+          type: number
+          example: 1
+        description:
+          description: The bow's description.
+          type: string
+          example: This bow is the result of Robbie's research. Ancient Sheikah technology allows it heightened functionality, Arrows fired from it travel in a perfectly straight line.
+    ArrowCollection:
+      description: Collection of arrow resources.
+      allOf:
+        - $ref: "#/components/schemas/metadata"
+        - type: object
+          properties:
+            objects:
+              type: array
+              description: An array of arrow resources.
+              items:
+                $ref: "#/components/schemas/arrow"
+    Arrow:
+      description: Complete response for a arrow resource.
+      allOf:
+        - $ref: "#/components/schemas/metadata"
+        - $ref: "#/components/schemas/arrow"
+    arrow:
+      description: Arrow data.
+      type: object
+      properties:
+        compendium_id:
+          description: The arrow's unique identifier, normal compendium.
+          type: number
+          example: 344
+        compendium_id_dlc_2:
+          description: The arrow's unique identifier, normal DLC 2 compendium.
+          type: number
+          example: 348
+        compendium_id_master_mode:
+          description: The arrow's unique identifier, normal Master Mode compendium.
+          type: number
+          example: 349
+        compendium_id_master_mode_dlc_2:
+          description: The arrow's unique identifier, normal Master Mode + DLC 2 compendium.
+          type: number
+          example: 353
+        name:
+          description: The name of the arrow.
+          type: string
+          example: Arrow
+        attack_power_min:
+          description: Minimum attack power modifier.
+          type: number
+          example: 0
+        attack_power_max:
+          description: Maximum attack power modifier.
+          type: number
+          example: 0
+        effects:
+          description: The arrow's extra effects.
+          type: string
+          example: None
+        description:
+          description: The arrow's description.
+          type: string
+          example: A common arrow. Its shaft was carved from the wood of a sturdy tree.
+    ShieldCollection:
+      description: Collection of Shield resources.
+      allOf:
+        - $ref: "#/components/schemas/metadata"
+        - type: object
+          properties:
+            objects:
+              type: array
+              description: An array of Shield resources.
+              items:
+                $ref: "#/components/schemas/shield"
+    Shield:
+      description: Complete response for a shield resource.
+      allOf:
+        - $ref: "#/components/schemas/metadata"
+        - $ref: "#/components/schemas/shield"
+    shield:
+      description: Shield data.
+      type: object
+      properties:
+        compendium_id:
+          description: The shield's unique identifier, normal compendium.
+          type: number
+          example: 367
+        compendium_id_dlc_2:
+          description: The shield's unique identifier, normal DLC 2 compendium.
+          type: number
+          example: 371
+        compendium_id_master_mode:
+          description: The shield's unique identifier, normal Master Mode compendium.
+          type: number
+          example: 372
+        compendium_id_master_mode_dlc_2:
+          description: The shield's unique identifier, normal Master Mode + DLC 2 compendium.
+          type: number
+          example: 376
+        name:
+          description: The name of the shield.
+          type: string
+          example: Ancient Shield
+        attack_power:
+          description: The shield's strength.
+          type: number
+          example: 70
+        durability:
+          description: The shield's durability.
+          type: number
+          example: 32
+        description:
+          description: The Shield's description.
+          type: string
+          example: This shield was made using ancient Sheikah technology. Its surface glows blue when raised in defense. Enhanced functionality allows it to deflect Guardian beams.
+    TreasureCollection:
+      description: Collection of treasure resources.
+      allOf:
+        - $ref: "#/components/schemas/metadata"
+        - type: object
+          properties:
+            objects:
+              type: array
+              description: An array of treasure resources.
+              items:
+                $ref: "#/components/schemas/treasure"
+    Treasure:
+      description: Complete response for a treasure resource.
+      allOf:
+        - $ref: "#/components/schemas/metadata"
+        - $ref: "#/components/schemas/treasure"
+    treasure:
+      description: Treasure data.
+      type: object
+      properties:
+        compendium_id:
+          description: The treasure's unique identifier, normal compendium.
+          type: number
+          example: 344
+        compendium_id_dlc_2:
+          description: The treasure's unique identifier, normal DLC 2 compendium.
+          type: number
+          example: 348
+        compendium_id_master_mode:
+          description: The treasure's unique identifier, normal Master Mode compendium.
+          type: number
+          example: 349
+        compendium_id_master_mode_dlc_2:
+          description: The treasure's unique identifier, normal Master Mode + DLC 2 compendium.
+          type: number
+          example: 353
+        name:
+          description: The name of the treasure.
+          type: string
+          example: Arrow
+        attack_power_min:
+          description: Minimum attack power modifier.
+          type: number
+          example: 0
+        attack_power_max:
+          description: Maximum attack power modifier.
+          type: number
+          example: 0
+        effects:
+          description: The arrow's extra effects.
+          type: string
+          example: None
+        description:
+          description: The arrow's description.
+          type: string
+          example: A common arrow. Its shaft was carved from the wood of a sturdy tree.
