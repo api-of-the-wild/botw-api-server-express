@@ -23,7 +23,8 @@
     "docker:restart": "scripts/docker/dockerRestart.sh",
     "docker:test": "scripts/docker/dockerRunTest.sh",
     "docker:buildapp": "scripts/docker/dockerBuildApp.sh",
-    "docker:buildtestrunner": "scripts/docker/dockerBuildTestRunner.sh"
+    "docker:buildtestrunner": "scripts/docker/dockerBuildTestRunner.sh",
+    "db:seed": "scripts/db/seed.sh"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.6",

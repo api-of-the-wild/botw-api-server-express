@@ -1,10 +1,33 @@
 -- GRANT ALL PRIVILEGES ON DATABASE botw TO admin;
 
 -- DROP MATERIALIZED VIEW IF EXISTS location_views;
+DROP TABLE IF EXISTS materials_additional_uses;
+DROP TABLE IF EXISTS materials;
 DROP TABLE IF EXISTS weapons;
 DROP TABLE IF EXISTS bows;
 DROP TABLE IF EXISTS arrows;
 DROP TABLE IF EXISTS shields;
+
+CREATE TABLE materials_additional_uses
+(
+  id INT PRIMARY KEY NOT NULL,
+  additional_use TEXT NOT NULL
+);
+
+CREATE TABLE materials
+(
+  id INT PRIMARY KEY NOT NULL,
+  compendium_id INT NOT NULL,
+  compendium_id_dlc_2 INT NOT NULL,
+  compendium_id_master_mode INT NOT NULL,
+  compendium_id_master_mode_dlc_2 INT NOT NULL,
+  name TEXT NOT NULL,
+  type TEXT NOT NULL,
+  value INT NOT NULL,
+  restores DECIMAL NULL,
+  additional_uses INT[] NULL,
+  description TEXT
+);
 
 CREATE TABLE weapons
 (
@@ -69,6 +92,8 @@ CREATE TABLE shields
   description TEXT
 );
 
+COPY materials_additional_uses FROM '/Users/kwhitejr/Projects/api-of-the-wild/botw-api-server-express/db/data/compendium/materials_additional_uses.csv' DELIMITER ',' CSV HEADER;
+COPY materials FROM '/Users/kwhitejr/Projects/api-of-the-wild/botw-api-server-express/db/data/compendium/materials.csv' DELIMITER ',' CSV HEADER;
 COPY weapons FROM '/Users/kwhitejr/Projects/api-of-the-wild/botw-api-server-express/db/data/compendium/weapons.csv' DELIMITER ',' CSV HEADER;
 COPY bows FROM '/Users/kwhitejr/Projects/api-of-the-wild/botw-api-server-express/db/data/compendium/bows.csv' DELIMITER ',' CSV HEADER;
 COPY arrows FROM '/Users/kwhitejr/Projects/api-of-the-wild/botw-api-server-express/db/data/compendium/arrows.csv' DELIMITER ',' CSV HEADER;
