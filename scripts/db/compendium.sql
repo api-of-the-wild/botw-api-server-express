@@ -1,6 +1,6 @@
 -- GRANT ALL PRIVILEGES ON DATABASE botw TO admin;
 
--- DROP MATERIALIZED VIEW IF EXISTS location_views;
+DROP MATERIALIZED VIEW IF EXISTS material_views;
 DROP TABLE IF EXISTS materials_additional_uses;
 DROP TABLE IF EXISTS materials;
 DROP TABLE IF EXISTS weapons;
@@ -98,3 +98,20 @@ COPY weapons FROM '/Users/kwhitejr/Projects/api-of-the-wild/botw-api-server-expr
 COPY bows FROM '/Users/kwhitejr/Projects/api-of-the-wild/botw-api-server-express/db/data/compendium/bows.csv' DELIMITER ',' CSV HEADER;
 COPY arrows FROM '/Users/kwhitejr/Projects/api-of-the-wild/botw-api-server-express/db/data/compendium/arrows.csv' DELIMITER ',' CSV HEADER;
 COPY shields FROM '/Users/kwhitejr/Projects/api-of-the-wild/botw-api-server-express/db/data/compendium/shields.csv' DELIMITER ',' CSV HEADER;
+
+-- Data structured for consumer
+CREATE MATERIALIZED VIEW material_views
+AS
+SELECT 
+  compendium_id,
+  compendium_id_dlc_2,
+  compendium_id_master_mode,
+  compendium_id_master_mode_dlc_2,
+  name,
+  type,
+  value,
+  description,
+  array_agg(additional_use)
+FROM materials
+JOIN materials_additional_uses on materials_additional_uses.id = any(additional_uses)
+GROUP BY materials.id;
