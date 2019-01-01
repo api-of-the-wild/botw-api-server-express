@@ -9,6 +9,7 @@ const {
 } = require("../utilities/middleware");
 
 const {
+  getMaterial,
   getWeapon,
   getBow,
   getArrow,
@@ -24,23 +25,15 @@ const {
 const routes = app => {
   const db = app.get("db");
 
-  // router.get(
-  //   "/materials/v1/:id",
-  //   asyncMiddleware(async (req, res, next) => {
-  //     const id = req.params.id;
-  //     const location = await getLocation(db, id);
-  //     if (location === null) {
-  //       res.status(404).send({
-  //         message: `Locations resource with id ${id} does not exist.`,
-  //       });
-  //       return;
-  //     }
-  //     res.body = location;
-  //     next();
-  //   })
-  // );
-
   // GET by id
+  router.get(
+    "/materials/v1/:id",
+    validateIdMiddleware,
+    validateQueryParamsMiddleware("mastermode"),
+    validateQueryParamsMiddleware("dlc2"),
+    getById(db, getMaterial, "materials")
+  );
+
   router.get(
     "/weapons/v1/:id",
     validateIdMiddleware,

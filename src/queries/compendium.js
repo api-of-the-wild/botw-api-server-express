@@ -7,6 +7,35 @@ const _makeQueryField = (isIdDlc2, isIdMasterMode) =>
         ? "compendium_id_master_mode"
         : "compendium_id";
 
+const getMaterial = (db, id, isIdDlc2, isIdMasterMode) => {
+  const idQueryField = _makeQueryField(isIdDlc2, isIdMasterMode);
+
+  return db.material_views
+    .findOne(
+      { [idQueryField]: id },
+      {
+        fields: [
+          "compendium_id",
+          "compendium_id_dlc_2",
+          "compendium_id_master_mode",
+          "compendium_id_master_mode_dlc_2",
+          "name",
+          "type",
+          "value",
+          "description",
+          "additional_uses",
+        ],
+      }
+    )
+    .then(material => {
+      if (material === undefined) {
+        return null;
+      } else {
+        return material;
+      }
+    });
+};
+
 const getWeapon = (db, id, isIdDlc2, isIdMasterMode) => {
   const idQueryField = _makeQueryField(isIdDlc2, isIdMasterMode);
 
@@ -222,6 +251,7 @@ const getShieldsCollection = (db, filters) => {
 };
 
 module.exports = {
+  getMaterial,
   getWeapon,
   getBow,
   getArrow,
@@ -230,4 +260,5 @@ module.exports = {
   getBowsCollection,
   getArrowsCollection,
   getShieldsCollection,
+  _makeQueryField,
 };

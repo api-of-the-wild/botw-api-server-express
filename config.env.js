@@ -76,7 +76,7 @@ module.exports = {
   paths: {
     VALID_PATHS: {
       geography: ["regions", "subregions", "locations"],
-      compendium: ["weapons", "bows", "arrows", "shields"],
+      compendium: ["materials", "weapons", "bows", "arrows", "shields"],
     },
     VALID_VERSIONS: ["v1"],
   },
