@@ -36,6 +36,30 @@ const getMaterial = (db, id, isIdDlc2, isIdMasterMode) => {
     });
 };
 
+const getMaterialsCollection = (db, filters) => {
+  return db.material_views
+    .find(filters, {
+      fields: [
+        "compendium_id",
+        "compendium_id_dlc_2",
+        "compendium_id_master_mode",
+        "compendium_id_master_mode_dlc_2",
+        "name",
+        "type",
+        "value",
+        "description",
+        "additional_uses",
+      ],
+    })
+    .then(materials => {
+      if (materials === undefined) {
+        return null;
+      } else {
+        return materials;
+      }
+    });
+};
+
 const getWeapon = (db, id, isIdDlc2, isIdMasterMode) => {
   const idQueryField = _makeQueryField(isIdDlc2, isIdMasterMode);
 
@@ -256,6 +280,7 @@ module.exports = {
   getBow,
   getArrow,
   getShield,
+  getMaterialsCollection,
   getWeaponsCollection,
   getBowsCollection,
   getArrowsCollection,
