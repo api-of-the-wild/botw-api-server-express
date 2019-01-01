@@ -102,7 +102,7 @@ COPY shields FROM '/Users/kwhitejr/Projects/api-of-the-wild/botw-api-server-expr
 -- Data structured for consumer
 CREATE MATERIALIZED VIEW material_views
 AS
-SELECT 
+SELECT
   compendium_id,
   compendium_id_dlc_2,
   compendium_id_master_mode,
@@ -111,7 +111,9 @@ SELECT
   type,
   value,
   description,
-  array_agg(additional_use)
+  array_agg(additional_use) as additional_uses
 FROM materials
-JOIN materials_additional_uses on materials_additional_uses.id = any(additional_uses)
-GROUP BY materials.id;
+LEFT JOIN materials_additional_uses on materials_additional_uses.id = any(additional_uses)
+GROUP BY materials.id
+ORDER BY materials.id ASC
+WITH DATA;
