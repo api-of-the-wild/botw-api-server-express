@@ -22,7 +22,7 @@ CREATE TABLE materials
   compendium_id_master_mode INT NOT NULL,
   compendium_id_master_mode_dlc_2 INT NOT NULL,
   name TEXT NOT NULL,
-  type TEXT NOT NULL,
+  material_type TEXT NOT NULL,
   value INT NOT NULL,
   restores DECIMAL NULL,
   additional_uses INT[] NULL,
@@ -108,7 +108,7 @@ SELECT
   compendium_id_master_mode,
   compendium_id_master_mode_dlc_2,
   name,
-  type,
+  material_type,
   value,
   description,
   array_agg(additional_use) as additional_uses

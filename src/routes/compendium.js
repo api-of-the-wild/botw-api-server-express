@@ -86,7 +86,7 @@ const routes = app => {
   // GET collections
   router.get(
     "/materials/v1",
-    // validateQueryParamsMiddleware("weapon_type"),
+    validateQueryParamsMiddleware("material_type"),
     // validateQueryParamsMiddleware("hands"),
     getCollection(db, getMaterialsCollection)
   );

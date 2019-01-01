@@ -72,6 +72,15 @@ module.exports = {
       "fountain",
       "spring",
     ],
+    MATERIAL_TYPE_ENUM: [
+      "Critters",
+      "Dragon Parts",
+      "Food",
+      "Minerals",
+      "Monster Parts",
+      "Other",
+      "Plants",
+    ],
   },
   paths: {
     VALID_PATHS: {

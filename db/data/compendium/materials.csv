@@ -1,4 +1,4 @@
-id,compendium_no,compendium_no_dlc_2,compendium_no_master_mode,compendium_no_master_mode_dlc_2,name,type,value,restores,additional_uses,description
+id,compendium_no,compendium_no_dlc_2,compendium_no_master_mode,compendium_no_master_mode_dlc_2,name,material_type,value,restores,additional_uses,description
 1,48,48,48,48,Hyrule Bass,Food,6,1,"{2}","An ordinary fish that can be found all over Hyrule. Can be eaten raw, but cooking it amplifies its healing benefits."
 2,49,49,49,49,Hearty Bass,Food,18,2,"{2,26}","This large fish lives near the shoreline. Its sizable body can restore a lot of nutrient. When cooked into a dish, it will temporarily increase your maximum hearts."
 3,50,50,50,50,Staminoka Bass,Food,18,1,"{32}",This Hyrule bass got to be the biggest fish by never getting caught (until now). Its long life results in a cooked dish that will restore a lot of stamina.
