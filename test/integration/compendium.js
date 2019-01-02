@@ -218,6 +218,72 @@ describe("the /compendium domain", () => {
           });
       });
     });
+
+    describe("GET /bows/v1", () => {
+      it("should respond with a single bow resource by id", () => {
+        const compendiumId = 332;
+        const testUri = `${SERVER_URI_BASE}/compendium/bows/v1/${compendiumId}`;
+        const rpOptions = createRpOptions(testUri);
+        return rp(rpOptions)
+          .then(result => {
+            // bow properties
+            expect(result.compendium_id).to.be.a("number");
+            expect(result.compendium_id_dlc_2).to.be.a("number");
+            expect(result.compendium_id_master_mode).to.be.a("number");
+            expect(result.compendium_id_master_mode_dlc_2).to.be.a("number");
+            expect(result.name).to.be.a("string");
+            expect(result.range).to.be.a("number");
+            expect(result.fire_rate).to.be.a("number");
+            expect(result.attack_power).to.be.a("number");
+            expect(result.durability).to.be.a("number");
+            expect(result.description).to.be.a("string");
+            // Request metadata properties
+            expect(result.self).to.be.a("string");
+            expect(result.resource).to.be.a("string");
+            expect(result.version).to.be.a("string");
+          })
+          .catch(err => {
+            assert.fail(`Unexpected error was caught: ${err}`);
+          });
+      });
+
+      it("should respond with a bows collection", () => {
+        const testUri = `${SERVER_URI_BASE}/compendium/bows/v1`;
+        const rpOptions = createRpOptions(testUri);
+        return rp(rpOptions)
+          .then(result => {
+            expect(result.objects).to.be.a("array");
+            // bows properties
+            result.objects.forEach(bow => {
+              expect(bow.compendium_id).to.satisfy(
+                value => value === null || typeof value === "number"
+              );
+              expect(bow.compendium_id_dlc_2).to.satisfy(
+                value => value === null || typeof value === "number"
+              );
+              expect(bow.compendium_id_master_mode).to.satisfy(
+                value => value === null || typeof value === "number"
+              );
+              expect(bow.compendium_id_master_mode_dlc_2).to.satisfy(
+                value => value === null || typeof value === "number"
+              );
+              expect(bow.name).to.be.a("string");
+              expect(bow.range).to.be.a("number");
+              expect(bow.fire_rate).to.be.a("number");
+              expect(bow.attack_power).to.be.a("number");
+              expect(bow.durability).to.be.a("number");
+              expect(bow.description).to.be.a("string");
+            });
+            // Request metadata properties
+            expect(result.self).to.be.a("string");
+            expect(result.resource).to.be.a("string");
+            expect(result.version).to.be.a("string");
+          })
+          .catch(err => {
+            assert.fail(`Unexpected error was caught: ${err}`);
+          });
+      });
+    });
   });
 
   // describe("4xx cases", () => {
