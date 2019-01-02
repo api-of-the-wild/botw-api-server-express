@@ -110,6 +110,7 @@ SELECT
   name,
   material_type,
   value,
+  restores,
   description,
   array_agg(additional_use) as additional_uses
 FROM materials

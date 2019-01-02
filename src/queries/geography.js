@@ -181,11 +181,11 @@ const getRegionsCollection = (db, filters) => {
         },
       },
     })
-    .then(region => {
-      if (region === undefined) {
+    .then(regions => {
+      if (regions === undefined) {
         return null;
       } else {
-        return region;
+        return regions;
       }
     });
 };

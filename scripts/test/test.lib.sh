@@ -18,5 +18,5 @@ integrationTest() {
     --recursive "${TEST_INTEGRATION_DIR}/**/*.js" \
     --reporter=mochawesome \
     --reporter-options reportDir="${REPORTS_DIR}/integration" \
-    # --require "${ROOT_DIR}/src/utilities/make_promises_safe.js"
+    --require "${ROOT_DIR}/src/utilities/make_promises_safe.js"
 }
