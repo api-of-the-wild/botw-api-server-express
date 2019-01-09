@@ -1,0 +1,251 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: Application VPC
+
+Parameters:
+
+  VpcBlock:
+    Type: String
+    Default: 10.0.0.0/16
+    Description: The CIDR range for the VPC. This should be a valid private (RFC 1918) CIDR range.
+
+  SubnetAZAPrivateBlock:
+    Type: String
+    Default: 10.0.0.0/19
+    Description: CidrBlock for AZ A Private Subnet within the VPC
+
+  SubnetAZAPublicBlock:
+    Type: String
+    Default: 10.0.32.0/20
+    Description: CidrBlock for AZ A Public Subnet within the VPC
+
+  SubnetAZASpareBlock:
+    Type: String
+    Default: 10.0.48.0/20
+    Description: CidrBlock for AZ A Spare Subnet within the VPC
+
+  SubnetAZBPrivateBlock:
+    Type: String
+    Default: 10.0.64.0/19
+    Description: CidrBlock for AZ B Private Subnet within the VPC
+
+  SubnetAZBPublicBlock:
+    Type: String
+    Default: 10.0.96.0/20
+    Description: CidrBlock for AZ B Public Subnet within the VPC
+
+  SubnetAZBSpareBlock:
+    Type: String
+    Default: 10.0.112.0/20
+    Description: CidrBlock for AZ B Spare Subnet within the VPC
+
+  SubnetAZCPrivateBlock:
+    Type: String
+    Default: 10.0.128.0/19
+    Description: CidrBlock for AZ C Private Subnet within the VPC
+
+  SubnetAZCPublicBlock:
+    Type: String
+    Default: 10.0.160.0/20
+    Description: CidrBlock for AZ C Public Subnet within the VPC
+
+  SubnetAZCSpareBlock:
+    Type: String
+    Default: 10.0.176.0/20
+    Description: CidrBlock for AZ C Spare Subnet within the VPC
+
+Resources:
+  # Initialize VPC
+  VPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock:  !Ref VpcBlock
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+
+  # Define all subnets by AZ
+
+  # AZ A
+  SubnetAZAPrivate:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone:
+        Fn::Select:
+        - '0'
+        - Fn::GetAZs:
+            Ref: AWS::Region
+      CidrBlock:
+        Ref: SubnetAZAPrivateBlock
+      VpcId:
+        Ref: VPC
+  SubnetAZAPublic:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone:
+        Fn::Select:
+        - '0'
+        - Fn::GetAZs:
+            Ref: AWS::Region
+      CidrBlock:
+        Ref: SubnetAZAPublicBlock
+      VpcId:
+        Ref: VPC
+  SubnetAZASpare:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone:
+        Fn::Select:
+        - '0'
+        - Fn::GetAZs:
+            Ref: AWS::Region
+      CidrBlock:
+        Ref: SubnetAZASpareBlock
+      VpcId:
+        Ref: VPC
+
+  # AZ B
+  SubnetAZBPrivate:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone:
+        Fn::Select:
+        - '1'
+        - Fn::GetAZs:
+            Ref: AWS::Region
+      CidrBlock:
+        Ref: SubnetAZBPrivateBlock
+      VpcId:
+        Ref: VPC
+  SubnetAZBPublic:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone:
+        Fn::Select:
+        - '1'
+        - Fn::GetAZs:
+            Ref: AWS::Region
+      CidrBlock:
+        Ref: SubnetAZBPublicBlock
+      VpcId:
+        Ref: VPC
+  SubnetAZBSpare:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone:
+        Fn::Select:
+        - '1'
+        - Fn::GetAZs:
+            Ref: AWS::Region
+      CidrBlock:
+        Ref: SubnetAZBSpareBlock
+      VpcId:
+        Ref: VPC
+
+  # AZ C
+  SubnetAZCPrivate:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone:
+        Fn::Select:
+        - '2'
+        - Fn::GetAZs:
+            Ref: AWS::Region
+      CidrBlock:
+        Ref: SubnetAZCPrivateBlock
+      VpcId:
+        Ref: VPC
+  SubnetAZCPublic:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone:
+        Fn::Select:
+        - '2'
+        - Fn::GetAZs:
+            Ref: AWS::Region
+      CidrBlock:
+        Ref: SubnetAZCPublicBlock
+      VpcId:
+        Ref: VPC
+  SubnetAZCSpare:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone:
+        Fn::Select:
+        - '2'
+        - Fn::GetAZs:
+            Ref: AWS::Region
+      CidrBlock:
+        Ref: SubnetAZCSpareBlock
+      VpcId:
+        Ref: VPC
+
+  # Networking resources for Public Subnets
+  InternetGateway:
+    Type: "AWS::EC2::InternetGateway"
+  VPCGatewayAttachment:
+    Type: "AWS::EC2::VPCGatewayAttachment"
+    Properties:
+      InternetGatewayId: !Ref InternetGateway
+      VpcId: !Ref VPC
+  PublicRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref VPC
+  Route:
+    DependsOn: VPCGatewayAttachment
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref PublicRouteTable
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref InternetGateway
+  SubnetAZAPublicRouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref SubnetAZAPublic
+      RouteTableId: !Ref PublicRouteTable
+  SubnetAZBPublicRouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref SubnetAZBPublic
+      RouteTableId: !Ref PublicRouteTable
+  SubnetAZCPublicRouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref SubnetAZCPublic
+      RouteTableId: !Ref PublicRouteTable
+
+  # Networking resources for Private Subnets
+  # One NAT for each Private Subnet
+  NatGatewayOneAttachment:
+    Type: AWS::EC2::EIP
+    DependsOn: GatewayAttachement
+    Properties:
+        Domain: vpc
+  NatGatewayTwoAttachment:
+    Type: AWS::EC2::EIP
+    DependsOn: GatewayAttachement
+    Properties:
+        Domain: vpc
+  NatGatewayThreeAttachment:
+    Type: AWS::EC2::EIP
+    DependsOn: GatewayAttachement
+    Properties:
+        Domain: vpc
+  NatGatewayOne:
+    Type: AWS::EC2::NatGateway
+    Properties:
+      AllocationId: !GetAtt NatGatewayOneAttachment.AllocationId
+      SubnetId: !Ref SubnetAZAPublic
+  NatGatewayTwo:
+    Type: AWS::EC2::NatGateway
+    Properties:
+      AllocationId: !GetAtt NatGatewayTwoAttachment.AllocationId
+      SubnetId: !Ref SubnetAZBPublic
+  NatGatewayThree:
+    Type: AWS::EC2::NatGateway
+    Properties:
+      AllocationId: !GetAtt NatGatewayThreeAttachment.AllocationId
+      SubnetId: !Ref SubnetAZCPublic
+  PrivateRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref VPC
