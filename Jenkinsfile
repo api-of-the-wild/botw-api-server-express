@@ -40,7 +40,7 @@ pipeline {
     }
 
     stage('Alpha tests') {
-      agent { docker 'compose' }
+      agent { docker 'docker/compose' }
       steps {
         sh 'yarn docker:test'
       }
