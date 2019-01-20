@@ -2,10 +2,10 @@ const _makeQueryField = (isIdDlc2, isIdMasterMode) =>
   isIdDlc2 && isIdMasterMode
     ? "compendium_id_master_mode_dlc_2"
     : isIdDlc2
-      ? "compendium_id_dlc_2"
-      : isIdMasterMode
-        ? "compendium_id_master_mode"
-        : "compendium_id";
+    ? "compendium_id_dlc_2"
+    : isIdMasterMode
+    ? "compendium_id_master_mode"
+    : "compendium_id";
 
 const getMaterial = (db, id, isIdDlc2, isIdMasterMode) => {
   const idQueryField = _makeQueryField(isIdDlc2, isIdMasterMode);

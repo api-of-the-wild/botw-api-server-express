@@ -2,9 +2,6 @@ const { expect, assert } = require("chai");
 const rp = require("request-promise");
 
 const config = require("../../config.env");
-const { createLogger } = require("../../src/utilities/logger");
-
-const logger = createLogger(console);
 
 const env = process.env;
 const INTEGRATION_STAGE = env.INTEGRATION_STAGE || "ALPHA";
