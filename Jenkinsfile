@@ -1,14 +1,16 @@
 #!groovy
 
 pipeline {
-  agent {
-    docker {
-      image 'node:8'
-      args '-p 3001:3001'
-    }
-  }
+  agent { none }
+  
   stages {
     stage('Build') {
+      agent {
+        docker {
+          image 'node:8'
+          args '-p 3001:3001'
+        }
+      }
       steps {
         sh 'npm install yarn'
         sh 'yarn install'
@@ -19,6 +21,12 @@ pipeline {
     }
     
     stage('Internal tests') {
+      agent {
+        docker {
+          image 'node:8'
+          args '-p 3001:3001'
+        }
+      }
       steps {
         parallel(
           lint: {
@@ -31,11 +39,13 @@ pipeline {
       }
     }
 
-    // TODO: install docker-compose on Jenkins server
-    // stage('Alpha tests') {
-    //   steps {
-    //     sh 'yarn docker:test'
-    //   }
-    // }
+    stage('Alpha tests') {
+      agent {
+        docker { image 'compose' }
+      }
+      steps {
+        sh 'yarn docker:test'
+      }
+    }
   }
 }
