@@ -41,7 +41,7 @@ pipeline {
 
     stage('Alpha tests') {
       agent {
-        docker { image 'docker/compose' }
+        docker { image 'tiangolo/docker-with-compose' }
       }
       steps {
         sh 'yarn docker:test'
