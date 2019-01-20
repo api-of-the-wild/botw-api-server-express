@@ -7,6 +7,7 @@ info:
   title: Compendium
   version: "1.0"
 paths:
+  # Creatures
   /compendium/creatures/v1/{id}:
     get:
       summary: Get data for a single creature.
@@ -45,6 +46,23 @@ paths:
                 $ref: "#/components/schemas/Creature"
         "404":
           description: Not Found
+  /compendium/creatures/v1:
+    get:
+      summary: Get data for several creatures.
+      description: Get several creatures.
+      tags:
+        - Creature
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json; charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/CreatureCollection"
+        "400":
+          description: Bad Request
+
+  # Monsters
   /compendium/monsters/v1/{id}:
     get:
       summary: Get data for a single monster.
@@ -83,6 +101,21 @@ paths:
                 $ref: "#/components/schemas/Monster"
         "404":
           description: Not Found
+  /compendium/monsters/v1:
+    get:
+      summary: Get data for several monsters.
+      description: Get several monsters.
+      tags:
+        - Monster
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json; charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/MonsterCollection"
+        "400":
+          description: Bad Request
 
   # Materials
   /compendium/materials/v1/{id}:
@@ -513,18 +546,11 @@ components:
           description: The name of the creature.
           type: string
           example: Arrow
-        attack_power_min:
-          description: Minimum attack power modifier.
-          type: number
-          example: 0
-        attack_power_max:
-          description: Maximum attack power modifier.
-          type: number
-          example: 0
-        effects:
-          description: The arrow's extra effects.
-          type: string
-          example: None
+        recoverable_materials:
+          description: Materials dropped by the creature.
+          type: array
+          items:
+            $ref: "#/components/schemas/recoverable_material"
         description:
           description: The arrow's description.
           type: string
@@ -552,39 +578,51 @@ components:
         compendium_id:
           description: The monster's unique identifier, normal compendium.
           type: number
-          example: 344
+          example: 88
         compendium_id_dlc_2:
           description: The monster's unique identifier, normal DLC 2 compendium.
           type: number
-          example: 348
+          example: 88
         compendium_id_master_mode:
           description: The monster's unique identifier, normal Master Mode compendium.
           type: number
-          example: 349
+          example: 88
         compendium_id_master_mode_dlc_2:
           description: The monster's unique identifier, normal Master Mode + DLC 2 compendium.
           type: number
-          example: 353
+          example: 88
         name:
           description: The name of the monster.
           type: string
-          example: Arrow
-        attack_power_min:
-          description: Minimum attack power modifier.
+          example: Keese
+        health:
+          description: The monster's health.
           type: number
-          example: 0
-        attack_power_max:
-          description: Maximum attack power modifier.
-          type: number
-          example: 0
-        effects:
-          description: The arrow's extra effects.
-          type: string
-          example: None
+          example: 1
+        recoverable_materials:
+          description: Materials dropped by the monster.
+          type: array
+          items:
+            $ref: "#/components/schemas/recoverable_material"
         description:
           description: The monster's description.
           type: string
           example: A common arrow. Its shaft was carved from the wood of a sturdy tree.
+    recoverable_material:
+      type: object
+      properties:
+        id:
+          description: The id of the recoverable material.
+          type: number
+          example: 123
+        name:
+          description: The name of the recoverable material.
+          type: string
+          example: Keese Wing
+        link:
+          description: A link to the material as a resource.
+          type: string
+          example: https://host.com/crafting/recoverable_materials/123
     MaterialCollection:
       description: Collection of material resources.
       allOf:
