@@ -1,7 +1,7 @@
 #!groovy
 
 pipeline {
-  agent { none }
+  agent none
   
   stages {
     stage('Build') {
@@ -40,9 +40,7 @@ pipeline {
     }
 
     stage('Alpha tests') {
-      agent {
-        docker { image 'compose' }
-      }
+      agent { docker 'compose' }
       steps {
         sh 'yarn docker:test'
       }
