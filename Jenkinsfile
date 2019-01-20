@@ -39,12 +39,12 @@ pipeline {
       }
     }
 
-    stage('Alpha tests') {
+    stage('Integration tests') {
       agent {
         docker { image 'tiangolo/docker-with-compose' }
       }
       steps {
-        sh 'yarn docker:test'
+        sh 'scripts/docker/dockerRunTest.sh'
       }
     }
   }
