@@ -4,7 +4,7 @@ set -e
 psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" "$POSTGRES_DB" <<-EOSQL
     GRANT ALL PRIVILEGES ON DATABASE $POSTGRES_DB TO $POSTGRES_USER;
 
-    -- Init geography domain
+    -- Init /geography domain
     DROP MATERIALIZED VIEW IF EXISTS location_views;
     DROP TABLE IF EXISTS locations;
     DROP TABLE IF EXISTS location_types;
@@ -62,7 +62,7 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" "$POSTGRES_DB" <<-EOSQL
     ORDER BY L.id ASC
     WITH DATA;
 
-    -- Init Compendium domain
+    -- Init /compendium domain
     DROP MATERIALIZED VIEW IF EXISTS material_views;
     DROP TABLE IF EXISTS materials_additional_uses;
     DROP TABLE IF EXISTS materials;
