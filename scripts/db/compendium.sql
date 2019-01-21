@@ -3,7 +3,7 @@
 DROP MATERIALIZED VIEW IF EXISTS material_views;
 DROP MATERIALIZED VIEW IF EXISTS monster_views;
 
-DROP TABLE IF EXISTS recoverable_materials;
+-- DROP TABLE IF EXISTS recoverable_materials;
 DROP TABLE IF EXISTS monsters;
 DROP TABLE IF EXISTS materials_additional_uses;
 DROP TABLE IF EXISTS materials;
@@ -11,21 +11,6 @@ DROP TABLE IF EXISTS weapons;
 DROP TABLE IF EXISTS bows;
 DROP TABLE IF EXISTS arrows;
 DROP TABLE IF EXISTS shields;
-
-CREATE TABLE recoverable_materials
-(
-  id INT PRIMARY KEY NOT NULL,
-  compendium_id INT NULL,
-  compendium_id_dlc_2 INT NULL,
-  compendium_id_master_mode INT NULL,
-  compendium_id_master_mode_dlc_2 INT NULL,
-  name TEXT NOT NULL,
-  material_type TEXT NOT NULL,
-  value INT NULL,
-  restores DECIMAL NULL,
-  additional_uses INT[] NULL,
-  description TEXT NULL
-);
 
 CREATE TABLE monsters
 (
@@ -126,7 +111,7 @@ CREATE TABLE shields
   description TEXT
 );
 
-COPY recoverable_materials FROM '/Users/kwhitejr/Projects/api-of-the-wild/botw-api-server-express/db/data/compendium/recoverable_materials.csv' DELIMITER ',' CSV HEADER;
+-- COPY recoverable_materials FROM '/Users/kwhitejr/Projects/api-of-the-wild/botw-api-server-express/db/data/compendium/recoverable_materials.csv' DELIMITER ',' CSV HEADER;
 COPY monsters FROM '/Users/kwhitejr/Projects/api-of-the-wild/botw-api-server-express/db/data/compendium/monsters.csv' DELIMITER ',' CSV HEADER;
 COPY materials_additional_uses FROM '/Users/kwhitejr/Projects/api-of-the-wild/botw-api-server-express/db/data/compendium/materials_additional_uses.csv' DELIMITER ',' CSV HEADER;
 COPY materials FROM '/Users/kwhitejr/Projects/api-of-the-wild/botw-api-server-express/db/data/compendium/materials.csv' DELIMITER ',' CSV HEADER;

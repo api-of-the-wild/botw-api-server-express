@@ -23,8 +23,6 @@ const {
   getShieldsCollection,
 } = require("../queries/compendium");
 
-// const { validateQueryParamsMiddleware } = require("../utilities/queryParamsValidation");
-
 const routes = app => {
   const db = app.get("db");
 
@@ -76,22 +74,6 @@ const routes = app => {
     validateQueryParamsMiddleware("dlc2"),
     getById(db, getShield, "shields")
   );
-
-  // router.get(
-  //   "/treasure/v1/:id",
-  //   asyncMiddleware(async (req, res, next) => {
-  //     const id = req.params.id;
-  //     // const region = await getRegion(db, id);
-  //     // if (region === null) {
-  //     //   res.status(404).send({
-  //     //     message: `Regions resource with id ${id} does not exist.`,
-  //     //   });
-  //     //   return;
-  //     // }
-  //     // res.body = region;
-  //     next();
-  //   })
-  // );
 
   // GET collections
   router.get(
