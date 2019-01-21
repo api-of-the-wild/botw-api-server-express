@@ -5,6 +5,7 @@ const {
   BOOLEAN_ENUM,
   LOCATION_TYPE_ENUM,
   MATERIAL_TYPE_ENUM,
+  MONSTER_TYPE_ENUM,
 } = require("../../config.env").enums;
 
 const validatePathMiddleware = (req, res, next) => {
@@ -53,6 +54,7 @@ const validateQueryParamsMiddleware = queryParam => (req, res, next) => {
     dlc2: BOOLEAN_ENUM,
     location_type: LOCATION_TYPE_ENUM,
     material_type: MATERIAL_TYPE_ENUM,
+    monster_type: MONSTER_TYPE_ENUM,
   };
 
   const queryParamsArray =
