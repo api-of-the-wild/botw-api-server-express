@@ -9,12 +9,14 @@ const {
 } = require("../utilities/middleware");
 
 const {
+  getCreature,
   getMonster,
   getMaterial,
   getWeapon,
   getBow,
   getArrow,
   getShield,
+  getCreaturesCollection,
   getMonstersCollection,
   getMaterialsCollection,
   getWeaponsCollection,
@@ -27,6 +29,14 @@ const routes = app => {
   const db = app.get("db");
 
   // GET by id
+  router.get(
+    "/creatures/v1/:id",
+    validateIdMiddleware,
+    validateQueryParamsMiddleware("mastermode"),
+    validateQueryParamsMiddleware("dlc2"),
+    getById(db, getCreature, "creatures")
+  );
+
   router.get(
     "/monsters/v1/:id",
     validateIdMiddleware,
@@ -76,6 +86,12 @@ const routes = app => {
   );
 
   // GET collections
+  router.get(
+    "/creatures/v1",
+    validateQueryParamsMiddleware("creature_type"),
+    getCollection(db, getCreaturesCollection)
+  );
+
   router.get(
     "/monsters/v1",
     validateQueryParamsMiddleware("monster_type"),

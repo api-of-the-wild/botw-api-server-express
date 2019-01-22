@@ -99,11 +99,23 @@ module.exports = {
       "ganon",
       "sheikah",
     ],
+    CREATURE_TYPE_ENUM: [
+      "mammal",
+      "bird",
+      "fish",
+      "snail",
+      "crab",
+      "other",
+      "insect",
+      "amphibian",
+      "reptile",
+    ],
   },
   paths: {
     VALID_PATHS: {
       geography: ["regions", "subregions", "locations"],
       compendium: [
+        "creatures",
         "monsters",
         "materials",
         "weapons",

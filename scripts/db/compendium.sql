@@ -2,8 +2,9 @@
 
 DROP MATERIALIZED VIEW IF EXISTS material_views;
 DROP MATERIALIZED VIEW IF EXISTS monster_views;
+DROP MATERIALIZED VIEW IF EXISTS creature_views;
 
--- DROP TABLE IF EXISTS recoverable_materials;
+DROP TABLE IF EXISTS creatures;
 DROP TABLE IF EXISTS monsters;
 DROP TABLE IF EXISTS materials_additional_uses;
 DROP TABLE IF EXISTS materials;
@@ -11,6 +12,19 @@ DROP TABLE IF EXISTS weapons;
 DROP TABLE IF EXISTS bows;
 DROP TABLE IF EXISTS arrows;
 DROP TABLE IF EXISTS shields;
+
+CREATE TABLE creatures
+(
+  id INT PRIMARY KEY NOT NULL,
+  compendium_id INT NULL,
+  compendium_id_dlc_2 INT NULL,
+  compendium_id_master_mode INT NULL,
+  compendium_id_master_mode_dlc_2 INT NULL,
+  name TEXT NOT NULL,
+  creature_type TEXT NOT NULL,
+  recoverable_materials INT[] NULL,
+  description TEXT NOT NULL
+);
 
 CREATE TABLE monsters
 (
@@ -111,7 +125,7 @@ CREATE TABLE shields
   description TEXT
 );
 
--- COPY recoverable_materials FROM '/Users/kwhitejr/Projects/api-of-the-wild/botw-api-server-express/db/data/compendium/recoverable_materials.csv' DELIMITER ',' CSV HEADER;
+COPY creatures FROM '/Users/kwhitejr/Projects/api-of-the-wild/botw-api-server-express/db/data/compendium/creatures.csv' DELIMITER ',' CSV HEADER;
 COPY monsters FROM '/Users/kwhitejr/Projects/api-of-the-wild/botw-api-server-express/db/data/compendium/monsters.csv' DELIMITER ',' CSV HEADER;
 COPY materials_additional_uses FROM '/Users/kwhitejr/Projects/api-of-the-wild/botw-api-server-express/db/data/compendium/materials_additional_uses.csv' DELIMITER ',' CSV HEADER;
 COPY materials FROM '/Users/kwhitejr/Projects/api-of-the-wild/botw-api-server-express/db/data/compendium/materials.csv' DELIMITER ',' CSV HEADER;
@@ -121,6 +135,23 @@ COPY arrows FROM '/Users/kwhitejr/Projects/api-of-the-wild/botw-api-server-expre
 COPY shields FROM '/Users/kwhitejr/Projects/api-of-the-wild/botw-api-server-express/db/data/compendium/shields.csv' DELIMITER ',' CSV HEADER;
 
 -- Data structured for consumer
+CREATE MATERIALIZED VIEW creature_views
+AS
+SELECT
+  creatures.compendium_id,
+  creatures.compendium_id_dlc_2,
+  creatures.compendium_id_master_mode,
+  creatures.compendium_id_master_mode_dlc_2,
+  creatures.name,
+  creatures.creature_type,
+  array_agg(recoverable_materials.name) as recoverable_materials,
+  creatures.description
+FROM creatures
+LEFT JOIN recoverable_materials on recoverable_materials.id = any(recoverable_materials)
+GROUP BY creatures.id
+ORDER BY creatures.id ASC
+WITH DATA;
+
 CREATE MATERIALIZED VIEW monster_views
 AS
 SELECT
