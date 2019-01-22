@@ -18,6 +18,200 @@ const createRpOptions = uri => ({
 
 describe("the /compendium domain", () => {
   describe("200 happy paths", () => {
+    describe("GET /creatures/v1", () => {
+      it("should respond with a single creature resource by id", () => {
+        const compendiumId = 1;
+        const testUri = `${SERVER_URI_BASE}/compendium/creatures/v1/${compendiumId}`;
+        const rpOptions = createRpOptions(testUri);
+        return rp(rpOptions)
+          .then(result => {
+            // creature properties
+            expect(result.compendium_id).to.be.a("number");
+            expect(result.compendium_id_dlc_2).to.be.a("number");
+            expect(result.compendium_id_master_mode).to.be.a("number");
+            expect(result.compendium_id_master_mode_dlc_2).to.be.a("number");
+            expect(result.name).to.be.a("string");
+            expect(result.creature_type).to.be.a("string");
+            expect(result.recoverable_materials).to.be.a("array");
+            expect(result.description).to.be.a("string");
+            // Request metadata properties
+            expect(result.self).to.be.a("string");
+            expect(result.resource).to.be.a("string");
+            expect(result.version).to.be.a("string");
+          })
+          .catch(err => {
+            assert.fail(`Unexpected error was caught: ${err}`);
+          });
+      });
+
+      it("should respond with a creatures collection", () => {
+        const testUri = `${SERVER_URI_BASE}/compendium/creatures/v1`;
+        const rpOptions = createRpOptions(testUri);
+        return rp(rpOptions)
+          .then(result => {
+            expect(result.objects).to.be.a("array");
+            // Location properties
+            result.objects.forEach(creature => {
+              expect(creature.compendium_id).to.be.a("number");
+              expect(creature.compendium_id_dlc_2).to.be.a("number");
+              expect(creature.compendium_id_master_mode).to.be.a("number");
+              expect(creature.compendium_id_master_mode_dlc_2).to.be.a(
+                "number"
+              );
+              expect(creature.name).to.be.a("string");
+              expect(creature.creature_type).to.be.a("string");
+              expect(creature.recoverable_materials).to.be.a("array");
+              expect(creature.description).to.be.a("string");
+            });
+            // Request metadata properties
+            expect(result.self).to.be.a("string");
+            expect(result.resource).to.be.a("string");
+            expect(result.version).to.be.a("string");
+          })
+          .catch(err => {
+            assert.fail(`Unexpected error was caught: ${err}`);
+          });
+      });
+
+      it("should respond with a creatures collection constrained by creature_type filter", () => {
+        const filter = "bird";
+        const testUri = `${SERVER_URI_BASE}/compendium/creatures/v1?creature_type=${filter}`;
+        const rpOptions = createRpOptions(testUri);
+        return rp(rpOptions)
+          .then(result => {
+            expect(result.objects).to.be.a("array");
+            // Location properties
+            result.objects.forEach(creature => {
+              expect(creature.compendium_id).to.be.a("number");
+              expect(creature.compendium_id_dlc_2).to.be.a("number");
+              expect(creature.compendium_id_master_mode).to.be.a("number");
+              expect(creature.compendium_id_master_mode_dlc_2).to.be.a(
+                "number"
+              );
+              expect(creature.name).to.be.a("string");
+              expect(creature.creature_type).to.equal(filter);
+              expect(creature.recoverable_materials).to.be.a("array");
+              expect(creature.description).to.be.a("string");
+            });
+            // Request metadata properties
+            expect(result.self).to.be.a("string");
+            expect(result.resource).to.be.a("string");
+            expect(result.version).to.be.a("string");
+          })
+          .catch(err => {
+            assert.fail(`Unexpected error was caught: ${err}`);
+          });
+      });
+    });
+
+    describe("GET /monsters/v1", () => {
+      it("should respond with a single monster resource by id", () => {
+        const compendiumId = 84;
+        const testUri = `${SERVER_URI_BASE}/compendium/monsters/v1/${compendiumId}`;
+        const rpOptions = createRpOptions(testUri);
+        return rp(rpOptions)
+          .then(result => {
+            // monster properties
+            expect(result.compendium_id).to.be.a("number");
+            expect(result.compendium_id_dlc_2).to.be.a("number");
+            expect(result.compendium_id_master_mode).to.be.a("number");
+            expect(result.compendium_id_master_mode_dlc_2).to.be.a("number");
+            expect(result.name).to.be.a("string");
+            expect(result.monster_type).to.be.a("string");
+            expect(result.health).to.be.a("number");
+            expect(result.base_damage).to.be.a("number");
+            expect(result.recoverable_materials).to.be.a("array");
+            expect(result.description).to.be.a("string");
+            // Request metadata properties
+            expect(result.self).to.be.a("string");
+            expect(result.resource).to.be.a("string");
+            expect(result.version).to.be.a("string");
+          })
+          .catch(err => {
+            assert.fail(`Unexpected error was caught: ${err}`);
+          });
+      });
+
+      it("should respond with a monsters collection", () => {
+        const testUri = `${SERVER_URI_BASE}/compendium/monsters/v1`;
+        const rpOptions = createRpOptions(testUri);
+        return rp(rpOptions)
+          .then(result => {
+            expect(result.objects).to.be.a("array");
+            // Location properties
+            result.objects.forEach(monster => {
+              expect(monster.compendium_id).to.satisfy(
+                value => value === null || typeof value === "number"
+              );
+              expect(monster.compendium_id_dlc_2).to.satisfy(
+                value => value === null || typeof value === "number"
+              );
+              expect(monster.compendium_id_master_mode).to.satisfy(
+                value => value === null || typeof value === "number"
+              );
+              expect(monster.compendium_id_master_mode_dlc_2).to.be.a("number");
+              expect(monster.name).to.be.a("string");
+              expect(monster.monster_type).to.be.a("string");
+              expect(monster.health).to.satisfy(
+                value => value === null || typeof value === "number"
+              );
+              expect(monster.base_damage).to.satisfy(
+                value => value === null || typeof value === "number"
+              );
+              expect(monster.recoverable_materials).to.be.a("array");
+              expect(monster.description).to.be.a("string");
+            });
+            // Request metadata properties
+            expect(result.self).to.be.a("string");
+            expect(result.resource).to.be.a("string");
+            expect(result.version).to.be.a("string");
+          })
+          .catch(err => {
+            assert.fail(`Unexpected error was caught: ${err}`);
+          });
+      });
+
+      it("should respond with a monsters collection constrained by monster_type filter", () => {
+        const filter = "bokoblin";
+        const testUri = `${SERVER_URI_BASE}/compendium/monsters/v1?monster_type=${filter}`;
+        const rpOptions = createRpOptions(testUri);
+        return rp(rpOptions)
+          .then(result => {
+            expect(result.objects).to.be.a("array");
+            // Location properties
+            result.objects.forEach(monster => {
+              expect(monster.compendium_id).to.satisfy(
+                value => value === null || typeof value === "number"
+              );
+              expect(monster.compendium_id_dlc_2).to.satisfy(
+                value => value === null || typeof value === "number"
+              );
+              expect(monster.compendium_id_master_mode).to.satisfy(
+                value => value === null || typeof value === "number"
+              );
+              expect(monster.compendium_id_master_mode_dlc_2).to.be.a("number");
+              expect(monster.name).to.be.a("string");
+              expect(monster.monster_type).to.equal(filter);
+              expect(monster.health).to.satisfy(
+                value => value === null || typeof value === "number"
+              );
+              expect(monster.base_damage).to.satisfy(
+                value => value === null || typeof value === "number"
+              );
+              expect(monster.recoverable_materials).to.be.a("array");
+              expect(monster.description).to.be.a("string");
+            });
+            // Request metadata properties
+            expect(result.self).to.be.a("string");
+            expect(result.resource).to.be.a("string");
+            expect(result.version).to.be.a("string");
+          })
+          .catch(err => {
+            assert.fail(`Unexpected error was caught: ${err}`);
+          });
+      });
+    });
+
     describe("GET /materials/v1", () => {
       it("should respond with a single material resource by id", () => {
         const compendiumId = 48;
