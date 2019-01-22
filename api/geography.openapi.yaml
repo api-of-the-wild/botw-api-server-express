@@ -1,6 +1,6 @@
 openapi: 3.0.1
 servers:
-  - url: "https://api-of-the-wild.com"
+  - url: "https://apiofthewild.com"
     description: AotW's public envirmonment.
 info:
   description: API of the Wild - Geography Services
