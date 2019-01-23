@@ -1050,36 +1050,29 @@ components:
         compendium_id:
           description: The treasure's unique identifier, normal compendium.
           type: number
-          example: 344
+          example: 383
         compendium_id_dlc_2:
           description: The treasure's unique identifier, normal DLC 2 compendium.
           type: number
-          example: 348
+          example: 387
         compendium_id_master_mode:
           description: The treasure's unique identifier, normal Master Mode compendium.
           type: number
-          example: 349
+          example: 388
         compendium_id_master_mode_dlc_2:
           description: The treasure's unique identifier, normal Master Mode + DLC 2 compendium.
           type: number
-          example: 353
+          example: 392
         name:
           description: The name of the treasure.
           type: string
-          example: Arrow
-        attack_power_min:
-          description: Minimum attack power modifier.
-          type: number
-          example: 0
-        attack_power_max:
-          description: Maximum attack power modifier.
-          type: number
-          example: 0
-        effects:
-          description: The arrow's extra effects.
-          type: string
-          example: None
+          example: Ore Deposit
+        recoverable_materials:
+          description: Materials dropped by the creature.
+          type: array
+          items:
+            $ref: "#/components/schemas/recoverable_material"
         description:
-          description: The arrow's description.
+          description: The treasure's description.
           type: string
-          example: A common arrow. Its shaft was carved from the wood of a sturdy tree.
+          example: This deposit contains a good deal of ore. Breaking the rock will yield rock salt, flint, and other ore and minerals of varying value.
