@@ -122,6 +122,7 @@ module.exports = {
         "bows",
         "arrows",
         "shields",
+        "treasures",
       ],
     },
     VALID_VERSIONS: ["v1"],

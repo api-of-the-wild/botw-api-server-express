@@ -1,0 +1,5 @@
+id,compendium_no,compendium_no_dlc_2,compendium_no_master_mode,compendium_no_master_mode_dlc_2,name,description,recoverable_materials
+1,382,386,387,391,Treasure Chest,"Fortunes untold (potentially) await the lucky adventurer who finds one of these. Chests can often be found within shrines or at enemy camps, but there may be some crafty folks who think they're safer underground.",
+2,383,387,388,392,Ore Deposit,"This deposit contains a good deal of ore. Breaking the rock will yield rock salt, flint, and other ore and minerals of varying value.","{92,132,73,85,123,133,134,144}"
+3,384,388,389,393,Rare Ore Deposit,"This deposit contains a good deal of precious ore and the occasional rare mineral, like ruby and sapphire. Break it open to see what it has to offer!","{92,73,85,133,134,144}"
+4,385,389,390,394,Luminous Stone Deposit,This deposit contains quite a bit of luminous stone. Crack it open to get at the easily processed rocks within.,"{92,108}"

@@ -3,6 +3,7 @@
 DROP MATERIALIZED VIEW IF EXISTS material_views;
 DROP MATERIALIZED VIEW IF EXISTS monster_views;
 DROP MATERIALIZED VIEW IF EXISTS creature_views;
+DROP MATERIALIZED VIEW IF EXISTS treasure_views;
 
 DROP TABLE IF EXISTS creatures;
 DROP TABLE IF EXISTS monsters;
@@ -12,6 +13,7 @@ DROP TABLE IF EXISTS weapons;
 DROP TABLE IF EXISTS bows;
 DROP TABLE IF EXISTS arrows;
 DROP TABLE IF EXISTS shields;
+DROP TABLE IF EXISTS treasures;
 
 CREATE TABLE creatures
 (
@@ -125,6 +127,18 @@ CREATE TABLE shields
   description TEXT
 );
 
+CREATE TABLE treasures
+(
+  id INT PRIMARY KEY NOT NULL,
+  compendium_id INT NOT NULL,
+  compendium_id_dlc_2 INT NOT NULL,
+  compendium_id_master_mode INT NOT NULL,
+  compendium_id_master_mode_dlc_2 INT NOT NULL,
+  name TEXT NOT NULL,
+  description TEXT NOT NULL,
+  recoverable_materials INT[] NULL
+);
+
 COPY creatures FROM '/Users/kwhitejr/Projects/api-of-the-wild/botw-api-server-express/db/data/compendium/creatures.csv' DELIMITER ',' CSV HEADER;
 COPY monsters FROM '/Users/kwhitejr/Projects/api-of-the-wild/botw-api-server-express/db/data/compendium/monsters.csv' DELIMITER ',' CSV HEADER;
 COPY materials_additional_uses FROM '/Users/kwhitejr/Projects/api-of-the-wild/botw-api-server-express/db/data/compendium/materials_additional_uses.csv' DELIMITER ',' CSV HEADER;
@@ -133,6 +147,7 @@ COPY weapons FROM '/Users/kwhitejr/Projects/api-of-the-wild/botw-api-server-expr
 COPY bows FROM '/Users/kwhitejr/Projects/api-of-the-wild/botw-api-server-express/db/data/compendium/bows.csv' DELIMITER ',' CSV HEADER;
 COPY arrows FROM '/Users/kwhitejr/Projects/api-of-the-wild/botw-api-server-express/db/data/compendium/arrows.csv' DELIMITER ',' CSV HEADER;
 COPY shields FROM '/Users/kwhitejr/Projects/api-of-the-wild/botw-api-server-express/db/data/compendium/shields.csv' DELIMITER ',' CSV HEADER;
+COPY treasures FROM '/Users/kwhitejr/Projects/api-of-the-wild/botw-api-server-express/db/data/compendium/treasures.csv' DELIMITER ',' CSV HEADER;
 
 -- Data structured for consumer
 CREATE MATERIALIZED VIEW creature_views
@@ -188,4 +203,20 @@ FROM materials
 LEFT JOIN materials_additional_uses on materials_additional_uses.id = any(additional_uses)
 GROUP BY materials.id
 ORDER BY materials.id ASC
+WITH DATA;
+
+CREATE MATERIALIZED VIEW treasure_views
+AS
+SELECT
+  treasures.compendium_id,
+  treasures.compendium_id_dlc_2,
+  treasures.compendium_id_master_mode,
+  treasures.compendium_id_master_mode_dlc_2,
+  treasures.name,
+  array_agg(recoverable_materials.name) as recoverable_materials,
+  treasures.description
+FROM treasures
+LEFT JOIN recoverable_materials on recoverable_materials.id = any(recoverable_materials)
+GROUP BY treasures.id
+ORDER BY treasures.id ASC
 WITH DATA;

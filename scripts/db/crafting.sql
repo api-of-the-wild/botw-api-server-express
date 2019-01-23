@@ -1,5 +1,6 @@
 DROP MATERIALIZED VIEW IF EXISTS creature_views;
 DROP MATERIALIZED VIEW IF EXISTS monster_views;
+DROP MATERIALIZED VIEW IF EXISTS treasure_views;
 
 DROP TABLE IF EXISTS recoverable_materials;
 

@@ -382,6 +382,55 @@ const getShieldsCollection = (db, filters) => {
     });
 };
 
+const getTreasure = (db, id, isIdDlc2, isIdMasterMode) => {
+  const idQueryField = _makeQueryField(isIdDlc2, isIdMasterMode);
+
+  return db.treasure_views
+    .findOne(
+      { [idQueryField]: id },
+      {
+        fields: [
+          "compendium_id",
+          "compendium_id_dlc_2",
+          "compendium_id_master_mode",
+          "compendium_id_master_mode_dlc_2",
+          "name",
+          "recoverable_materials",
+          "description",
+        ],
+      }
+    )
+    .then(treasure => {
+      if (treasure === undefined) {
+        return null;
+      } else {
+        return treasure;
+      }
+    });
+};
+
+const getTreasuresCollection = (db, filters) => {
+  return db.treasure_views
+    .find(filters, {
+      fields: [
+        "compendium_id",
+        "compendium_id_dlc_2",
+        "compendium_id_master_mode",
+        "compendium_id_master_mode_dlc_2",
+        "name",
+        "recoverable_materials",
+        "description",
+      ],
+    })
+    .then(treasures => {
+      if (treasures === undefined) {
+        return null;
+      } else {
+        return treasures;
+      }
+    });
+};
+
 module.exports = {
   getCreature,
   getMonster,
@@ -390,6 +439,7 @@ module.exports = {
   getBow,
   getArrow,
   getShield,
+  getTreasure,
   getCreaturesCollection,
   getMonstersCollection,
   getMaterialsCollection,
@@ -397,5 +447,6 @@ module.exports = {
   getBowsCollection,
   getArrowsCollection,
   getShieldsCollection,
+  getTreasuresCollection,
   _makeQueryField,
 };

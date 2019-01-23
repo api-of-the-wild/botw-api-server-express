@@ -16,6 +16,7 @@ const {
   getBow,
   getArrow,
   getShield,
+  getTreasure,
   getCreaturesCollection,
   getMonstersCollection,
   getMaterialsCollection,
@@ -23,6 +24,7 @@ const {
   getBowsCollection,
   getArrowsCollection,
   getShieldsCollection,
+  getTreasuresCollection,
 } = require("../queries/compendium");
 
 const routes = app => {
@@ -85,6 +87,14 @@ const routes = app => {
     getById(db, getShield, "shields")
   );
 
+  router.get(
+    "/treasures/v1/:id",
+    validateIdMiddleware,
+    validateQueryParamsMiddleware("mastermode"),
+    validateQueryParamsMiddleware("dlc2"),
+    getById(db, getTreasure, "treasures")
+  );
+
   // GET collections
   router.get(
     "/creatures/v1",
@@ -116,6 +126,8 @@ const routes = app => {
   router.get("/arrows/v1", getCollection(db, getArrowsCollection));
 
   router.get("/shields/v1", getCollection(db, getShieldsCollection));
+
+  router.get("/treasures/v1", getCollection(db, getTreasuresCollection));
 
   router.use(enrichResponseMiddleware);
   return router;
