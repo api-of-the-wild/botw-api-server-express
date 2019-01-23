@@ -214,7 +214,7 @@ describe("the /compendium domain", () => {
 
     describe("GET /materials/v1", () => {
       it("should respond with a single material resource by id", () => {
-        const compendiumId = 48;
+        const compendiumId = 162;
         const testUri = `${SERVER_URI_BASE}/compendium/materials/v1/${compendiumId}`;
         const rpOptions = createRpOptions(testUri);
         return rp(rpOptions)
@@ -464,6 +464,186 @@ describe("the /compendium domain", () => {
               expect(bow.attack_power).to.be.a("number");
               expect(bow.durability).to.be.a("number");
               expect(bow.description).to.be.a("string");
+            });
+            // Request metadata properties
+            expect(result.self).to.be.a("string");
+            expect(result.resource).to.be.a("string");
+            expect(result.version).to.be.a("string");
+          })
+          .catch(err => {
+            assert.fail(`Unexpected error was caught: ${err}`);
+          });
+      });
+    });
+
+    describe("GET /arrows/v1", () => {
+      it("should respond with a single arrow resource by id", () => {
+        const compendiumId = 344;
+        const testUri = `${SERVER_URI_BASE}/compendium/arrows/v1/${compendiumId}`;
+        const rpOptions = createRpOptions(testUri);
+        return rp(rpOptions)
+          .then(result => {
+            // bow properties
+            expect(result.compendium_id).to.be.a("number");
+            expect(result.compendium_id_dlc_2).to.be.a("number");
+            expect(result.compendium_id_master_mode).to.be.a("number");
+            expect(result.compendium_id_master_mode_dlc_2).to.be.a("number");
+            expect(result.name).to.be.a("string");
+            expect(result.attack_power_min).to.be.a("number");
+            expect(result.attack_power_max).to.be.a("number");
+            expect(result.effects).to.be.a("string");
+            expect(result.description).to.be.a("string");
+            // Request metadata properties
+            expect(result.self).to.be.a("string");
+            expect(result.resource).to.be.a("string");
+            expect(result.version).to.be.a("string");
+          })
+          .catch(err => {
+            assert.fail(`Unexpected error was caught: ${err}`);
+          });
+      });
+
+      it("should respond with a arrows collection", () => {
+        const testUri = `${SERVER_URI_BASE}/compendium/arrows/v1`;
+        const rpOptions = createRpOptions(testUri);
+        return rp(rpOptions)
+          .then(result => {
+            expect(result.objects).to.be.a("array");
+            // arrows properties
+            result.objects.forEach(arrow => {
+              expect(arrow.compendium_id).to.satisfy(
+                value => value === null || typeof value === "number"
+              );
+              expect(arrow.compendium_id_dlc_2).to.satisfy(
+                value => value === null || typeof value === "number"
+              );
+              expect(arrow.compendium_id_master_mode).to.satisfy(
+                value => value === null || typeof value === "number"
+              );
+              expect(arrow.compendium_id_master_mode_dlc_2).to.satisfy(
+                value => value === null || typeof value === "number"
+              );
+              expect(arrow.name).to.be.a("string");
+              expect(arrow.attack_power_min).to.be.a("number");
+              expect(arrow.attack_power_max).to.be.a("number");
+              expect(arrow.effects).to.be.a("string");
+              expect(arrow.description).to.be.a("string");
+            });
+            // Request metadata properties
+            expect(result.self).to.be.a("string");
+            expect(result.resource).to.be.a("string");
+            expect(result.version).to.be.a("string");
+          })
+          .catch(err => {
+            assert.fail(`Unexpected error was caught: ${err}`);
+          });
+      });
+    });
+
+    describe("GET /shields/v1", () => {
+      it("should respond with a single shield resource by id", () => {
+        const compendiumId = 350;
+        const testUri = `${SERVER_URI_BASE}/compendium/shields/v1/${compendiumId}`;
+        const rpOptions = createRpOptions(testUri);
+        return rp(rpOptions)
+          .then(result => {
+            // Shield properties
+            expect(result.compendium_id).to.be.a("number");
+            expect(result.compendium_id_dlc_2).to.be.a("number");
+            expect(result.compendium_id_master_mode).to.be.a("number");
+            expect(result.compendium_id_master_mode_dlc_2).to.be.a("number");
+            expect(result.name).to.be.a("string");
+            expect(result.strength).to.be.a("number");
+            expect(result.durability).to.be.a("number");
+            expect(result.description).to.be.a("string");
+            // Request metadata properties
+            expect(result.self).to.be.a("string");
+            expect(result.resource).to.be.a("string");
+            expect(result.version).to.be.a("string");
+          })
+          .catch(err => {
+            assert.fail(`Unexpected error was caught: ${err}`);
+          });
+      });
+
+      it("should respond with a shields collection", () => {
+        const testUri = `${SERVER_URI_BASE}/compendium/shields/v1`;
+        const rpOptions = createRpOptions(testUri);
+        return rp(rpOptions)
+          .then(result => {
+            expect(result.objects).to.be.a("array");
+            // shields properties
+            result.objects.forEach(shield => {
+              expect(shield.compendium_id).to.satisfy(
+                value => value === null || typeof value === "number"
+              );
+              expect(shield.compendium_id_dlc_2).to.satisfy(
+                value => value === null || typeof value === "number"
+              );
+              expect(shield.compendium_id_master_mode).to.satisfy(
+                value => value === null || typeof value === "number"
+              );
+              expect(shield.compendium_id_master_mode_dlc_2).to.satisfy(
+                value => value === null || typeof value === "number"
+              );
+              expect(shield.name).to.be.a("string");
+              expect(shield.strength).to.be.a("number");
+              expect(shield.durability).to.be.a("number");
+              expect(shield.description).to.be.a("string");
+            });
+            // Request metadata properties
+            expect(result.self).to.be.a("string");
+            expect(result.resource).to.be.a("string");
+            expect(result.version).to.be.a("string");
+          })
+          .catch(err => {
+            assert.fail(`Unexpected error was caught: ${err}`);
+          });
+      });
+    });
+
+    describe("GET /treasures/v1", () => {
+      it("should respond with a single treasure resource by id", () => {
+        const compendiumId = 382;
+        const testUri = `${SERVER_URI_BASE}/compendium/treasures/v1/${compendiumId}`;
+        const rpOptions = createRpOptions(testUri);
+        return rp(rpOptions)
+          .then(result => {
+            // Treasure properties
+            expect(result.compendium_id).to.be.a("number");
+            expect(result.compendium_id_dlc_2).to.be.a("number");
+            expect(result.compendium_id_master_mode).to.be.a("number");
+            expect(result.compendium_id_master_mode_dlc_2).to.be.a("number");
+            expect(result.name).to.be.a("string");
+            expect(result.recoverable_materials).to.be.a("array");
+            expect(result.description).to.be.a("string");
+            // Request metadata properties
+            expect(result.self).to.be.a("string");
+            expect(result.resource).to.be.a("string");
+            expect(result.version).to.be.a("string");
+          })
+          .catch(err => {
+            assert.fail(`Unexpected error was caught: ${err}`);
+          });
+      });
+
+      it("should respond with a treasures collection", () => {
+        const testUri = `${SERVER_URI_BASE}/compendium/treasures/v1`;
+        const rpOptions = createRpOptions(testUri);
+        return rp(rpOptions)
+          .then(result => {
+            expect(result.objects).to.be.a("array");
+            // Location properties
+            result.objects.forEach(treasure => {
+              expect(treasure.compendium_id).to.be.a("number");
+              expect(treasure.compendium_id_dlc_2).to.be.a("number");
+              expect(treasure.compendium_id_master_mode).to.be.a("number");
+              expect(treasure.compendium_id_master_mode_dlc_2).to.be.a(
+                "number"
+              );
+              expect(treasure.name).to.be.a("string");
+              expect(treasure.recoverable_materials).to.be.a("array");
+              expect(treasure.description).to.be.a("string");
             });
             // Request metadata properties
             expect(result.self).to.be.a("string");
