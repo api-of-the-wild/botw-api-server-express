@@ -7,22 +7,23 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" "$POSTGRES_DB" <<-EOSQL
     -- Init /crafting domain
     DROP MATERIALIZED VIEW IF EXISTS creature_views;
     DROP MATERIALIZED VIEW IF EXISTS monster_views;
+    DROP MATERIALIZED VIEW IF EXISTS treasure_views;
 
     DROP TABLE IF EXISTS recoverable_materials;
 
     CREATE TABLE recoverable_materials
     (
-    id INT PRIMARY KEY NOT NULL,
-    compendium_id INT NULL,
-    compendium_id_dlc_2 INT NULL,
-    compendium_id_master_mode INT NULL,
-    compendium_id_master_mode_dlc_2 INT NULL,
-    name TEXT NOT NULL,
-    material_type TEXT NOT NULL,
-    value INT NULL,
-    restores DECIMAL NULL,
-    additional_uses INT[] NULL,
-    description TEXT NULL
+        id INT PRIMARY KEY NOT NULL,
+        compendium_id INT NULL,
+        compendium_id_dlc_2 INT NULL,
+        compendium_id_master_mode INT NULL,
+        compendium_id_master_mode_dlc_2 INT NULL,
+        name TEXT NOT NULL,
+        material_type TEXT NOT NULL,
+        value INT NULL,
+        restores DECIMAL NULL,
+        additional_uses INT[] NULL,
+        description TEXT NULL
     );
 
     COPY recoverable_materials FROM '/docker-entrypoint-initdb.d/data/compendium/recoverable_materials.csv' DELIMITER ',' CSV HEADER;
@@ -30,6 +31,7 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" "$POSTGRES_DB" <<-EOSQL
     -- Init /compendium domain
     DROP MATERIALIZED VIEW IF EXISTS material_views;
     DROP MATERIALIZED VIEW IF EXISTS monster_views;
+    DROP MATERIALIZED VIEW IF EXISTS treasure_views;
     DROP MATERIALIZED VIEW IF EXISTS creature_views;
 
     DROP TABLE IF EXISTS creatures;
@@ -40,6 +42,7 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" "$POSTGRES_DB" <<-EOSQL
     DROP TABLE IF EXISTS bows;
     DROP TABLE IF EXISTS arrows;
     DROP TABLE IF EXISTS shields;
+    DROP TABLE IF EXISTS treasures;
 
     CREATE TABLE creatures
     (
@@ -153,12 +156,27 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" "$POSTGRES_DB" <<-EOSQL
         description TEXT
     );
 
+    CREATE TABLE treasures
+    (
+        id INT PRIMARY KEY NOT NULL,
+        compendium_id INT NOT NULL,
+        compendium_id_dlc_2 INT NOT NULL,
+        compendium_id_master_mode INT NOT NULL,
+        compendium_id_master_mode_dlc_2 INT NOT NULL,
+        name TEXT NOT NULL,
+        description TEXT NOT NULL,
+        recoverable_materials INT[] NULL
+    );
+
+    COPY creatures FROM '/docker-entrypoint-initdb.d/data/compendium/creatures.csv' DELIMITER ',' CSV HEADER;
+    COPY monsters FROM '/docker-entrypoint-initdb.d/data/compendium/monsters.csv' DELIMITER ',' CSV HEADER;
     COPY materials_additional_uses FROM '/docker-entrypoint-initdb.d/data/compendium/materials_additional_uses.csv' DELIMITER ',' CSV HEADER;
     COPY materials FROM '/docker-entrypoint-initdb.d/data/compendium/materials.csv' DELIMITER ',' CSV HEADER;
     COPY weapons FROM '/docker-entrypoint-initdb.d/data/compendium/weapons.csv' DELIMITER ',' CSV HEADER;
     COPY bows FROM '/docker-entrypoint-initdb.d/data/compendium/bows.csv' DELIMITER ',' CSV HEADER;
     COPY arrows FROM '/docker-entrypoint-initdb.d/data/compendium/arrows.csv' DELIMITER ',' CSV HEADER;
     COPY shields FROM '/docker-entrypoint-initdb.d/data/compendium/shields.csv' DELIMITER ',' CSV HEADER;
+    COPY treasures FROM '/docker-entrypoint-initdb.d/data/compendium/treasures.csv' DELIMITER ',' CSV HEADER;
 
     -- Data structured for consumer
     CREATE MATERIALIZED VIEW creature_views
@@ -200,20 +218,36 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" "$POSTGRES_DB" <<-EOSQL
     CREATE MATERIALIZED VIEW material_views
     AS
     SELECT
-        compendium_id,
-        compendium_id_dlc_2,
-        compendium_id_master_mode,
-        compendium_id_master_mode_dlc_2,
-        name,
-        material_type,
-        value,
-        restores,
-        description,
+        materials.compendium_id,
+        materials.compendium_id_dlc_2,
+        materials.compendium_id_master_mode,
+        materials.compendium_id_master_mode_dlc_2,
+        materials.name,
+        materials.material_type,
+        materials.value,
+        materials.restores,
+        materials.description,
         array_agg(additional_use) as additional_uses
     FROM materials
     LEFT JOIN materials_additional_uses on materials_additional_uses.id = any(additional_uses)
     GROUP BY materials.id
     ORDER BY materials.id ASC
+    WITH DATA;
+
+    CREATE MATERIALIZED VIEW treasure_views
+    AS
+    SELECT
+        treasures.compendium_id,
+        treasures.compendium_id_dlc_2,
+        treasures.compendium_id_master_mode,
+        treasures.compendium_id_master_mode_dlc_2,
+        treasures.name,
+        array_agg(recoverable_materials.name) as recoverable_materials,
+        treasures.description
+    FROM treasures
+    LEFT JOIN recoverable_materials on recoverable_materials.id = any(recoverable_materials)
+    GROUP BY treasures.id
+    ORDER BY treasures.id ASC
     WITH DATA;
 
     -- Init /geography domain
