@@ -672,7 +672,7 @@ describe("the /compendium domain", () => {
 
         return rp(rpOptions)
           .then(erroneousResult => {
-            logger.error(`Unexpected error was caught: ${erroneousResult}`);
+            assert.fail(`Unexpected error was caught: ${erroneousResult}`);
           })
           .catch(result => {
             expect(result.statusCode).to.be.equal(400);
@@ -699,7 +699,7 @@ describe("the /compendium domain", () => {
 
         return rp(rpOptions)
           .then(erroneousResult => {
-            logger.error(`Unexpected resolution: ${erroneousResult}`);
+            assert.fail(`Unexpected resolution: ${erroneousResult}`);
           })
           .catch(result => {
             expect(result.statusCode).to.be.equal(404);
