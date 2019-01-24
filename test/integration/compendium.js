@@ -657,53 +657,57 @@ describe("the /compendium domain", () => {
     });
   });
 
-  // describe("4xx cases", () => {
-  //   it("should respond 400 when path or id is bogus", () => {
-  //     const testCases = [
-  //       `${SERVER_URI_BASE}/bogus/regions/v1/3`,
-  //       `${SERVER_URI_BASE}/compendium/bogus/v1/3`,
-  //       `${SERVER_URI_BASE}/compendium/regions/bogus/3`,
-  //       `${SERVER_URI_BASE}/compendium/regions/v1/bogus`,
-  //       `${SERVER_URI_BASE}/hocus/bogus`,
-  //     ];
+  describe("4xx cases", () => {
+    it("should respond 400 when path or id is bogus", () => {
+      const testCases = [
+        `${SERVER_URI_BASE}/bogus/creatures/v1/3`,
+        `${SERVER_URI_BASE}/compendium/bogus/v1/3`,
+        `${SERVER_URI_BASE}/compendium/creatures/bogus/3`,
+        `${SERVER_URI_BASE}/compendium/creatures/v1/bogus`,
+        `${SERVER_URI_BASE}/hocus/bogus`,
+      ];
 
-  //     const testRunner = testCase => {
-  //       const rpOptions = createRpOptions(testCase);
+      const testRunner = testCase => {
+        const rpOptions = createRpOptions(testCase);
 
-  //       return rp(rpOptions)
-  //         .then(erroneousResult => {
-  //           logger.error(`Unexpected error was caught: ${erroneousResult}`);
-  //         })
-  //         .catch(result => {
-  //           expect(result.statusCode).to.be.equal(400);
-  //           expect(result.error.message).to.be.a("string");
-  //         });
-  //     };
+        return rp(rpOptions)
+          .then(erroneousResult => {
+            logger.error(`Unexpected error was caught: ${erroneousResult}`);
+          })
+          .catch(result => {
+            expect(result.statusCode).to.be.equal(400);
+            expect(result.error.message).to.be.a("string");
+          });
+      };
 
-  //     testCases.forEach(testRunner);
-  //   });
+      testCases.forEach(testRunner);
+    });
 
-  //   it("should respond 404 when resource for id is not found", () => {
-  //     const testCases = [
-  //       `${SERVER_URI_BASE}/compendium/regions/v1/30`,
-  //       `${SERVER_URI_BASE}/compendium/subregions/v1/1000`,
-  //       `${SERVER_URI_BASE}/compendium/locations/v1/3000`,
-  //     ];
+    it("should respond 404 when resource for id is not found", () => {
+      const testCases = [
+        `${SERVER_URI_BASE}/compendium/creatures/v1/500`,
+        `${SERVER_URI_BASE}/compendium/monsters/v1/500`,
+        `${SERVER_URI_BASE}/compendium/materials/v1/500`,
+        `${SERVER_URI_BASE}/compendium/weapons/v1/500`,
+        `${SERVER_URI_BASE}/compendium/bows/v1/500`,
+        `${SERVER_URI_BASE}/compendium/arrows/v1/500`,
+        `${SERVER_URI_BASE}/compendium/treasures/v1/500`,
+      ];
 
-  //     const testRunner = testCase => {
-  //       const rpOptions = createRpOptions(testCase);
+      const testRunner = testCase => {
+        const rpOptions = createRpOptions(testCase);
 
-  //       return rp(rpOptions)
-  //         .then(erroneousResult => {
-  //           logger.error(`Unexpected resolution: ${erroneousResult}`);
-  //         })
-  //         .catch(result => {
-  //           expect(result.statusCode).to.be.equal(404);
-  //           expect(result.error.message).to.be.a("string");
-  //         });
-  //     };
+        return rp(rpOptions)
+          .then(erroneousResult => {
+            logger.error(`Unexpected resolution: ${erroneousResult}`);
+          })
+          .catch(result => {
+            expect(result.statusCode).to.be.equal(404);
+            expect(result.error.message).to.be.a("string");
+          });
+      };
 
-  //     testCases.forEach(testRunner);
-  //   });
-  // });
+      testCases.forEach(testRunner);
+    });
+  });
 });
