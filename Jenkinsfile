@@ -23,11 +23,14 @@ pipeline {
           }
         }
         stage('Alpha Integration Tests') {
-          // docker.image('node:8.10').inside() {
-          //   sh '.scripts/test/lint.sh'
-          // }
+          agent {
+            docker {
+              image 'tiangolo/docker-with-compose'
+              args '-u root -v /var/run/docker.sock:/var/run/docker.sock --network host'
+            }
+          }
           steps {
-            echo 'Alpha integration not implemented'
+            sh 'scripts/docker/dockerRunTest.sh'
           }
         }
       }
