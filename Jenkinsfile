@@ -30,19 +30,10 @@ pipeline {
             }
           }
           steps {
-            sh 'scripts/docker/dockerRunTest.sh'
+            sh './scripts/docker/dockerRunTest.sh'
           }
         }
       }
     }
-
-    // stage('Integration tests') {
-    //   agent {
-    //     docker { image 'tiangolo/docker-with-compose' }
-    //   }
-    //   steps {
-    //     sh 'scripts/docker/dockerRunTest.sh'
-    //   }
-    // }
   }
 }
