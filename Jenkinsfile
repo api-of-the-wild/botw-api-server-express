@@ -11,7 +11,7 @@ pipeline {
       }
     }
     stage('Local Tests') {
-      parallel (
+      parallel {
         stage('Unit Tests') {
           agent { docker 'node:8.10' }
           environment {
@@ -30,7 +30,7 @@ pipeline {
             echo 'Alpha integration not implemented'
           }
         },
-      )
+      }
     }
 
     // stage('Integration tests') {
