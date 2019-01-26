@@ -5,14 +5,20 @@ pipeline {
   
   stages {
     stage('Build') {
-      docker.image('node:8.10').inside() {
+      agent { docker 'node:8.10' }
+      steps {
         sh './scripts/build/build.sh'
       }
     }
     parallel (
       UnitTests: {
         stage('Unit Tests') {
-          docker.image('node:8.10').inside() {
+          agent { docker 'node:8.10' }
+          environment {
+            STAGE = 'test'
+          }
+          steps {
+            echo '${env.STAGE}'
             sh '.scripts/test/index.sh'
           }
         }
@@ -22,7 +28,9 @@ pipeline {
           // docker.image('node:8.10').inside() {
           //   sh '.scripts/test/lint.sh'
           // }
-          echo 'Alpha integration not implemented'
+          steps {
+            echo 'Alpha integration not implemented'
+          }
         }
       },
     )
