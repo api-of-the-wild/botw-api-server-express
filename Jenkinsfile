@@ -18,8 +18,8 @@ pipeline {
             STAGE = 'test'
           }
           steps {
-            echo '${env.STAGE}'
-            sh '.scripts/test/index.sh'
+            echo "${env.STAGE}"
+            sh './scripts/test/index.sh'
           }
         }
         stage('Alpha Integration Tests') {

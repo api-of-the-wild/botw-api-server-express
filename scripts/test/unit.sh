@@ -16,9 +16,5 @@ yarn nyc \
   --report-dir="${REPORTS_DIR}/coverage" \
   mocha \
     --recursive "${TEST_DIR}/**/*.js" \
-    --exclude "${SRC_DIR}/queries/**/*.js" \
-    --exclude "${SRC_DIR}/routes/**/*.js" \
-    --exclude "${SRC_DIR}/server.js" \
-    --exclude "${SRC_DIR}/db_connect.js" \
     --reporter=mochawesome \
     --reporter-options reportDir="${REPORTS_DIR}/coverage"

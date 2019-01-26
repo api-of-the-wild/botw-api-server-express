@@ -13,6 +13,7 @@
     "src/routes/**/*.js",
     "src/utilities/make_promises_safe.js",
     "src/server.js",
+    "src/index.js",
     "src/db_connect.js"
   ],
   "reporter": [
