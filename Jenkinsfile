@@ -30,7 +30,8 @@ pipeline {
             }
           }
           steps {
-            sh './scripts/docker/dockerRunTest.sh'
+            sh 'ls -lah scripts/docker/'
+            sh 'scripts/docker/dockerRunTest.sh'
           }
         }
       }
