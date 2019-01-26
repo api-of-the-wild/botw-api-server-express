@@ -5,47 +5,35 @@ pipeline {
   
   stages {
     stage('Build') {
-      agent {
-        docker {
-          image 'node:8'
-          args '-p 3001:3001'
-        }
-      }
-      steps {
-        sh 'npm install yarn'
-        sh 'yarn install'
-        sh 'node -v'
-        sh 'npm -v'
-        sh 'yarn --version'
+      docker.image('node:8.10').inside() {
+        sh './scripts/build/build.sh'
       }
     }
-    
-    stage('Internal tests') {
-      agent {
-        docker {
-          image 'node:8'
-          args '-p 3001:3001'
-        }
-      }
-      steps {
-        parallel(
-          lint: {
-            sh 'yarn test:lint'
-          },
-          unit: {
-            sh 'yarn test:unit'
+    parallel (
+      UnitTests: {
+        stage('Unit Tests') {
+          docker.image('node:8.10').inside() {
+            sh '.scripts/test/index.sh'
           }
-        )
-      }
-    }
+        }
+      },
+      AlphaIntegration: {
+        stage('Alpha Integration Tests') {
+          // docker.image('node:8.10').inside() {
+          //   sh '.scripts/test/lint.sh'
+          // }
+          echo 'Alpha integration not implemented'
+        }
+      },
+    )
 
-    stage('Integration tests') {
-      agent {
-        docker { image 'tiangolo/docker-with-compose' }
-      }
-      steps {
-        sh 'scripts/docker/dockerRunTest.sh'
-      }
-    }
+    // stage('Integration tests') {
+    //   agent {
+    //     docker { image 'tiangolo/docker-with-compose' }
+    //   }
+    //   steps {
+    //     sh 'scripts/docker/dockerRunTest.sh'
+    //   }
+    // }
   }
 }
