@@ -21,7 +21,7 @@ pipeline {
             echo '${env.STAGE}'
             sh '.scripts/test/index.sh'
           }
-        },
+        }
         stage('Alpha Integration Tests') {
           // docker.image('node:8.10').inside() {
           //   sh '.scripts/test/lint.sh'
@@ -29,7 +29,7 @@ pipeline {
           steps {
             echo 'Alpha integration not implemented'
           }
-        },
+        }
       }
     }
 
