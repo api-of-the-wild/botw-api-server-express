@@ -25,7 +25,7 @@ pipeline {
         stage('Alpha Integration Tests') {
           agent {
             docker {
-              image 'tiangolo/docker-with-compose'
+              image 'docker/compose'
               args '-u root -v /var/run/docker.sock:/var/run/docker.sock --network host'
             }
           }
