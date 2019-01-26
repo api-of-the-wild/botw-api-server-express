@@ -25,13 +25,13 @@ pipeline {
         stage('Alpha Integration Tests') {
           agent {
             docker {
-              image 'docker/compose'
+              image 'tmaier/docker-compose'
               args '-u root -v /var/run/docker.sock:/var/run/docker.sock --network host'
             }
           }
           steps {
-            sh 'ls -lah scripts/docker/'
-            sh 'scripts/docker/dockerRunTest.sh'
+            sh 'ls -lah ./scripts/docker/'
+            sh './scripts/docker/dockerRunTest.sh'
           }
         }
       }
