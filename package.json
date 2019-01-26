@@ -7,8 +7,8 @@
   "author": "White, Kevin <kwhitejr@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "STAGE=dev nodemon index.js",
-    "start:test": "STAGE=test nodemon index.js",
+    "start": "STAGE=dev nodemon src/index.js",
+    "start:test": "STAGE=test nodemon src/index.js",
     "count_failures": "bin/count_failures.sh",
     "test": "scripts/test/index.sh",
     "test:lint": "scripts/test/lint.sh",
