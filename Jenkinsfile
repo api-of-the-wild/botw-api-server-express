@@ -30,8 +30,7 @@ pipeline {
             }
           }
           steps {
-            sh 'ls -l /bin/bash'
-            sh 'apk add bash'
+            sh 'apk update && apk add bash'
             sh 'ls -l /bin/bash'
             sh './scripts/docker/dockerRunTest.sh'
           }
