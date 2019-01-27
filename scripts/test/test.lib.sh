@@ -8,8 +8,6 @@ TEST_UNIT_DIR="${ROOT_DIR}/test/unit"
 TEST_INTEGRATION_DIR="${ROOT_DIR}/test/integration"
 REPORTS_DIR="${ROOT_DIR}/reports"
 
-. "${SCRIPTS_DIR}/lib.sh"
-
 integrationTest() {
   INTEGRATION_STAGE=$1
   export INTEGRATION_STAGE
