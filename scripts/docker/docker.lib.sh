@@ -79,5 +79,5 @@ dockerExecuteTestRunner() {
   dockerBuildTestRunner
 
   echo "Run ${IMAGE_NAME} executable test container..."
-  docker run -it --rm --network container:api_of_the_wild_app_1 kwhitejr/botw-test-runner
+  docker run --rm --network container:api_of_the_wild_app_1 kwhitejr/botw-test-runner
 }
