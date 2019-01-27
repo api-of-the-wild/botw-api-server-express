@@ -7,7 +7,6 @@ ROOT_DIR="$(realpath "${SCRIPTS_DIR}/..")"
 
 . "${SCRIPTS_DIR}/lib.sh"
 
-
 # @param containerId   $1   The container id to use when talking to docker daemon
 # @param portNumber    $2   The port number bound inside the container
 #
