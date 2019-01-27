@@ -702,6 +702,7 @@ describe("the /compendium domain", () => {
             assert.fail(`Unexpected resolution: ${erroneousResult}`);
           })
           .catch(result => {
+            console.log(result); // eslint-disable-line
             expect(result.statusCode).to.be.equal(404);
             expect(result.error.message).to.be.a("string");
           });
