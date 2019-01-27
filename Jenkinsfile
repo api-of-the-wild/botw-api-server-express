@@ -25,13 +25,11 @@ pipeline {
         stage('Alpha Integration Tests') {
           agent {
             docker {
-              image 'tmaier/docker-compose'
+              image 'kwhitejr/docker-compose'
               args '-u root -v /var/run/docker.sock:/var/run/docker.sock --network host'
             }
           }
           steps {
-            sh 'apk update && apk add bash'
-            sh 'ls -l /bin/bash'
             sh './scripts/docker/dockerRunTest.sh'
           }
         }
