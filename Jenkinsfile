@@ -30,6 +30,7 @@ pipeline {
             }
           }
           steps {
+            sh 'pwd'
             sh './scripts/docker/dockerRunTest.sh'
           }
         }
