@@ -317,7 +317,6 @@ describe("the /compendium domain", () => {
         const rpOptions = createRpOptions(testUri);
         return rp(rpOptions)
           .then(result => {
-            console.log(result); // eslint-disable-line
             // weapon properties
             expect(result.compendium_id).to.be.a("number");
             expect(result.compendium_id_dlc_2).to.be.a("number");
@@ -633,7 +632,6 @@ describe("the /compendium domain", () => {
         const rpOptions = createRpOptions(testUri);
         return rp(rpOptions)
           .then(result => {
-            console.log(result); // eslint-disable-line
             expect(result.objects).to.be.a("array");
             // Location properties
             result.objects.forEach(treasure => {
