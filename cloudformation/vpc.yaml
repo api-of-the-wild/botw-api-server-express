@@ -1,109 +1,67 @@
 AWSTemplateFormatVersion: "2010-09-09"
 Description: Application VPC
 
-Parameters:
-
-  VpcBlock:
-    Type: String
-    Default: 10.0.0.0/16
-    Description: The CIDR range for the VPC. This should be a valid private (RFC 1918) CIDR range.
-
-  SubnetAZAPrivateBlock:
-    Type: String
-    Default: 10.0.0.0/19
-    Description: CidrBlock for AZ A Private Subnet within the VPC
-
-  SubnetAZAPublicBlock:
-    Type: String
-    Default: 10.0.32.0/20
-    Description: CidrBlock for AZ A Public Subnet within the VPC
-
-  SubnetAZASpareBlock:
-    Type: String
-    Default: 10.0.48.0/20
-    Description: CidrBlock for AZ A Spare Subnet within the VPC
-
-  SubnetAZBPrivateBlock:
-    Type: String
-    Default: 10.0.64.0/19
-    Description: CidrBlock for AZ B Private Subnet within the VPC
-
-  SubnetAZBPublicBlock:
-    Type: String
-    Default: 10.0.96.0/20
-    Description: CidrBlock for AZ B Public Subnet within the VPC
-
-  SubnetAZBSpareBlock:
-    Type: String
-    Default: 10.0.112.0/20
-    Description: CidrBlock for AZ B Spare Subnet within the VPC
-
-  SubnetAZCPrivateBlock:
-    Type: String
-    Default: 10.0.128.0/19
-    Description: CidrBlock for AZ C Private Subnet within the VPC
-
-  SubnetAZCPublicBlock:
-    Type: String
-    Default: 10.0.160.0/20
-    Description: CidrBlock for AZ C Public Subnet within the VPC
-
-  SubnetAZCSpareBlock:
-    Type: String
-    Default: 10.0.176.0/20
-    Description: CidrBlock for AZ C Spare Subnet within the VPC
+Mappings:
+  SubnetConfig:
+    Vpc:
+      CIDR: 10.0.0.0/16
+    Private:
+      CIDRAzA: 10.0.0.0/19
+      CIDRAzB: 10.0.64.0/19
+      CIDRAzC: 10.0.128.0/19
+    Public:
+      CIDRAzA: 10.0.32.0/20
+      CIDRAzB: 10.0.96.0/20
+      CIDRAzC: 10.0.160.0/20
+    Spare:
+      CIDRAzA: 10.0.48.0/20
+      CIDRAzB: 10.0.112.0/20
+      CIDRAzC: 10.0.176.0/20
 
 Resources:
   # Initialize VPC
   VPC:
     Type: AWS::EC2::VPC
     Properties:
-      CidrBlock:  !Ref VpcBlock
+      CidrBlock: !FindInMap [SubnetConfig, Vpc, CIDR]
       EnableDnsSupport: true
       EnableDnsHostnames: true
 
-  # Define all subnets by AZ
+# Define all subnets by AZ
+  # Availability Zone A
+  SubnetPrivateAzA:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone:
+        Fn::Select:
+        - '0'
+        - Fn::GetAZs:
+            Ref: AWS::Region
+      CidrBlock: !FindInMap [SubnetConfig, Private, CIDRAzA]
+      VpcId: !Ref VPC
+  SubnetPublicAzA:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone:
+        Fn::Select:
+        - '0'
+        - Fn::GetAZs:
+            Ref: AWS::Region
+      CidrBlock: !FindInMap [SubnetConfig, Public, CIDRAzA]
+      VpcId: !Ref VPC
+  SubnetSpareAzA:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone:
+        Fn::Select:
+        - '0'
+        - Fn::GetAZs:
+            Ref: AWS::Region
+      CidrBlock: !FindInMap [SubnetConfig, Spare, CIDRAzA]
+      VpcId: !Ref VPC
 
-  # AZ A
-  SubnetAZAPrivate:
-    Type: AWS::EC2::Subnet
-    Properties:
-      AvailabilityZone:
-        Fn::Select:
-        - '0'
-        - Fn::GetAZs:
-            Ref: AWS::Region
-      CidrBlock:
-        Ref: SubnetAZAPrivateBlock
-      VpcId:
-        Ref: VPC
-  SubnetAZAPublic:
-    Type: AWS::EC2::Subnet
-    Properties:
-      AvailabilityZone:
-        Fn::Select:
-        - '0'
-        - Fn::GetAZs:
-            Ref: AWS::Region
-      CidrBlock:
-        Ref: SubnetAZAPublicBlock
-      VpcId:
-        Ref: VPC
-  SubnetAZASpare:
-    Type: AWS::EC2::Subnet
-    Properties:
-      AvailabilityZone:
-        Fn::Select:
-        - '0'
-        - Fn::GetAZs:
-            Ref: AWS::Region
-      CidrBlock:
-        Ref: SubnetAZASpareBlock
-      VpcId:
-        Ref: VPC
-
-  # AZ B
-  SubnetAZBPrivate:
+  # Availability Zone B
+  SubnetPrivateAzB:
     Type: AWS::EC2::Subnet
     Properties:
       AvailabilityZone:
@@ -111,11 +69,9 @@ Resources:
         - '1'
         - Fn::GetAZs:
             Ref: AWS::Region
-      CidrBlock:
-        Ref: SubnetAZBPrivateBlock
-      VpcId:
-        Ref: VPC
-  SubnetAZBPublic:
+      CidrBlock: !FindInMap [SubnetConfig, Private, CIDRAzB]
+      VpcId: !Ref VPC
+  SubnetPublicAzB:
     Type: AWS::EC2::Subnet
     Properties:
       AvailabilityZone:
@@ -123,11 +79,9 @@ Resources:
         - '1'
         - Fn::GetAZs:
             Ref: AWS::Region
-      CidrBlock:
-        Ref: SubnetAZBPublicBlock
-      VpcId:
-        Ref: VPC
-  SubnetAZBSpare:
+      CidrBlock: !FindInMap [SubnetConfig, Public, CIDRAzB]
+      VpcId: !Ref VPC
+  SubnetSpareAzB:
     Type: AWS::EC2::Subnet
     Properties:
       AvailabilityZone:
@@ -135,13 +89,11 @@ Resources:
         - '1'
         - Fn::GetAZs:
             Ref: AWS::Region
-      CidrBlock:
-        Ref: SubnetAZBSpareBlock
-      VpcId:
-        Ref: VPC
+      CidrBlock: !FindInMap [SubnetConfig, Spare, CIDRAzB]
+      VpcId: !Ref VPC
 
   # AZ C
-  SubnetAZCPrivate:
+  SubnetPrivateAzC:
     Type: AWS::EC2::Subnet
     Properties:
       AvailabilityZone:
@@ -149,11 +101,9 @@ Resources:
         - '2'
         - Fn::GetAZs:
             Ref: AWS::Region
-      CidrBlock:
-        Ref: SubnetAZCPrivateBlock
-      VpcId:
-        Ref: VPC
-  SubnetAZCPublic:
+      CidrBlock: !FindInMap [SubnetConfig, Private, CIDRAzC]
+      VpcId: !Ref VPC
+  SubnetPublicAzC:
     Type: AWS::EC2::Subnet
     Properties:
       AvailabilityZone:
@@ -161,11 +111,9 @@ Resources:
         - '2'
         - Fn::GetAZs:
             Ref: AWS::Region
-      CidrBlock:
-        Ref: SubnetAZCPublicBlock
-      VpcId:
-        Ref: VPC
-  SubnetAZCSpare:
+      CidrBlock: !FindInMap [SubnetConfig, Public, CIDRAzC]
+      VpcId: !Ref VPC
+  SubnetSpareAzC:
     Type: AWS::EC2::Subnet
     Properties:
       AvailabilityZone:
@@ -173,15 +121,13 @@ Resources:
         - '2'
         - Fn::GetAZs:
             Ref: AWS::Region
-      CidrBlock:
-        Ref: SubnetAZCSpareBlock
-      VpcId:
-        Ref: VPC
+      CidrBlock: !FindInMap [SubnetConfig, Spare, CIDRAzC]
+      VpcId: !Ref VPC
 
   # Networking resources for Public Subnets
   InternetGateway:
     Type: "AWS::EC2::InternetGateway"
-  VPCGatewayAttachment:
+  GatewayAttachment:
     Type: "AWS::EC2::VPCGatewayAttachment"
     Properties:
       InternetGatewayId: !Ref InternetGateway
@@ -191,61 +137,112 @@ Resources:
     Properties:
       VpcId: !Ref VPC
   Route:
-    DependsOn: VPCGatewayAttachment
+    DependsOn: GatewayAttachment
     Type: AWS::EC2::Route
     Properties:
       RouteTableId: !Ref PublicRouteTable
       DestinationCidrBlock: 0.0.0.0/0
       GatewayId: !Ref InternetGateway
-  SubnetAZAPublicRouteTableAssociation:
+  SubnetPublicRouteTableAssociationAzA:
     Type: AWS::EC2::SubnetRouteTableAssociation
     Properties:
-      SubnetId: !Ref SubnetAZAPublic
+      SubnetId: !Ref SubnetPublicAzA
       RouteTableId: !Ref PublicRouteTable
-  SubnetAZBPublicRouteTableAssociation:
+  SubnetPublicRouteTableAssociationAzB:
     Type: AWS::EC2::SubnetRouteTableAssociation
     Properties:
-      SubnetId: !Ref SubnetAZBPublic
+      SubnetId: !Ref SubnetPublicAzB
       RouteTableId: !Ref PublicRouteTable
-  SubnetAZCPublicRouteTableAssociation:
+  SubnetPublicRouteTableAssociationAzC:
     Type: AWS::EC2::SubnetRouteTableAssociation
     Properties:
-      SubnetId: !Ref SubnetAZCPublic
+      SubnetId: !Ref SubnetPublicAzC
       RouteTableId: !Ref PublicRouteTable
 
   # Networking resources for Private Subnets
   # One NAT for each Private Subnet
   NatGatewayOneAttachment:
     Type: AWS::EC2::EIP
-    DependsOn: GatewayAttachement
+    DependsOn: GatewayAttachment
     Properties:
-        Domain: vpc
+      Domain: vpc
   NatGatewayTwoAttachment:
     Type: AWS::EC2::EIP
-    DependsOn: GatewayAttachement
+    DependsOn: GatewayAttachment
     Properties:
-        Domain: vpc
+      Domain: vpc
   NatGatewayThreeAttachment:
     Type: AWS::EC2::EIP
-    DependsOn: GatewayAttachement
+    DependsOn: GatewayAttachment
     Properties:
-        Domain: vpc
+      Domain: vpc
   NatGatewayOne:
     Type: AWS::EC2::NatGateway
     Properties:
       AllocationId: !GetAtt NatGatewayOneAttachment.AllocationId
-      SubnetId: !Ref SubnetAZAPublic
+      SubnetId: !Ref SubnetPublicAzA
   NatGatewayTwo:
     Type: AWS::EC2::NatGateway
     Properties:
       AllocationId: !GetAtt NatGatewayTwoAttachment.AllocationId
-      SubnetId: !Ref SubnetAZBPublic
+      SubnetId: !Ref SubnetPublicAzB
   NatGatewayThree:
     Type: AWS::EC2::NatGateway
     Properties:
       AllocationId: !GetAtt NatGatewayThreeAttachment.AllocationId
-      SubnetId: !Ref SubnetAZCPublic
+      SubnetId: !Ref SubnetPublicAzC
   PrivateRouteTable:
     Type: AWS::EC2::RouteTable
     Properties:
       VpcId: !Ref VPC
+  PrivateRouteOne:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref PrivateRouteTable
+      DestinationCidrBlock: 0.0.0.0/0
+      NatGatewayId: !Ref NatGatewayOne
+  PrivateRouteTwo:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref PrivateRouteTable
+      DestinationCidrBlock: 0.0.0.0/0
+      NatGatewayId: !Ref NatGatewayTwo
+  PrivateRouteThree:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref PrivateRouteTable
+      DestinationCidrBlock: 0.0.0.0/0
+      NatGatewayId: !Ref NatGatewayThree
+  PrivateRouteTableAssociationAzA:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PrivateRouteTable
+      SubnetId: !Ref SubnetPrivateAzA
+  PrivateRouteTableAssociationAzB:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PrivateRouteTable
+      SubnetId: !Ref SubnetPrivateAzB
+  PrivateRouteTableAssociationAzC:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PrivateRouteTable
+      SubnetId: !Ref SubnetPrivateAzC
+
+Outputs:
+  PrivateSubnetIds:
+    Value: !Join [ ",", [ !Ref SubnetPrivateAzA, !Ref SubnetPrivateAzB, !Ref SubnetPrivateAzC ] ]
+    Export:
+      Name: PrivateSubnetIds
+  PublicSubnetIds:
+    Value: !Join [ ",", [ !Ref SubnetPublicAzA, !Ref SubnetPublicAzB, !Ref SubnetPublicAzC ] ]
+    Export:
+      Name: PublicSubnetIds
+  SpareSubnetIds:
+    Value: !Join [ ",", [ !Ref SubnetSpareAzA, !Ref SubnetSpareAzB, !Ref SubnetSpareAzC ] ]
+    Export:
+      Name: SpareSubnetIds
+  VpcId:
+    Value: !Ref VPC
+    Export:
+      Name: VpcId

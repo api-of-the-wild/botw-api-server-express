@@ -1,0 +1,25 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: Application VPC
+
+Parameters:
+  InstanceType:
+    Type: String
+    Default: t2.micro
+    AllowedValues:
+      - t2.micro
+  VpcId:
+    Type: String
+    AllowedPattern: ^vpc-[a-zA-Z0-9]*
+  DbClass:
+    Description: RDS Database instance class
+    Type: String
+    Default: db.t2.micro
+    AllowedValues:
+      - t2.micro
+  DbAllocatedStorage:
+    Description: The size of the database (Gb)
+    Type: Number
+    Default: 5
+  DbPort:
+    Type: Number
+    Default: 5432
