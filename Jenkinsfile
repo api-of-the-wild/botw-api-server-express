@@ -22,18 +22,18 @@ pipeline {
             sh './scripts/test/index.sh'
           }
         }
-        stage('Alpha Integration Tests') {
-          agent {
-            docker {
-              image 'kwhitejr/docker-compose'
-              args '-u root -v /var/run/docker.sock:/var/run/docker.sock --network host'
-            }
-          }
-          steps {
-            sh 'pwd'
-            sh './scripts/docker/dockerRunTest.sh'
-          }
-        }
+        // stage('Alpha Integration Tests') {
+        //   agent {
+        //     docker {
+        //       image 'kwhitejr/docker-compose'
+        //       args '-u root -v /var/run/docker.sock:/var/run/docker.sock --network host'
+        //     }
+        //   }
+        //   steps {
+        //     sh 'pwd'
+        //     sh './scripts/docker/dockerRunTest.sh'
+        //   }
+        // }
       }
     }
   }
