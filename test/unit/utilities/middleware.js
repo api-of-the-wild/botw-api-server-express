@@ -7,6 +7,8 @@ const {
   asyncMiddleware,
   enrichResponseMiddleware,
   validatePathMiddleware,
+  validateIdMiddleware,
+  validateQueryParamsMiddleware,
 } = require("../../../src/utilities/middleware");
 
 describe("asyncMiddleware()", () => {
@@ -124,7 +126,8 @@ describe("validatePathMiddleware()", () => {
   beforeEach(() => {
     req = {};
     res = {
-      status: spy(),
+      status: stub().returnsThis(),
+      send: spy(),
     };
     next = spy();
   });
@@ -150,16 +153,112 @@ describe("validatePathMiddleware()", () => {
       "/BOGUS/regions/v1/1",
       "/geography/BOGUS/v1/1",
       "/geography/locations/BOGUS/1",
-      "/geography/locations/v1/BOGUS",
-      "/geography/locations/v1",
     ];
 
-    const testRunner = path => {
-      req.path = path;
-      res.status = stub().returns({
-        send: spy(),
-      });
+    const testRunner = testCase => {
+      req.path = testCase;
       validatePathMiddleware(req, res, next);
+      expect(res.status.calledWith(400)).to.be.true;
+      // expect(res.send.calledOnce).to.be.true;
+    };
+
+    testCases.forEach(testRunner);
+  });
+});
+
+describe("validateIdMiddleware()", () => {
+  let req, res, next;
+
+  beforeEach(() => {
+    req = {};
+    res = {
+      status: stub().returnsThis(),
+      send: spy(),
+    };
+    next = spy();
+  });
+
+  it("should call `next` if id is valid", () => {
+    const testCases = ["1", "2"];
+
+    const testRunner = testCase => {
+      req.params = { id: testCase };
+      validateIdMiddleware(req, res, next);
+      expect(next.called).to.be.true;
+    };
+
+    testCases.forEach(testRunner);
+  });
+
+  it("should send 400 if id is falsy", () => {
+    const testCases = [undefined, null, "0", false];
+
+    const testRunner = testCase => {
+      req.params = { id: testCase };
+      validateIdMiddleware(req, res, next);
+      expect(res.status.calledWith(400)).to.be.true;
+      // expect(res.send.calledOnce).to.be.true;
+    };
+
+    testCases.forEach(testRunner);
+  });
+});
+
+describe("validateQueryParamsMiddleware()", () => {
+  let req, res, next;
+
+  beforeEach(() => {
+    req = {};
+    res = {
+      status: stub().returnsThis(),
+      send: spy(),
+    };
+    next = spy();
+  });
+
+  it("should call `next` if no query parameters", () => {
+    const testCases = [{}, { key: "" }];
+    const testRunner = testCase => {
+      req.query = testCase;
+      validateQueryParamsMiddleware("key")(req, res, next);
+      expect(next.called).to.be.true;
+    };
+
+    testCases.forEach(testRunner);
+  });
+
+  it("should call `next` when query parameters are valid", () => {
+    const testCases = [
+      { weapon_type: "sword" },
+      { hands: "2" },
+      { mastermode: "true" },
+      { dlc2: "false" },
+      { location_type: "shrine" },
+    ];
+
+    const testRunner = testCase => {
+      req.query = testCase;
+      const queryParam = Object.keys(testCase)[0];
+      validateQueryParamsMiddleware(queryParam)(req, res, next);
+      expect(next.called).to.be.true;
+    };
+
+    testCases.forEach(testRunner);
+  });
+
+  it("should send 400 if the query params are not valid", () => {
+    const testCases = [
+      { weapon_type: "banana" },
+      { hands: "4" },
+      { mastermode: "perhaps" },
+      { dlc2: "null" },
+      { location_type: "mufasa" },
+    ];
+
+    const testRunner = testCase => {
+      req.query = testCase;
+      const queryParam = Object.keys(testCase)[0];
+      validateQueryParamsMiddleware(queryParam)(req, res, next);
       expect(res.status.calledWith(400)).to.be.true;
       // expect(res.send.calledOnce).to.be.true;
     };

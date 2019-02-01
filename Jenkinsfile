@@ -1,41 +1,40 @@
 #!groovy
 
 pipeline {
-  agent {
-    docker {
-      image 'node:8'
-      args '-p 3001:3001'
-    }
-  }
+  agent any
+  
   stages {
     stage('Build') {
+      agent { docker 'node:8.10' }
       steps {
-        sh 'npm install yarn'
-        sh 'yarn install'
-        sh 'node -v'
-        sh 'npm -v'
-        sh 'yarn --version'
+        sh './scripts/build/build.sh'
       }
     }
-    
-    stage('Internal tests') {
-      steps {
-        parallel(
-          lint: {
-            sh 'yarn test:lint'
-          },
-          unit: {
-            sh 'yarn test:unit'
+    stage('Local Tests') {
+      parallel {
+        stage('Unit Tests') {
+          agent { docker 'node:8.10' }
+          environment {
+            STAGE = 'test'
           }
-        )
+          steps {
+            echo "${env.STAGE}"
+            sh './scripts/test/index.sh'
+          }
+        }
+        // stage('Alpha Integration Tests') {
+        //   agent {
+        //     docker {
+        //       image 'kwhitejr/docker-compose'
+        //       args '-u root -v /var/run/docker.sock:/var/run/docker.sock --network host'
+        //     }
+        //   }
+        //   steps {
+        //     sh 'pwd'
+        //     sh './scripts/docker/dockerRunTest.sh'
+        //   }
+        // }
       }
     }
-
-    // TODO: install docker-compose on Jenkins server
-    // stage('Alpha tests') {
-    //   steps {
-    //     sh 'yarn docker:test'
-    //   }
-    // }
   }
 }

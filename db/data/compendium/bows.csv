@@ -1,0 +1,27 @@
+﻿id,compendium_no,compendium_no_dlc_2,compendium_no_master_mode,compendium_no_master_mode_dlc_2,name,attack_power,durability,range,fire_rate,locations,dropped_by,description
+1,332,336,337,341,Ancient Bow,44,120,50,1,,,"This bow is the result of Robbie's research. Ancient Sheikah technology allows it heightened functionality, Arrows fired from it travel in a perfectly straight line."
+2,334,338,339,343,Boko Bow,4,16,20,1,,,"A basic Bokoblin bow made of wood. It's made by taking any tree branch and tying a string to either end, so don't expect much in the way of combat effectiveness."
+3,319,323,324,328,Bow of Light,100,100,500,1,,,"Princess Zelda gave you this bow and arrow for the battle with Dark beast Ganon. When wielded by the hero, it fires arrows of pure light strong enough to oppose the Calamity."
+4,336,340,341,345,Dragon Bone Boko Bow,24,30,20,1,,,"A Boko bow reinforced by fossils. Bokoblins handpicked the materials it's made from, so it boasts a respectable firepower."
+5,343,347,348,352,Duplex Bow,14,18,40,2,,,A bow favored by the skilled archers of the Yiga Clan. It's been engineered to fire two arrows at once to ensure your target comes to a swift and none-too-pleasant halt.
+6,328,332,333,337,Falcon Bow,20,50,40,1,,,"A highly refined Rito-made bow created by a master Rito craftsman. Rito warriors favor it for its superior rate of fire, which helps them excel even further at aerial combat."
+7,325,329,330,334,Forest Dweller's Bow,15,35,20,3,,,"The Koroks made this bow for Hylians. It's crafted from flexible wood and uses sturdy vines for the bowstring. Its construction may be simple, but it fires multiple arrows at once."
+8,330,334,335,339,Golden Bow,14,60,40,1,,,"This Gerudo-made bow is popular for the fine ornamentations along its limbs. Designed for hunting and warfare alike, this bow was engineered to strike distant targets."
+9,329,333,334,338,Great Eagle Bow,28,60,40,3,,,"A bow without equal wielded by the Rito Champion, Revali. it's said Revali could loose arrows with the speed of a gale, making him supreme in aerial combat."
+10,323,327,328,332,Knight's Bow,26,48,20,1,,,"The sturdy metal construction of this bow offers superior durability, while its lack of firing quirks makes it quite reliable. Once favored by the knights at Hyrule Castle."
+11,337,341,342,346,Lizal Bow,14,25,20,1,,,A wooden bow created by Lizalfos. It's reinforced by the bones of a large fish - a marked improvement over any standard wooden bow.
+12,340,344,345,349,Lynel Bow,10,30,20,3,,,A Lynel-made bow crafted from rough metal. True to the vicious nature of Lynel weaponry. It fires a spread of multiple arrows at once. Ideal for taking down quick-moving targets.
+13,341,345,346,350,Mighty Lynel Bow,20,35,20,3,,,"This massive Lynel bow sports a bowstring made from a metal so tough, mere Hylians have trouble drawing it back."
+14,331,335,336,340,Phrenic Bow,10,45,40,1,,,A bow passed down through the Sheikah tribe. Concentrating before drawing the string will allow you to target distant enemies as easily as those nearby.
+15,338,342,343,347,Reinforced Lizal Bow,25,35,20,1,,,"A Lizal bow with a grip reinforced by metal. The body is made from the branches of a flexible tree that grows near water, which offers some serious destructive power."
+16,324,328,329,333,Royal Bow,38,60,20,1,,,"In the past, the king of Hyrule presented this bow to only the most talented archers in the land. Its combat capabilities are as impressive as its extravagant design."
+17,333,337,338,342,Royal Guard's Bow,50,20,30,1,,,"This prototype Sheikah-made bow was designed to fight the Great Calamity. made with anient technology, it boasts a high rate of fire and firepower but has low durability."
+18,342,346,347,351,Savage Lynel Bow,32,45,20,3,,,This Lynel bow is made from a special steel found at the peak of Death Mountain. It has tremendous stopping power and can pierce thick armor as easily as thin paper.
+19,326,330,331,335,Silver Bow,15,40,20,1,,,"A bow favored by the Zora for fishing. It doesn't boast the highest firepower, but the special metal it's crafted from prioritizes durability."
+20,322,326,327,331,Soldier's Bow,14,36,20,1,,,"A bow designed for armed conflict. Inflicts more damage than a civilian bow, but it will still burn if it touches fire."
+21,335,339,340,344,Spiked Boko Bow,12,20,20,1,,,"An upgraded Boko Bow bound with animal bone to boost its durability and firepower. Its craftsmanship is sloppy, but it's light and easy to use."
+22,339,343,344,348,Steel Lizal Bow,36,50,20,1,,,This bow is wielded by lizalfos who are expert marksmen. The metal that reinforces much of the weapon adds some additional weight but offers heightened durability.
+23,327,331,332,336,Swallow Bow,9,30,40,1,,,"This bow is a favorite among Rito warriors. The bowstring has been specially engineered for aerial combat, which allows it to be drawn faster than a normal bow."
+24,321,325,326,330,Traveler's Bow,5,22,20,1,,,"A small bow used by travelers for protection. It doesn't do a lot of damage, but it can be used to attack foes from a distance."
+25,,,,,Twilight Bow,30,100,8000,1,,Super Smash Bros. series Zelda amiibo,"A bow used by the princess who fought the beasts of twilight alongside the hero. It's said to contain the spirits of light's power. It fires arrows straight and true, as if beams of light."
+26,320,324,325,329,Wooden Bow,4,20,20,1,,,"This wooden bow may not be the most reliable for battling monsters, but it is excellent for hunting small animals."

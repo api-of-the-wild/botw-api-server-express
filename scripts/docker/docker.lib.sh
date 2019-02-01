@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd -P )"
 CURRENT_DIR="${CURRENT_DIR:?}"
@@ -6,7 +6,6 @@ SCRIPTS_DIR="$(realpath "${CURRENT_DIR}/..")"
 ROOT_DIR="$(realpath "${SCRIPTS_DIR}/..")"
 
 . "${SCRIPTS_DIR}/lib.sh"
-
 
 # @param containerId   $1   The container id to use when talking to docker daemon
 # @param portNumber    $2   The port number bound inside the container
@@ -80,5 +79,5 @@ dockerExecuteTestRunner() {
   dockerBuildTestRunner
 
   echo "Run ${IMAGE_NAME} executable test container..."
-  docker run -it --rm --network container:api_of_the_wild_app_1 kwhitejr/botw-test-runner
+  docker run --rm --network container:api_of_the_wild_app_1 kwhitejr/botw-test-runner
 }

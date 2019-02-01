@@ -1,6 +1,6 @@
 openapi: 3.0.1
 servers:
-  - url: "https://api-of-the-wild.com"
+  - url: "https://apiofthewild.com"
     description: AotW's public envirmonment.
 info:
   description: API of the Wild - Geography Services
@@ -29,6 +29,21 @@ paths:
                 $ref: "#/components/schemas/Region"
         "404":
           description: Not Found
+  /geography/regions/v1:
+    get:
+      summary: Get data for several regions.
+      description: Get several regions.
+      tags:
+        - Region
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json; charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/RegionCollection"
+        "400":
+          description: Bad Request
   /geography/subregions/v1/{id}:
     get:
       summary: Get data for a single subregion.
@@ -51,6 +66,21 @@ paths:
                 $ref: "#/components/schemas/Subregion"
         "404":
           description: Not Found
+  /geography/subregions/v1:
+    get:
+      summary: Get data for several subregions.
+      description: Get several subregions.
+      tags:
+        - Subregion
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json; charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/SubregionCollection"
+        "400":
+          description: Bad Request
   /geography/locations/v1/{id}:
     get:
       summary: Get data for a single location.
@@ -73,6 +103,35 @@ paths:
                 $ref: "#/components/schemas/Location"
         "404":
           description: Not Found
+  /geography/locations/v1:
+    get:
+      summary: Get data for several locations.
+      description: Get several locations.
+      tags:
+        - Location
+      parameters:
+        - in: query
+          description: The location type.
+          name: location_type
+          required: false
+          schema:
+            type: string
+            enum:
+              - "shrine"
+              - "stable"
+              - "village"
+              - "tower"
+              - "fountain"
+              - "spring"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json; charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/LocationCollection"
+        "400":
+          description: Bad Request
 
 components:
   schemas:
@@ -93,11 +152,33 @@ components:
           description: The version of the requested resource.
           type: string
           example: v1
+    RegionCollection:
+      description: Collection of region resources.
+      allOf:
+        - $ref: "#/components/schemas/metadata"
+        - type: object
+          properties:
+            objects:
+              type: array
+              description: An array of region resources.
+              items:
+                $ref: "#/components/schemas/region"
     Region:
       description: Complete response for a region resource.
       allOf:
         - $ref: "#/components/schemas/metadata"
         - $ref: "#/components/schemas/region"
+    SubregionCollection:
+      description: Collection of subregion resources.
+      allOf:
+        - $ref: "#/components/schemas/metadata"
+        - type: object
+          properties:
+            objects:
+              type: array
+              description: An array of subregion resources.
+              items:
+                $ref: "#/components/schemas/subregion"
     Subregion:
       description: Complete response for a subregion resource.
       allOf:
@@ -108,6 +189,17 @@ components:
             region:
               type: string
               example: "Akkala"
+    LocationCollection:
+      description: Collection of location resources.
+      allOf:
+        - $ref: "#/components/schemas/metadata"
+        - type: object
+          properties:
+            objects:
+              type: array
+              description: An array of location resources.
+              items:
+                $ref: "#/components/schemas/location"
     Location:
       description: Complete response for a location resource.
       allOf:

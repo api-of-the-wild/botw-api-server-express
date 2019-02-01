@@ -1,0 +1,37 @@
+id,compendium_no,compendium_no_dlc_2,compendium_no_master_mode,compendium_no_master_mode_dlc_2,name,material_type,value,restores,additional_uses,description
+36,162,165,167,170,Apple,Food,3,0.5,,"A common fruit found on trees all around Hyrule. Eat it fresh, or cook it to increase its effect."
+37,163,166,168,171,Palm Fruit,Food,4,1,,Fruit from palm trees that grow near the ocean. It doesn't offer any special effects but will increase your heart recovery when used as an ingredient.
+38,164,167,169,172,Wildberry,Food,3,0.5,,"A fruit that grows in cold, snowy regions known for its tangy, sweet flavor. It doesn't offer any special effects, but it's a popular cooking ingredient."
+39,165,168,170,173,Hearty Durian,Food,15,3,"{26}","This fruit's odor earned it the nickname ""king of fruits"". It offers immense restorative power; dishes cooked with it will temporarily increase your maximum hearts."
+40,166,169,171,174,Hydromelon,Food,4,0.5,"{7}","This resilient fruit can flourish even in the heat of the desert. The hydrating liquid inside provides a cooling effect that, when cooked, increases your heat resistance."
+41,167,170,172,175,Spicy Pepper,Food,3,0.5,"{7}",This pepper is exploding with spice. Cook with it to create dishes that will raise your body temperature and help you withstand the cold.
+42,168,171,173,176,Voltfruit,Food,4,0.5,"{2,8}","Cacti found in the Gerudo Desert bear this sweet fruit. It's naturally insulated, so when cooked into a dish, it provides resistance against electricity."
+43,169,172,174,177,Fleet-Lotus Seeds,Food,5,0.5,"{29}","The plant that bears these seeds grows near deep water. The roots draw nutrients from the water, which boosts your movement speed when the seeds are cooked into a dish."
+44,170,173,175,178,Mighty Bananas,Food,5,0.5,"{4}","This fruit grows mainly in tropical forests of the Faron region. When it's used as an ingredient, the resulting dish will temporarily increase your attack power."
+45,171,174,176,179,Hylian Shroom,Food,3,0.5,,A common mushroom found near trees around Hyrule. Eat it to restore half a heart.
+46,172,175,177,180,Endura Shroom,Food,6,1,"{27}",A rare yellowish-orange mushroom. Cook it before eating to temporarily increase your stamina limit.
+47,173,176,178,181,Stamella Shroom,Food,5,1,"{32}",A green mushroom that grows near trees in the forest. It's chock-full of natural energy. Cook it to release its stamina-restoration properties.
+48,174,177,179,182,Hearty Truffle,Food,6,2,"{26}",This rare mushroom has a rich scent. Cook it before eating to temporarily increase your maximum hearts.
+49,175,178,180,183,Big Hearty Truffle,Food,15,3,"{26}","Years of going unpicked have allowed this hearty truffle to grow quite large. It's chock-full of nutrients. When cooked into a dish, it temporarily increases your maximum hearts."
+50,176,179,181,184,Chillshroom,Food,4,0.5,"{7}","Often found at the base of pine trees in cold climates, these mushrooms are cool to the touch and can be used to cook dishes that allow you to stay cool even in arid regions."
+51,177,180,182,185,Sunshroom,Food,4,0.5,"{2,5}","A bright red mushroom that grows in hot climates. Imbued with the power of heat, they can be used to cook dishes that will allow you to endure the bitter cold."
+52,178,181,183,186,Zapshroom,Food,4,0.5,"{2,8}","This mushroom grows wild in the Gerudo region. The cap is naturally insulated, so when used in cooking, it will offer protection against electricity."
+53,179,182,184,187,Rushroom,Food,3,0.5,"{2,29}",A mushroom that can grow almost anywhere but prefers ceilings and sheer cliffs. Cook it before eating to temporarily increase your movement speed.
+54,180,183,185,188,Razorshroom,Food,5,0.5,"{4}",This mushroom is known for the natural slice in its cap. Eating it fosters your competitive spirit. Use it when cooking to prepare a dish that will increase your strength.
+55,181,184,186,189,Ironshroom,Food,5,0.5,"{6}",The cap of this mushroom is very hard. Use it when cooking to prepare a dish that increases your defense.
+56,182,185,187,190,Silent Shroom,Food,3,0.5,"{2,30}","A strange mushroom that glows quietly in the forest at night. Cooking it into a dish unlocks the nutrients in its cap, resulting in a meal that will allow you to move stealthily."
+57,183,186,188,191,Hyrule Herb,Plants,3,1,,This healthy herb grows abundantly in the plains of Hyrule. Cook it before eating to increase the number of hearts it restores.
+58,184,187,189,192,Hearty Radish,Food,8,2.5,"{26}",A rare radish that grows best in sunny plains. Cook it before eating to temporarily increase your maximum hearts.
+59,185,188,190,193,Big Hearty Radish,Food,15,4,"{26}","This hearty radish has grown much larger than the average radish. It's rich in analeptic compounds that, when cooked into a dish, temporarily increase your maximum hearts."
+60,186,189,191,194,Cool Safflina,Plants,3,,"{7}","This medicinal plant grows in high elevations, such as mountains in the Hebra or Gerudo regions. When cooked into a dish, it will temporarily increase your heat resistance."
+61,187,190,192,195,Warm Safflina,Plants,3,,"{2,5}","This medicinal plant grows in hot regions, such as the Gerudo Desert. It's warm to the touch and increases your cold resistance when cooked into a dish."
+62,188,191,193,196,Electric Safflina,Plants,3,,"{28}","This medicinal plant grows abundantly in the Gerudo Desert. Its peculiar fibers conduct electricity, which will increase your electricity resistance when cooked into a dish."
+63,189,192,194,197,Swift Carrot,Food,4,0.5,"{29}","This carrot is cultivated extensively in Kakariko Village. It strengthens the legs and hips when cooked into a dish, which helps increase your movement speed."
+64,190,193,195,198,Endura Carrot,Plants,30,2,"{23,27}","Highly valued as a medicinal plant, this carrot contains large amounts of nourishing energy. When cooked into a dish, it boosts your stamina beyond its maximum limit."
+65,191,194,196,199,Fortified Pumpkin,Plants,5,0.5,"{6}","An extremely tough pumpkin raised in village fields. When cooked, that toughness manifests itself by considerably upping defense."
+66,192,195,197,200,Swift Violet,Plants,10,,"{2,29}","This vitality-rich flower blooms mainly on cliffsides. When cooked into a dish, the nourishing compounds increase your movement speed."
+67,193,196,198,201,Mighty Thistle,Plants,5,,"{4}",This medicinal plant is known for its sharp thorns and for the fruit it bears. The fruit contains a compound that increases attack power when cooked into a dish.
+68,194,197,199,202,Armoranth,Plants,5,,"{6}","This tough medicinal plant cannot be broken, but it can be cooked. Its durable yet flexible fibers raise your defense when cooked into a dish."
+69,195,198,200,203,Blue Nightshade,Plants,4,,"{2,30}","A plant that grows in quieter areas of Hyrule. At night, it gives off a soft glow. Cook with it to increase your stealth."
+70,196,199,201,204,Silent Princess,Plants,10,,"{2,30}","This lovely flower was said to have been a favorite of the princess of Hyrule. Once feared to have gone extinct, it's recently been spotted growing in the wild."
+71,197,200,202,205,Courser Bee Honey,Food,10,2,"{2,32}",Honey straight from the hive is chock-full of nutrients. Cooking this into a meal unlocks the potential of these nutrients and provides a stamina-recovery effect.

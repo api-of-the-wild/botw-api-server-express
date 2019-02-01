@@ -1,10 +1,7 @@
-const { expect } = require("chai");
+const { expect, assert } = require("chai");
 const rp = require("request-promise");
 
 const config = require("../../config.env");
-const { createLogger } = require("../../src/utilities/logger");
-
-const logger = createLogger(console);
 
 const env = process.env;
 const INTEGRATION_STAGE = env.INTEGRATION_STAGE || "ALPHA";
@@ -20,87 +17,248 @@ const createRpOptions = uri => ({
 });
 
 describe("the /geography domain", () => {
-  describe("GET /regions/v1/:id", () => {
-    it("should respond 200 with a region object", () => {
-      const testUri = `${SERVER_URI_BASE}/geography/regions/v1/3`;
-      const rpOptions = createRpOptions(testUri);
-      return rp(rpOptions)
-        .then(result => {
-          // Region properties
-          expect(result.id).to.be.a("number");
-          expect(result.name).to.be.a("string");
-          expect(result.subregions).to.be.a("array");
-          // Subregion properties
-          expect(result.subregions[0].id).to.be.a("number");
-          expect(result.subregions[0].name).to.be.a("string");
-          expect(result.subregions[0].locations).to.be.a("array");
-          // Location properties
-          expect(result.subregions[0].locations[0].id).to.be.a("number");
-          expect(result.subregions[0].locations[0].name).to.be.a("string");
-          expect(result.subregions[0].locations[0].location_type).to.satisfy(
-            value => value === null || typeof value === "string"
-          );
-          // Request metadata properties
-          expect(result.self).to.be.a("string");
-          expect(result.resource).to.be.a("string");
-          expect(result.version).to.be.a("string");
-        })
-        .catch(err => {
-          logger.error(`Unexpected error was caught: ${err}`);
-        });
-    });
-  });
+  describe("200 happy paths", () => {
+    describe("GET /regions/v1", () => {
+      it("should respond with a single region resource by id", () => {
+        const testUri = `${SERVER_URI_BASE}/geography/regions/v1/3`;
+        const rpOptions = createRpOptions(testUri);
+        return rp(rpOptions)
+          .then(result => {
+            // Region properties
+            expect(result.id).to.be.a("number");
+            expect(result.name).to.be.a("string");
+            expect(result.subregions).to.be.a("array");
+            // Subregion properties
+            result.subregions.forEach(subregion => {
+              expect(subregion.id).to.be.a("number");
+              expect(subregion.name).to.be.a("string");
+              expect(subregion.locations).to.be.a("array");
+              subregion.locations.forEach(location => {
+                // Location properties
+                expect(location.id).to.be.a("number");
+                expect(location.name).to.be.a("string");
+                expect(location.location_type).to.satisfy(
+                  value => value === null || typeof value === "string"
+                );
+              });
+            });
+            // Request metadata properties
+            expect(result.self).to.be.a("string");
+            expect(result.resource).to.be.a("string");
+            expect(result.version).to.be.a("string");
+          })
+          .catch(err => {
+            assert.fail(`Unexpected error was caught: ${err}`);
+          });
+      });
 
-  describe("GET /subregions/v1/:id", () => {
-    it("should respond 200 with a subregion object", () => {
-      const testUri = `${SERVER_URI_BASE}/geography/subregions/v1/3`;
-      const rpOptions = createRpOptions(testUri);
-      return rp(rpOptions)
-        .then(result => {
-          // Subregion properties
-          expect(result.id).to.be.a("number");
-          expect(result.name).to.be.a("string");
-          expect(result.region).to.be.a("string");
-          expect(result.locations).to.be.a("array");
-          // Location properties
-          expect(result.locations[0].id).to.be.a("number");
-          expect(result.locations[0].name).to.be.a("string");
-          expect(result.locations[0].location_type).to.satisfy(
-            value => value === null || typeof value === "string"
-          );
-          // Request metadata properties
-          expect(result.self).to.be.a("string");
-          expect(result.resource).to.be.a("string");
-          expect(result.version).to.be.a("string");
-        })
-        .catch(err => {
-          logger.error(`Unexpected error was caught: ${err}`);
-        });
+      it("should respond with a regions collection", () => {
+        const testUri = `${SERVER_URI_BASE}/geography/regions/v1`;
+        const rpOptions = createRpOptions(testUri);
+        return rp(rpOptions)
+          .then(result => {
+            expect(result.objects).to.be.an("array");
+            // Region properties
+            result.objects.forEach(region => {
+              expect(region.id).to.be.a("number");
+              expect(region.name).to.be.a("string");
+              expect(region.subregions).to.be.a("array");
+              // Subregion properties
+              region.subregions.forEach(subregion => {
+                expect(subregion.id).to.be.a("number");
+                expect(subregion.name).to.be.a("string");
+                expect(subregion.locations).to.be.a("array");
+                subregion.locations.forEach(location => {
+                  // Location properties
+                  expect(location.id).to.be.a("number");
+                  expect(location.name).to.be.a("string");
+                  expect(location.location_type).to.satisfy(
+                    value => value === null || typeof value === "string"
+                  );
+                });
+              });
+            });
+            // Request metadata properties
+            expect(result.self).to.be.a("string");
+            expect(result.resource).to.be.a("string");
+            expect(result.version).to.be.a("string");
+          })
+          .catch(err => {
+            assert.fail(`Unexpected error was caught: ${err}`);
+          });
+      });
     });
-  });
 
-  describe("GET /locations/v1/:id", () => {
-    it("should respond 200 with a location object", () => {
-      const testUri = `${SERVER_URI_BASE}/geography/locations/v1/3`;
-      const rpOptions = createRpOptions(testUri);
-      return rp(rpOptions)
-        .then(result => {
-          // Location properties
-          expect(result.id).to.be.a("number");
-          expect(result.name).to.be.a("string");
-          expect(result.region).to.be.a("string");
-          expect(result.subregion).to.be.a("string");
-          expect(result.location_type).to.satisfy(
-            value => value === null || typeof value === "string"
-          );
-          // Request metadata properties
-          expect(result.self).to.be.a("string");
-          expect(result.resource).to.be.a("string");
-          expect(result.version).to.be.a("string");
-        })
-        .catch(err => {
-          logger.error(`Unexpected error was caught: ${err}`);
-        });
+    describe("GET /subregions/v1", () => {
+      it("should respond with a single subregion resource by id", () => {
+        const testUri = `${SERVER_URI_BASE}/geography/subregions/v1/3`;
+        const rpOptions = createRpOptions(testUri);
+        return rp(rpOptions)
+          .then(result => {
+            // Subregion properties
+            expect(result.id).to.be.a("number");
+            expect(result.name).to.be.a("string");
+            expect(result.region).to.be.a("string");
+            expect(result.locations).to.be.a("array");
+            // Location properties
+            result.locations.forEach(location => {
+              // Location properties
+              expect(location.id).to.be.a("number");
+              expect(location.name).to.be.a("string");
+              expect(location.location_type).to.satisfy(
+                value => value === null || typeof value === "string"
+              );
+            });
+            // Request metadata properties
+            expect(result.self).to.be.a("string");
+            expect(result.resource).to.be.a("string");
+            expect(result.version).to.be.a("string");
+          })
+          .catch(err => {
+            assert.fail(`Unexpected error was caught: ${err}`);
+          });
+      });
+
+      it("should respond with a subregions collection", () => {
+        const testUri = `${SERVER_URI_BASE}/geography/subregions/v1`;
+        const rpOptions = createRpOptions(testUri);
+        return rp(rpOptions)
+          .then(result => {
+            expect(result.objects).to.be.an("array");
+            // Subregion properties
+            result.objects.forEach(subregion => {
+              expect(subregion.id).to.be.a("number");
+              expect(subregion.name).to.be.a("string");
+              expect(subregion.region).to.be.a("string");
+              expect(subregion.locations).to.be.a("array");
+              // Location properties
+              subregion.locations.forEach(location => {
+                // Location properties
+                expect(location.id).to.be.a("number");
+                expect(location.name).to.be.a("string");
+                expect(location.location_type).to.satisfy(
+                  value => value === null || typeof value === "string"
+                );
+              });
+            });
+            // Request metadata properties
+            expect(result.self).to.be.a("string");
+            expect(result.resource).to.be.a("string");
+            expect(result.version).to.be.a("string");
+          })
+          .catch(err => {
+            assert.fail(`Unexpected error was caught: ${err}`);
+          });
+      });
+
+      it("should respond with a subregions collection constrained by filter", () => {
+        const filter = "Akkala";
+        const testUri = `${SERVER_URI_BASE}/geography/subregions/v1?region=${filter}`;
+        const rpOptions = createRpOptions(testUri);
+        return rp(rpOptions)
+          .then(result => {
+            expect(result.objects).to.be.an("array");
+            // Subregion properties
+            result.objects.forEach(subregion => {
+              expect(subregion.id).to.be.a("number");
+              expect(subregion.name).to.be.a("string");
+              expect(subregion.region).to.be.a("string");
+              expect(subregion.locations).to.be.a("array");
+              // Location properties
+              subregion.locations.forEach(location => {
+                // Location properties
+                expect(location.id).to.be.a("number");
+                expect(location.name).to.be.a("string");
+                expect(location.location_type).to.satisfy(
+                  value => value === null || typeof value === "string"
+                );
+              });
+            });
+            // Request metadata properties
+            expect(result.self).to.be.a("string");
+            expect(result.resource).to.be.a("string");
+            expect(result.version).to.be.a("string");
+          })
+          .catch(err => {
+            assert.fail(`Unexpected error was caught: ${err}`);
+          });
+      });
+    });
+
+    describe("GET /locations/v1", () => {
+      it("should respond with a single location resource by id", () => {
+        const testUri = `${SERVER_URI_BASE}/geography/locations/v1/3`;
+        const rpOptions = createRpOptions(testUri);
+        return rp(rpOptions)
+          .then(result => {
+            // Location properties
+            expect(result.id).to.be.a("number");
+            expect(result.name).to.be.a("string");
+            expect(result.region).to.be.a("string");
+            expect(result.subregion).to.be.a("string");
+            expect(result.location_type).to.satisfy(
+              value => value === null || typeof value === "string"
+            );
+            // Request metadata properties
+            expect(result.self).to.be.a("string");
+            expect(result.resource).to.be.a("string");
+            expect(result.version).to.be.a("string");
+          })
+          .catch(err => {
+            assert.fail(`Unexpected error was caught: ${err}`);
+          });
+      });
+
+      it("should respond with a locations collection", () => {
+        const testUri = `${SERVER_URI_BASE}/geography/locations/v1`;
+        const rpOptions = createRpOptions(testUri);
+        return rp(rpOptions)
+          .then(result => {
+            expect(result.objects).to.be.a("array");
+            // Location properties
+            result.objects.forEach(location => {
+              expect(location.id).to.be.a("number");
+              expect(location.name).to.be.a("string");
+              expect(location.region).to.be.a("string");
+              expect(location.subregion).to.be.a("string");
+              expect(location.location_type).to.satisfy(
+                value => value === null || typeof value === "string"
+              );
+            });
+            // Request metadata properties
+            expect(result.self).to.be.a("string");
+            expect(result.resource).to.be.a("string");
+            expect(result.version).to.be.a("string");
+          })
+          .catch(err => {
+            assert.fail(`Unexpected error was caught: ${err}`);
+          });
+      });
+
+      it("should respond with a locations collection constrained by filter", () => {
+        const filter = "shrine";
+        const testUri = `${SERVER_URI_BASE}/geography/locations/v1?location_type=${filter}`;
+        const rpOptions = createRpOptions(testUri);
+        return rp(rpOptions)
+          .then(result => {
+            expect(result.objects).to.be.a("array");
+            // Location properties
+            result.objects.forEach(location => {
+              expect(location.id).to.be.a("number");
+              expect(location.name).to.be.a("string");
+              expect(location.region).to.be.a("string");
+              expect(location.subregion).to.be.a("string");
+              expect(location.location_type).to.equal(filter);
+            });
+            // Request metadata properties
+            expect(result.self).to.be.a("string");
+            expect(result.resource).to.be.a("string");
+            expect(result.version).to.be.a("string");
+          })
+          .catch(err => {
+            assert.fail(`Unexpected error was caught: ${err}`);
+          });
+      });
     });
   });
 
@@ -119,7 +277,7 @@ describe("the /geography domain", () => {
 
         return rp(rpOptions)
           .then(erroneousResult => {
-            logger.error(`Unexpected error was caught: ${erroneousResult}`);
+            assert.fail(`Unexpected error was caught: ${erroneousResult}`);
           })
           .catch(result => {
             expect(result.statusCode).to.be.equal(400);
@@ -142,7 +300,7 @@ describe("the /geography domain", () => {
 
         return rp(rpOptions)
           .then(erroneousResult => {
-            logger.error(`Unexpected resolution: ${erroneousResult}`);
+            assert.fail(`Unexpected resolution: ${erroneousResult}`);
           })
           .catch(result => {
             expect(result.statusCode).to.be.equal(404);

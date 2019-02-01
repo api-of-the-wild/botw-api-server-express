@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 MY_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd -P )"
 MY_DIR="${MY_DIR:?}"

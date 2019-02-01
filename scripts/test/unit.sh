@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 MY_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd -P )"
 MY_DIR="${MY_DIR:?}"
@@ -16,8 +16,5 @@ yarn nyc \
   --report-dir="${REPORTS_DIR}/coverage" \
   mocha \
     --recursive "${TEST_DIR}/**/*.js" \
-    --exclude "${SRC_DIR}/queries/**/*.js" \
-    --exclude "${SRC_DIR}/routes/**/*.js" \
-    --exclude "${SRC_DIR}/server.js" \
     --reporter=mochawesome \
     --reporter-options reportDir="${REPORTS_DIR}/coverage"
