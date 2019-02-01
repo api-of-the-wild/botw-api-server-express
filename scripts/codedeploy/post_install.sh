@@ -3,10 +3,7 @@
 set -e
 
 cd ~/aotw-app
-ls -lah
-node -v
-yarn version
-npm install
+yarn install
 
 # setup NODE_ENV
 if [ ! -z "$DEPLOYMENT_GROUP_NAME" ]; then
