@@ -675,7 +675,6 @@ describe("the /compendium domain", () => {
             assert.fail(`Unexpected error was caught: ${erroneousResult}`);
           })
           .catch(result => {
-            console.log(result.statusCode); // eslint-disable-line
             expect(result.statusCode).to.be.equal(400);
             expect(result.error.message).to.be.a("string");
           });
@@ -703,7 +702,6 @@ describe("the /compendium domain", () => {
             assert.fail(`Unexpected resolution: ${erroneousResult}`);
           })
           .catch(result => {
-            console.log(result.statusCode); // eslint-disable-line
             expect(result.statusCode).to.be.equal(404);
             expect(result.error.message).to.be.a("string");
           });
