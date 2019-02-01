@@ -5,7 +5,7 @@ set -e
 yum -y update
 
 # add nodejs to yum
-curl --silent --location https://rpm.nodesource.com/setup_4.x | bash -
+curl --silent --location https://rpm.nodesource.com/setup_8.x | bash -
 yum -y install nodejs
 
 # install yarn
