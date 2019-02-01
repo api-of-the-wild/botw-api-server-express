@@ -12,18 +12,18 @@ permissions:
       - file
 hooks:
   BeforeInstall:
-    - location: install.sh
+    - location: scripts/codedeploy/install.sh
       timeout: 300
       runas: root
   AfterInstall:
-    - location: post_install.sh
+    - location: scripts/codedeploy/post_install.sh
       timeout: 600
       runas: ec2-user
   ApplicationStart:
-    - location: run.sh
+    - location: scripts/codedeploy/run.sh
       timeout: 120
       runas: ec2-user
   ApplicationStop:
-    - location: stop.sh
+    - location: scripts/codedeploy/stop.sh
       timeout: 120
       runas: ec2-user

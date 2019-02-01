@@ -9,5 +9,6 @@ curl --silent --location https://rpm.nodesource.com/setup_4.x | bash -
 yum -y install nodejs
 
 # install yarn
-npm install -g yarn pm2
+npm install -g yarn
+npm install -g pm2
 pm2 update
